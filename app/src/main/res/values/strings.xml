@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Live Cricket Streaming</string>
+    <string name="action_settings">Settings</string>
+    <string name="firstpage">ca-app-pub-9201945236996508/9842277274</string>
+    <string name="squads">ca-app-pub-9201945236996508/2319010471</string>
+    <string name="fullsquad">ca-app-pub-9201945236996508/3795743674</string>
+    <string name="news">ca-app-pub-9201945236996508/5272476879</string>
+    <string name="newsdetails">ca-app-pub-9201945236996508/6749210079</string>
+    <string name="fixture">ca-app-pub-9201945236996508/8225943275</string>
+    <string name="playvideo">ca-app-pub-9201945236996508/9702676471</string>
+    <string name="themesonglist">ca-app-pub-9201945236996508/2179409676</string>
+    <string name="highlights">ca-app-pub-9201945236996508/3656142875</string>
+    <string name="highlightsvids">ca-app-pub-9201945236996508/2039808877</string>
+    <string name="futuretour">ca-app-pub-9201945236996508/9423474874</string>
+    <string name="rank">ca-app-pub-9201945236996508/1900208070</string>
+    <string name="livescore">ca-app-pub-9201945236996508/2578082074</string>
+    <string name="fpage">ca-app-pub-9201945236996508/5930757279</string>
+    <string name="underframe">ca-app-pub-9201945236996508/6270869676</string>
+    <string name="streamm3u8">ca-app-pub-9201945236996508/9982178079</string>
+
+    <string name="youtube">AIzaSyDPm-0hit-BeRpVgGiQ2B5vjtSHhxveayQ</string>
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+</resources>
