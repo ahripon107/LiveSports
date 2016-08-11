@@ -26,7 +26,7 @@ public class FrontPage extends AppCompatActivity {
     private ViewPager mPager;
     AdView adView;
 
-    String[] itemName = {"Live Streaming","Live Score","Highlights","Fixture","Download Flash Player"};
+    String[] itemName = {"Live Streaming","Live Score","Highlights","Fixture","News","Download Flash Player"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class FrontPage extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 4)
+                if (position == 5)
                 {
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
@@ -62,7 +62,7 @@ public class FrontPage extends AppCompatActivity {
                 }
                 /*else if (position == 1)
                 {
-                    Intent intent = new Intent(FrontPage.this,CricketNews.class);
+                    Intent intent = new Intent(FrontPage.this,CricketNewsListActivity.class);
                     startActivity(intent);
                 }*/
                 else if (position == 0)
@@ -82,6 +82,9 @@ public class FrontPage extends AppCompatActivity {
 
                     Intent intent = new Intent(FrontPage.this,Highlights.class);
                     intent.putExtra("cause","highlights");
+                    startActivity(intent);
+                } else if (position == 4) {
+                    Intent intent = new Intent(FrontPage.this,CricketNewsListActivity.class);
                     startActivity(intent);
                 }
 
