@@ -17,6 +17,8 @@ import com.sfuronlabs.ripon.cricketmania.R;
  */
 public class LiveScore extends AppCompatActivity {
 
+    public static final String EXTRA_URL = "url";
+
     private WebView mWebview ;
     AdView adView;
 
@@ -26,7 +28,7 @@ public class LiveScore extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.livescore);
         Intent intent = getIntent();
-        String url = intent.getStringExtra("url");
+        String url = intent.getStringExtra(EXTRA_URL);
         adView = (AdView) findViewById(R.id.adViewLivescore);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice("18D9D4FB40DF048C506091E42E0FDAFD").build();
         //AdRequest adRequest = new AdRequest.Builder().build();

@@ -1,6 +1,7 @@
 package com.sfuronlabs.ripon.cricketmania.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,72 +10,78 @@ import android.widget.TextView;
 
 import com.sfuronlabs.ripon.cricketmania.R;
 import com.sfuronlabs.ripon.cricketmania.model.RecordVsOthers;
+import com.sfuronlabs.ripon.cricketmania.util.ViewHolder;
 
 import java.util.ArrayList;
 
 /**
  * Created by Ripon on 12/16/15.
  */
-public class TeamRecordAdapter extends BaseAdapter {
+public class TeamRecordAdapter extends RecyclerView.Adapter<TeamRecordAdapter.TeamRecordViewHolder> {
 
     Context context;
     ArrayList<RecordVsOthers> players;
     LayoutInflater layoutInflater;
 
-    public TeamRecordAdapter(Context context, ArrayList<RecordVsOthers> players)
-    {
+    public TeamRecordAdapter(Context context, ArrayList<RecordVsOthers> players) {
         this.context = context;
         this.players = players;
-
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
-    public int getCount() {
+    public TeamRecordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.singleteamrecord,parent,false);
+        return new TeamRecordViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(TeamRecordViewHolder holder, int position) {
+
+        holder.vsWhom.setText("Against " + players.get(position).getAgainst());
+        holder.played.setText("Played: " + players.get(position).getPlayed());
+        holder.wins.setText("Wins: " + players.get(position).getWins());
+        holder.loss.setText("Losses: " + players.get(position).getLoss());
+        holder.draw.setText("Tie/NR: " + players.get(position).getDraw());
+        holder.highestInnings.setText("Highest Innings: " + players.get(position).getHighestInnings());
+        holder.BBI.setText("Best Bowling: " + players.get(position).getBestBBI());
+        holder.bestIndividual.setText("Best Innings: " + players.get(position).getBestInning());
+        holder.mostWkts.setText("Most Wickets: " + players.get(position).getMaxWkts());
+        holder.mostRuns.setText("Most Runs: " + players.get(position).getMaxRuns());
+    }
+
+    @Override
+    public int getItemCount() {
         return players.size();
     }
 
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
+    static class TeamRecordViewHolder extends RecyclerView.ViewHolder {
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
-        view = convertView;
-        if (convertView == null)
-        {
-            view = layoutInflater.inflate(R.layout.singleteamrecord,null);
+        protected TextView vsWhom;
+        protected TextView played;
+        protected TextView wins;
+        protected TextView loss;
+        protected TextView draw;
+        protected TextView highestInnings;
+        protected TextView BBI;
+        protected TextView bestIndividual;
+        protected TextView mostWkts;
+        protected TextView mostRuns;
+
+        public TeamRecordViewHolder(View itemView) {
+            super(itemView);
+
+            vsWhom = ViewHolder.get(itemView,R.id.tvAgainst);
+            played = ViewHolder.get(itemView,R.id.tvPlayed);
+            wins = ViewHolder.get(itemView,R.id.tvWins);
+            loss = ViewHolder.get(itemView,R.id.tvLoss);
+            draw = ViewHolder.get(itemView,R.id.tvDraw);
+            highestInnings = ViewHolder.get(itemView,R.id.tvHighestInnings);
+            BBI = ViewHolder.get(itemView,R.id.tvBBI);
+            bestIndividual = ViewHolder.get(itemView,R.id.tvBestIndividual);
+            mostWkts = ViewHolder.get(itemView,R.id.tvMostWickets);
+            mostRuns = ViewHolder.get(itemView,R.id.tvMostRuns);
         }
-
-        TextView vsWhom = (TextView) view.findViewById(R.id.tvAgainst);
-        TextView played = (TextView) view.findViewById(R.id.tvPlayed);
-        TextView wins = (TextView) view.findViewById(R.id.tvWins);
-        TextView loss = (TextView) view.findViewById(R.id.tvLoss);
-        TextView draw = (TextView) view.findViewById(R.id.tvDraw);
-        TextView highestInnings = (TextView) view.findViewById(R.id.tvHighestInnings);
-        TextView BBI = (TextView) view.findViewById(R.id.tvBBI);
-        TextView bestIndividual = (TextView) view.findViewById(R.id.tvBestIndividual);
-        TextView mostWkts = (TextView) view.findViewById(R.id.tvMostWickets);
-        TextView mostRuns = (TextView) view.findViewById(R.id.tvMostRuns);
-
-
-        vsWhom.setText("Against "+players.get(position).getAgainst());
-        played.setText("Played: "+players.get(position).getPlayed());
-        wins.setText("Wins: "+players.get(position).getWins());
-        loss.setText("Losses: "+players.get(position).getLoss());
-        draw.setText("Tie/NR: "+players.get(position).getDraw());
-        highestInnings.setText("Highest Innings: "+players.get(position).getHighestInnings());
-        BBI.setText("Best Bowling: "+players.get(position).getBestBBI());
-        bestIndividual.setText("Best Innings: "+players.get(position).getBestInning());
-        mostWkts.setText("Most Wickets: "+players.get(position).getMaxWkts());
-        mostRuns.setText("Most Runs: "+players.get(position).getMaxRuns());
-        return view;
     }
 }

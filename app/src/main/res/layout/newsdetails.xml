@@ -27,34 +27,55 @@
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:layout_alignParentTop="true">
-            >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvHL"
+                    android:id="@+id/text_view_headline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Large Text"
+                    android:textColor="@color/cpb_green"
                     android:layout_marginBottom="7dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:layout_marginLeft="5dp"
+                    android:textSize="22sp" />
 
                 <TextView
-                    android:id="@+id/tvDT"
+                    android:id="@+id/text_view_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Small Text"
-                    android:layout_marginBottom="15dp"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/Green"
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvDTLS"
+                    android:id="@+id/text_view_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/Blue"
+                    android:textSize="16sp"
+                    android:text="author"/>
+                <TextView
+                    android:id="@+id/text_view_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:text="Medium Text"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textSize="18sp" />
+                <Button
+                    android:id="@+id/btn_details_news"
+                    android:text="DETAILS"
+                    android:layout_margin="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"/>
 
             </LinearLayout>
         </ScrollView>

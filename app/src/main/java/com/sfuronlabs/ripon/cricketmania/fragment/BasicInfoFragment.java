@@ -17,22 +17,15 @@ import org.json.JSONObject;
 /**
  * Created by Ripon on 12/16/15.
  */
-public class BasicInfoFragment extends Fragment
-{
+public class BasicInfoFragment extends Fragment {
 
-        Typeface tf;
-
-
-        public BasicInfoFragment() {
-
-
+    public BasicInfoFragment() {
     }
 
     public static BasicInfoFragment newInstanceOfDescriptionFragment(String text) {
         BasicInfoFragment myFragment = new BasicInfoFragment();
         Bundle arguments = new Bundle();
         arguments.putString("details", text);
-
         myFragment.setArguments(arguments);
         return myFragment;
     }
@@ -40,8 +33,7 @@ public class BasicInfoFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        inflater = (LayoutInflater)getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.basicinfofragment,null,false);
+        View v = inflater.inflate(R.layout.basicinfofragment, container, false);
         TextView teamName = (TextView) v.findViewById(R.id.tvTeamNameBasic);
         TextView testRank = (TextView) v.findViewById(R.id.tvTestRank);
         TextView odiRank = (TextView) v.findViewById(R.id.tvODIRank);
@@ -62,50 +54,39 @@ public class BasicInfoFragment extends Fragment
             jsonObject = jsonObject.getJSONObject("TeamProfile");
 
             String a = jsonObject.getString("TeamName");
-            teamName.setText("Team Name: "+a);
+            teamName.setText("Team Name: " + a);
 
             JSONObject object;
 
 
             JSONArray jsonArray;
-            if (jsonObject.has("Ranking"))
-            {
+            if (jsonObject.has("Ranking")) {
                 jsonArray = jsonObject.getJSONArray("Ranking");
-                if (jsonArray.length()==3)
-                {
+                if (jsonArray.length() == 3) {
                     object = jsonArray.getJSONObject(0);
-                    testRank.setText("Test: "+object.getString("content"));
+                    testRank.setText("Test: " + object.getString("content"));
 
                     object = jsonArray.getJSONObject(1);
-                    odiRank.setText("ODI: "+object.getString("content"));
+                    odiRank.setText("ODI: " + object.getString("content"));
 
                     object = jsonArray.getJSONObject(2);
-                    t20Rank.setText("T20I: "+object.getString("content"));
-                }
-
-                else if (jsonArray.length()==2)
-                {
+                    t20Rank.setText("T20I: " + object.getString("content"));
+                } else if (jsonArray.length() == 2) {
 
                     testRank.setText("Test: N/A");
 
                     object = jsonArray.getJSONObject(0);
-                    odiRank.setText("ODI: "+object.getString("content"));
+                    odiRank.setText("ODI: " + object.getString("content"));
 
                     object = jsonArray.getJSONObject(1);
-                    t20Rank.setText("T20I: "+object.getString("content"));
-                }
-
-                else
-                {
+                    t20Rank.setText("T20I: " + object.getString("content"));
+                } else {
                     testRank.setText("Test: N/A");
                     odiRank.setText("ODI: N/A");
                     t20Rank.setText("T20I: N/A");
                 }
 
-            }
-
-            else
-            {
+            } else {
                 testRank.setText("Test: N/A");
                 odiRank.setText("ODI: N/A");
                 t20Rank.setText("T20I: N/A");
@@ -114,50 +95,39 @@ public class BasicInfoFragment extends Fragment
 
             String s;
 
-            if (jsonObject.has("Captain"))
-            {
+            if (jsonObject.has("Captain")) {
                 jsonArray = jsonObject.getJSONArray("Captain");
-                if (jsonArray.length()==3)
-                {
+                if (jsonArray.length() == 3) {
                     object = jsonArray.getJSONObject(0);
-                    s = "Test: "+object.getString("FirstName")+" "+object.getString("LastName");
+                    s = "Test: " + object.getString("FirstName") + " " + object.getString("LastName");
                     testCaptain.setText(s);
 
                     object = jsonArray.getJSONObject(1);
-                    s = "ODI: "+object.getString("FirstName")+" "+object.getString("LastName");
+                    s = "ODI: " + object.getString("FirstName") + " " + object.getString("LastName");
                     odiCaptain.setText(s);
 
                     object = jsonArray.getJSONObject(2);
-                    s = "T20: "+object.getString("FirstName")+" "+object.getString("LastName");
+                    s = "T20: " + object.getString("FirstName") + " " + object.getString("LastName");
                     t20Captain.setText(s);
-                }
-
-                else if (jsonArray.length()==2)
-                {
+                } else if (jsonArray.length() == 2) {
 
                     s = "Test: N/A";
                     testCaptain.setText(s);
 
                     object = jsonArray.getJSONObject(0);
-                    s = "ODI: "+object.getString("FirstName")+" "+object.getString("LastName");
+                    s = "ODI: " + object.getString("FirstName") + " " + object.getString("LastName");
                     odiCaptain.setText(s);
 
                     object = jsonArray.getJSONObject(1);
-                    s = "T20: "+object.getString("FirstName")+" "+object.getString("LastName");
+                    s = "T20: " + object.getString("FirstName") + " " + object.getString("LastName");
                     t20Captain.setText(s);
-                }
-
-                else
-                {
+                } else {
                     testCaptain.setText("Test: N/A");
                     odiCaptain.setText("ODI: N/A");
                     t20Captain.setText("T20I: N/A");
                 }
 
-            }
-
-            else
-            {
+            } else {
                 testCaptain.setText("Test: N/A");
                 odiCaptain.setText("ODI: N/A");
                 t20Captain.setText("T20I: N/A");
@@ -165,7 +135,7 @@ public class BasicInfoFragment extends Fragment
 
 
             object = jsonObject.getJSONObject("Coach");
-            s = "Coach: "+object.getString("FirstName")+" "+object.getString("LastName");
+            s = "Coach: " + object.getString("FirstName") + " " + object.getString("LastName");
             coach.setText(s);
 
             //object = jsonObject.getJSONObject("Castrol");

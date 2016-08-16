@@ -3,10 +3,11 @@ package com.sfuronlabs.ripon.cricketmania.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.sfuronlabs.ripon.cricketmania.R;
 import com.sfuronlabs.ripon.cricketmania.adapter.PlayerListAdapter;
@@ -22,12 +23,11 @@ import java.util.ArrayList;
  * Created by Ripon on 12/16/15.
  */
 public class PlayersFragment extends Fragment {
-    ListView playerslist;
+    RecyclerView recyclerView;
     ArrayList<Player> pl;
     PlayerListAdapter playerListAdapter;
 
-    public PlayersFragment()
-    {
+    public PlayersFragment() {
 
     }
 
@@ -35,7 +35,6 @@ public class PlayersFragment extends Fragment {
         PlayersFragment myFragment = new PlayersFragment();
         Bundle arguments = new Bundle();
         arguments.putString("details", text);
-
         myFragment.setArguments(arguments);
         return myFragment;
     }
@@ -43,23 +42,19 @@ public class PlayersFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        inflater = (LayoutInflater)getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.playersfragment,null,false);
-        playerslist = (ListView) v.findViewById(R.id.lvPlayers);
+        View v = inflater.inflate(R.layout.playersfragment, container, false);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
         pl = new ArrayList<>();
-        playerListAdapter = new PlayerListAdapter(getContext(),pl);
-        playerslist.setAdapter(playerListAdapter);
-
-
+        playerListAdapter = new PlayerListAdapter(getContext(), pl);
+        recyclerView.setAdapter(playerListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return v;
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser)
-    {
+    public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser)
-        {
+        if (isVisibleToUser) {
             pl.clear();
             String string = getArguments().getString("details");
             try {
@@ -70,12 +65,11 @@ public class PlayersFragment extends Fragment {
                 jsonObject = jsonObject.getJSONObject("TeamProfile");
                 jsonObject = jsonObject.getJSONObject("Players");
                 JSONArray jsonArray = jsonObject.getJSONArray("Player");
-                for (int i=0;i<jsonArray.length();i++)
-                {
+                for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
                     String personid = obj.getString("personid");
-                    String name = obj.getString("FirstName")+" "+obj.getString("LastName");
-                    Player player = new Player(name,null,personid);
+                    String name = obj.getString("FirstName") + " " + obj.getString("LastName");
+                    Player player = new Player(name, null, personid);
                     pl.add(player);
 
                 }
@@ -83,9 +77,7 @@ public class PlayersFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
-        else
-        {
+        } else {
 
         }
     }

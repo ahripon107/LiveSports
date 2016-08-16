@@ -4,16 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-
-
-    <permission android:name="com.sfuronlabs.ripon.cricketmania.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
-    <uses-permission android:name="com.sfuronlabs.ripon.bpl2015.permission.C2D_MESSAGE" />
 
     <application
         android:name="com.sfuronlabs.ripon.cricketmania.ParseApplication"
@@ -63,7 +53,7 @@
         </activity>
 
         <activity
-            android:name=".activity.NewsDetails"
+            android:name=".activity.NewsDetailsActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
             >
@@ -195,31 +185,26 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <service android:name="com.parse.PushService" />
-        <receiver android:name="com.parse.ParseBroadcastReceiver">
+        <activity
+            android:name=".activity.TrollPostListActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.TROLLPOSTLISTACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </receiver>
-        <receiver android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
+        </activity>
+
+        <activity
+            android:name=".activity.PlayerProfileActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <action android:name="android.intent.action.PLAYERPROFILEACTIVITY" />
 
-                <!--
-                  IMPORTANT: If you change the package name of this sample app,
-                  change "com.parse.tutorials.pushnotifications" in the lines
-                  below to match the new package name.
-                -->
-                <category android:name="com.sfuronlabs.ripon.bpl2015" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </receiver>
-
+        </activity>
     </application>
-
-
-
 </manifest>

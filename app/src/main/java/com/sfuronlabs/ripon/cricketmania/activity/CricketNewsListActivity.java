@@ -11,12 +11,14 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
+import com.google.inject.Inject;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sfuronlabs.ripon.cricketmania.adapter.NewsListAdapter;
 import com.sfuronlabs.ripon.cricketmania.R;
 import com.sfuronlabs.ripon.cricketmania.model.CricketNews;
 import com.sfuronlabs.ripon.cricketmania.util.Constants;
 import com.sfuronlabs.ripon.cricketmania.util.FetchFromWeb;
+import com.sfuronlabs.ripon.cricketmania.util.RoboAppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,32 +27,40 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 
 /**
  * Created by Ripon on 11/6/15.
  */
-public class CricketNewsListActivity extends AppCompatActivity {
+@ContentView(R.layout.news)
+public class CricketNewsListActivity extends RoboAppCompatActivity {
 
+    @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
-    NewsListAdapter newsListAdapter;
+
+    @InjectView(R.id.adViewNews)
     AdView adView;
+
+    NewsListAdapter newsListAdapter;
+
+    @Inject
     ArrayList<CricketNews> cricketNewses;
+
+    @Inject
+    Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.news);
-        setTitle("CRICKET NEWS");
-        adView = (AdView) findViewById(R.id.adViewNews);
-        cricketNewses = new ArrayList<>();
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv_news);
-        //allNews.getBackground().setAlpha(50);
+        setTitle("CRICKET NEWS");
+
         newsListAdapter = new NewsListAdapter(this,cricketNewses);
         recyclerView.setAdapter(newsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        String url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20cricket.news(0,50)%20where%20region=%22IN%22&format=json&diagnostics=true&env=store%3A%2F%2F0TxIGQMQbObzvU4Apia0V0&callback=";
+        String url = Constants.NEWS_URL;
         Log.d(Constants.TAG, url);
 
         final ProgressDialog progressDialog = new ProgressDialog(CricketNewsListActivity.this);
@@ -65,14 +75,12 @@ public class CricketNewsListActivity extends AppCompatActivity {
                     JSONArray jsonArray = response.getJSONArray("item");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        Gson gson = new Gson();
                         CricketNews cricketNews = gson.fromJson(String.valueOf(jsonObject),CricketNews.class);
                         cricketNewses.add(cricketNews);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
                 newsListAdapter.notifyDataSetChanged();
                 Log.d(Constants.TAG, response.toString());
             }
@@ -84,7 +92,7 @@ public class CricketNewsListActivity extends AppCompatActivity {
             }
         });
 
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("D3FA0144AD5EA91460638306E4CB0FB2").build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE).build();
         adView.loadAd(adRequest);
     }
 }

@@ -10,17 +10,14 @@
         android:id="@+id/adViewFixture"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
         ads:adUnitId="@string/fixture">
     </com.google.android.gms.ads.AdView>
 
-    <ListView
-        android:id="@+id/lvFixture"
+    <include layout="@layout/recycler_view_layout"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bpl"
         android:layout_above="@id/adViewFixture"
-        android:layout_gravity="center_horizontal" />
+        android:layout_alignParentTop="true"/>
 </RelativeLayout>

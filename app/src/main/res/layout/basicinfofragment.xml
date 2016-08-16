@@ -1,118 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Team Name"
-        android:id="@+id/tvTeamNameBasic" />
+        android:orientation="vertical"
+        android:layout_margin="8dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Ranking"
-        android:id="@+id/tvRank"
-        android:layout_below="@+id/tvTeamNameBasic"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp"/>
+        <TextView
+            android:id="@+id/tvTeamNameBasic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Team Name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        <TextView
+            android:id="@+id/tvRank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvTeamNameBasic"
+            android:layout_marginTop="40dp"
+            android:text="Ranking"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        android:id="@+id/tvTestRank"
-        android:layout_below="@+id/tvRank"
-        android:layout_toRightOf="@+id/tvRank"
-        android:layout_toEndOf="@+id/tvRank" />
+        <TextView
+            android:id="@+id/tvTestRank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvRank"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/tvODIRank"
-        android:layout_below="@+id/tvTestRank"
-        android:layout_alignLeft="@+id/tvTestRank"
-        android:layout_alignStart="@+id/tvTestRank" />
+            android:layout_toEndOf="@+id/tvRank"
+            android:layout_toRightOf="@+id/tvRank"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/tvT20Rank"
-        android:layout_below="@+id/tvODIRank"
-        android:layout_alignLeft="@+id/tvODIRank"
-        android:layout_alignStart="@+id/tvODIRank" />
+        <TextView
+            android:id="@+id/tvODIRank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvTestRank"
+            android:layout_alignStart="@+id/tvTestRank"
+            android:layout_below="@+id/tvTestRank"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Captain"
-        android:id="@+id/tvCaptain"
-        android:layout_below="@+id/tvT20Rank"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp" />
+        <TextView
+            android:id="@+id/tvT20Rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvODIRank"
+            android:layout_alignStart="@+id/tvODIRank"
+            android:layout_below="@+id/tvODIRank"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/tvTestCaptain"
-        android:layout_below="@+id/tvCaptain"
-        android:layout_toRightOf="@+id/tvCaptain"
-        android:layout_toEndOf="@+id/tvCaptain" />
+        <TextView
+            android:id="@+id/tvCaptain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvT20Rank"
+            android:layout_marginTop="40dp"
+            android:text="Captain"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/tvODICaptain"
-        android:layout_below="@+id/tvTestCaptain"
-        android:layout_alignLeft="@+id/tvTestCaptain"
-        android:layout_alignStart="@+id/tvTestCaptain" />
+        <TextView
+            android:id="@+id/tvTestCaptain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCaptain"
+            android:layout_toEndOf="@+id/tvCaptain"
+            android:layout_toRightOf="@+id/tvCaptain"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/tvT20Captain"
-        android:layout_below="@+id/tvODICaptain"
-        android:layout_alignLeft="@+id/tvODICaptain"
-        android:layout_alignStart="@+id/tvODICaptain" />
+        <TextView
+            android:id="@+id/tvODICaptain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvTestCaptain"
+            android:layout_alignStart="@+id/tvTestCaptain"
+            android:layout_below="@+id/tvTestCaptain"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Coach"
-        android:id="@+id/tvCoach"
-        android:layout_marginTop="33dp"
-        android:layout_below="@+id/tvT20Captain"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <TextView
+            android:id="@+id/tvT20Captain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvODICaptain"
+            android:layout_alignStart="@+id/tvODICaptain"
+            android:layout_below="@+id/tvODICaptain"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Description"
-        android:id="@+id/tvDescription"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/tvCoach"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <TextView
+            android:id="@+id/tvCoach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvT20Captain"
+            android:layout_marginTop="33dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvCoach"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </RelativeLayout>
+</ScrollView>

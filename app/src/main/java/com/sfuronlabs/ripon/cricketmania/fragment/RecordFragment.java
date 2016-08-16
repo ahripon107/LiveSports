@@ -3,6 +3,8 @@ package com.sfuronlabs.ripon.cricketmania.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,17 +26,15 @@ import java.util.ArrayList;
  */
 public class RecordFragment extends Fragment {
 
-    ListView playerslist;
+    RecyclerView recyclerView;
     ArrayList<RecordVsOthers> pl;
     TeamRecordAdapter teamRecordAdapter;
 
-    public RecordFragment()
-    {
-        //pl = new ArrayList<>();
+    public RecordFragment() {
+
     }
 
-    public static RecordFragment newInstanceOfRecordFragment(String text,String what)
-    {
+    public static RecordFragment newInstanceOfRecordFragment(String text, String what) {
         RecordFragment myFragment = new RecordFragment();
         Bundle arguments = new Bundle();
 
@@ -49,15 +49,15 @@ public class RecordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.playersfragment,container,false);
-        playerslist = (ListView) v.findViewById(R.id.lvPlayers);
+        View v = inflater.inflate(R.layout.playersfragment, container, false);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
         pl = new ArrayList<>();
-        teamRecordAdapter = new TeamRecordAdapter(this.getActivity(),pl);
-        playerslist.setAdapter(teamRecordAdapter);
+        teamRecordAdapter = new TeamRecordAdapter(this.getActivity(), pl);
+        recyclerView.setAdapter(teamRecordAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         String string = getArguments().getString("details");
         String what = getArguments().getString("what");
-
 
         try {
             JSONObject jsonObject = new JSONObject(string);
@@ -68,37 +68,38 @@ public class RecordFragment extends Fragment {
 
             JSONArray jsonArray = jsonObject.getJSONArray("Tally");
 
-            for (int i=0;i<jsonArray.length();i++)
-            {
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject obj = jsonArray.getJSONObject(i);
-                if (obj.getString("mtype").equals(what))
-                {
+                if (obj.getString("mtype").equals(what)) {
                     String against = obj.getString("Name");
                     String wins = obj.getString("Wins");
                     String lass = obj.getString("Losses");
                     String draw = obj.getString("NoResults");
                     String played = obj.getString("Played");
-                    JSONObject obj1 = obj.getJSONObject("HighestInningSummary");
-                    obj1 = obj1.getJSONObject("Score");
-                    String highestInnings = obj1.getString("runs")+" / "+obj1.getString("wickets");
+                    String highestInnings = "";
+                    JSONObject obj1;
+                    if (obj.has("HighestInningSummary")) {
+                        obj1 = obj.getJSONObject("HighestInningSummary");
+                        obj1 = obj1.getJSONObject("Score");
+                        highestInnings = obj1.getString("runs") + " / " + obj1.getString("wickets");
+                    }
 
                     obj1 = obj.getJSONObject("Tops").getJSONObject("Bowling").getJSONObject("Player");
-                    String as = obj1.getString("FirstName")+" "+obj1.getString("LastName")+" - "+obj.getJSONObject("Tops").getJSONObject("Bowling").getString("RunsGiven")+" / "+obj.getJSONObject("Tops").getJSONObject("Bowling").getString("WicketsTaken");
+                    String as = obj1.getString("FirstName") + " " + obj1.getString("LastName") + " - " + obj.getJSONObject("Tops").getJSONObject("Bowling").getString("RunsGiven") + " / " + obj.getJSONObject("Tops").getJSONObject("Bowling").getString("WicketsTaken");
 
                     obj1 = obj.getJSONObject("Tops").getJSONObject("Batting").getJSONObject("Player");
-                    String bs = obj1.getString("FirstName")+" "+obj1.getString("LastName")+" - "+obj.getJSONObject("Tops").getJSONObject("Batting").getJSONObject("RunsScored").getString("content")+" ("+obj.getJSONObject("Tops").getJSONObject("Batting").getString("BallsFaced")+")";
+                    String bs = obj1.getString("FirstName") + " " + obj1.getString("LastName") + " - " + obj.getJSONObject("Tops").getJSONObject("Batting").getJSONObject("RunsScored").getString("content") + " (" + obj.getJSONObject("Tops").getJSONObject("Batting").getString("BallsFaced") + ")";
 
                     obj1 = obj.getJSONObject("Prolific").getJSONObject("Bowling").getJSONObject("Player");
-                    String cs = obj1.getString("FirstName")+" "+obj1.getString("LastName")+" - "+obj.getJSONObject("Prolific").getJSONObject("Bowling").getString("WicketsTaken")+" wickets";
+                    String cs = obj1.getString("FirstName") + " " + obj1.getString("LastName") + " - " + obj.getJSONObject("Prolific").getJSONObject("Bowling").getString("WicketsTaken") + " wickets";
 
                     obj1 = obj.getJSONObject("Prolific").getJSONObject("Batting").getJSONObject("Player");
-                    String ds = obj1.getString("FirstName")+" "+obj1.getString("LastName")+" - "+obj.getJSONObject("Prolific").getJSONObject("Batting").getString("RunsScored")+" runs";
+                    String ds = obj1.getString("FirstName") + " " + obj1.getString("LastName") + " - " + obj.getJSONObject("Prolific").getJSONObject("Batting").getString("RunsScored") + " runs";
 
-                    RecordVsOthers recordVsOthers = new RecordVsOthers(against,played,wins,lass,draw,highestInnings,as,bs,cs,ds);
+                    RecordVsOthers recordVsOthers = new RecordVsOthers(against, played, wins, lass, draw, highestInnings, as, bs, cs, ds);
                     pl.add(recordVsOthers);
                 }
             }
-            Toast.makeText(getActivity(),"length "+jsonArray.length(),Toast.LENGTH_LONG).show();
             teamRecordAdapter.notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();

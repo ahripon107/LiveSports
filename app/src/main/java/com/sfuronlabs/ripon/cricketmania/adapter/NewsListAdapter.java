@@ -1,6 +1,7 @@
 package com.sfuronlabs.ripon.cricketmania.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +10,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.google.inject.Inject;
 import com.sfuronlabs.ripon.cricketmania.R;
+import com.sfuronlabs.ripon.cricketmania.activity.NewsDetailsActivity;
 import com.sfuronlabs.ripon.cricketmania.model.CricketNews;
 import com.sfuronlabs.ripon.cricketmania.util.CircleImageView;
+import com.sfuronlabs.ripon.cricketmania.util.Constants;
 import com.sfuronlabs.ripon.cricketmania.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Ripon on 10/30/15.
@@ -26,6 +34,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
     ArrayList<CricketNews> cricketNewses;
     LayoutInflater layoutInflater;
 
+    @Inject
     public NewsListAdapter(Context context, ArrayList<CricketNews> cricketNewses) {
         this.context = context;
         this.cricketNewses = cricketNewses;
@@ -38,10 +47,11 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
     }
 
     @Override
-    public void onBindViewHolder(NewsViewHolder holder, int position) {
+    public void onBindViewHolder(NewsViewHolder holder, final int position) {
         holder.headline.setText(cricketNewses.get(position).getTitle());
         holder.author.setText(cricketNewses.get(position).getAuthor());
-        holder.time.setText(cricketNewses.get(position).getPubDate());
+        String dateAndTime = cricketNewses.get(position).getPubDate();
+        holder.time.setText(Constants.timestamp(dateAndTime));
         Picasso.with(context)
                 .load(cricketNewses.get(position).getThumburl())
                 .placeholder(R.drawable.bpl)
@@ -49,7 +59,9 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, NewsDetailsActivity.class);
+                intent.putExtra(NewsDetailsActivity.EXTRA_NEWS_OBJECT,cricketNewses.get(position));
+                context.startActivity(intent);
             }
         });
     }
