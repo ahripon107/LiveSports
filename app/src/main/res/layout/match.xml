@@ -6,9 +6,37 @@
     android:layout_margin="5dp">
 
     <LinearLayout
+        android:id="@+id/match_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_margin="7dp">
+
+
+            <TextView
+                android:id="@+id/tvSeriesname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="SBNCS"
+                android:textSize="13sp"
+                android:textColor="@color/Green"/>
+
+            <TextView
+                android:id="@+id/tvMatchNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="TIME"
+                android:textSize="18sp"
+                android:textColor="@color/Blue"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -106,7 +134,7 @@
                 android:layout_gravity="center"
                 android:text="TIME"
                 android:textSize="16sp"
-                android:textColor="@color/MediumSlateBlue"/>
+                android:textColor="@color/SkyBlue"/>
         </LinearLayout>
     </LinearLayout>
 

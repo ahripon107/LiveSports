@@ -13,7 +13,7 @@ public class Constants {
     public static final String SOLAIMAN_LIPI_FONT = "fonts/solaimanlipi.ttf";
     public static final String ONE_PLUS_TEST_DEVICE = "7D3F3DF2A7214E839DBE70BE2132D5B9";
     public static final String NEWS_URL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20cricket.news(0,50)%20where%20region=%22IN%22&format=json&diagnostics=true&env=store%3A%2F%2F0TxIGQMQbObzvU4Apia0V0&callback=";
-    public static final String FIXTURE_URL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20cricket.upcoming_matches(0,25)&format=json&diagnostics=true&env=store%3A%2F%2F0TxIGQMQbObzvU4Apia0V0&callback=";
+    public static final String FIXTURE_URL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20cricket.upcoming_matches(0,50)&format=json&diagnostics=true&env=store%3A%2F%2F0TxIGQMQbObzvU4Apia0V0&callback=";
     public static final String TAG = "ripons";
 
     public static final String AUS_TEAM_LOGO_URL = "https://s.yimg.com/qx/cricket/fufp/images/1_l-11-2-2012-975ee512e59ffc420e26dee2813daa27.png";

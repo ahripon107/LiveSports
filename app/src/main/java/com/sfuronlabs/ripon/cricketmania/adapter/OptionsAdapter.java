@@ -9,10 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sfuronlabs.ripon.cricketmania.R;
-import com.squareup.picasso.Picasso;
+import com.sfuronlabs.ripon.cricketmania.util.Constants;
 
 /**
- * Created by Ripon on 10/25/15.
+ * @author Ripon
  */
 public class OptionsAdapter extends BaseAdapter {
 
@@ -22,13 +22,12 @@ public class OptionsAdapter extends BaseAdapter {
     LayoutInflater layoutInflater;
     Typeface banglafont;
 
-    public OptionsAdapter(Context context, String[] itemName)
-    {
+    public OptionsAdapter(Context context, String[] itemName) {
         this.context = context;
         this.itemName = itemName;
 
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        banglafont = Typeface.createFromAsset(context.getAssets(), "fonts/solaimanlipi.ttf");
+        banglafont = Typeface.createFromAsset(context.getAssets(), Constants.SOLAIMAN_LIPI_FONT);
     }
 
     @Override
@@ -48,21 +47,13 @@ public class OptionsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
-        view = convertView;
-        if (convertView == null)
-        {
-            view = layoutInflater.inflate(R.layout.singleoption,null);
-
-
+        View view = convertView;
+        if (convertView == null) {
+            view = layoutInflater.inflate(R.layout.singleoption, parent, false);
         }
-        //CircleImageView circleImageView = (CircleImageView) view.findViewById(R.id.civItems);
+
         TextView textView = (TextView) view.findViewById(R.id.tvItemName);
 
-        /*Picasso.with(context)
-                .load("http://vpn.gd/bpl/"+imageID[position]+".jpg")
-                .placeholder(R.drawable.bpl) // optional
-                .into(circleImageView);*/
         textView.setTypeface(banglafont);
         textView.setText(itemName[position]);
         return view;

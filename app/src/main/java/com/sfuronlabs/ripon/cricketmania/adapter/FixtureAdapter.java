@@ -1,12 +1,15 @@
 package com.sfuronlabs.ripon.cricketmania.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sfuronlabs.ripon.cricketmania.activity.ActivityMatchDetails;
 import com.sfuronlabs.ripon.cricketmania.util.CircleImageView;
 import com.sfuronlabs.ripon.cricketmania.model.Match;
 import com.sfuronlabs.ripon.cricketmania.R;
@@ -14,6 +17,7 @@ import com.sfuronlabs.ripon.cricketmania.util.Constants;
 import com.sfuronlabs.ripon.cricketmania.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -38,7 +42,7 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureV
     }
 
     @Override
-    public void onBindViewHolder(FixtureViewHolder holder, int position) {
+    public void onBindViewHolder(FixtureViewHolder holder, final int position) {
         Picasso.with(context)
                 .load(resolveLogo(data.get(position).getTeam1()))
                 .placeholder(R.drawable.bpl)
@@ -54,8 +58,19 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureV
         if (source.equals("fixture")) {
             String timeparts[] = data.get(position).getTime().split("T");
             holder.time.setText(timeparts[0]+"  "+timeparts[1]);
+            holder.seriesName.setText(data.get(position).getSeriesName());
+            holder.matchNo.setText(data.get(position).getMatchNo());
         } else {
             holder.time.setText(data.get(position).getTime());
+            holder.seriesName.setVisibility(View.GONE);
+            holder.matchNo.setVisibility(View.GONE);
+            holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ActivityMatchDetails.class);
+                    intent.putExtra("match", (Serializable) data.get(position));
+                }
+            });
         }
     }
 
@@ -64,13 +79,16 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureV
         return data.size();
     }
 
-    static class FixtureViewHolder extends RecyclerView.ViewHolder {
+    public static class FixtureViewHolder extends RecyclerView.ViewHolder {
         protected CircleImageView imgteam1;
         protected CircleImageView imgteam2;
         protected TextView textteam1;
         protected TextView textteam2;
         protected TextView venue;
         protected TextView time;
+        protected TextView seriesName;
+        protected TextView matchNo;
+        protected LinearLayout linearLayout;
 
         public FixtureViewHolder(View itemView) {
             super(itemView);
@@ -81,6 +99,9 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureV
             textteam2 = ViewHolder.get(itemView, R.id.tvTeam2);
             venue = ViewHolder.get(itemView, R.id.tvVenue);
             time = ViewHolder.get(itemView, R.id.tvTime);
+            seriesName = ViewHolder.get(itemView,R.id.tvSeriesname);
+            matchNo = ViewHolder.get(itemView,R.id.tvMatchNo);
+            linearLayout = ViewHolder.get(itemView,R.id.match_layout);
         }
     }
 

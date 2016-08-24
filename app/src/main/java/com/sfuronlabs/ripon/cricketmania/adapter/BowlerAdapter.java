@@ -1,6 +1,7 @@
 package com.sfuronlabs.ripon.cricketmania.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,14 @@ import android.widget.TextView;
 
 import com.sfuronlabs.ripon.cricketmania.model.Bowler;
 import com.sfuronlabs.ripon.cricketmania.R;
+import com.sfuronlabs.ripon.cricketmania.util.ViewHolder;
 
 import java.util.ArrayList;
 
 /**
  * Created by Ripon on 3/25/16.
  */
-public class BowlerAdapter extends BaseAdapter {
+public class BowlerAdapter extends RecyclerView.Adapter<BowlerAdapter.BowlerViewHolder> {
 
     Context context;
     ArrayList<Bowler> bowlers;
@@ -28,44 +30,45 @@ public class BowlerAdapter extends BaseAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+
     @Override
-    public int getCount() {
+    public BowlerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new BowlerViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.singlebowler,parent,false));
+    }
+
+    @Override
+    public void onBindViewHolder(BowlerViewHolder holder, int position) {
+        holder.name.setText(bowlers.get(position).getName());
+        holder.overs.setText(bowlers.get(position).getOver());
+        holder.maidens.setText(bowlers.get(position).getMaiden());
+        holder.runs.setText(bowlers.get(position).getRun());
+        holder.wickets.setText(bowlers.get(position).getWicket());
+        holder.economy.setText(bowlers.get(position).getEconomy());
+    }
+
+
+    @Override
+    public int getItemCount() {
         return bowlers.size();
     }
 
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
+    static class BowlerViewHolder extends RecyclerView.ViewHolder {
+        protected TextView name;
+        protected TextView overs;
+        protected TextView maidens;
+        protected TextView runs;
+        protected TextView wickets;
+        protected TextView economy;
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
+        public BowlerViewHolder(View itemView) {
+            super(itemView);
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
-        view = convertView;
-        if(convertView == null)
-        {
-            view = layoutInflater.inflate(R.layout.singlebowler,null);
+            name = ViewHolder.get(itemView,R.id.bowl_Name);
+            overs = ViewHolder.get(itemView,R.id.bowl_Name);
+            maidens = ViewHolder.get(itemView,R.id.bowl_Name);
+            runs = ViewHolder.get(itemView,R.id.bowl_Name);
+            wickets =ViewHolder.get(itemView,R.id.bowl_Name);
+            economy = ViewHolder.get(itemView,R.id.bowl_Name);
         }
-
-        TextView name = (TextView) view.findViewById(R.id.bowl_Name);
-        TextView overs = (TextView) view.findViewById(R.id.bowl_overs);
-        TextView maidens = (TextView) view.findViewById(R.id.bowl_maiden);
-        TextView runs = (TextView) view.findViewById(R.id.bowl_runs);
-        TextView wickets = (TextView) view.findViewById(R.id.bowl_wickets);
-        TextView economy = (TextView) view.findViewById(R.id.bowl_economy);
-
-        name.setText(bowlers.get(position).getName());
-        overs.setText(bowlers.get(position).getOver());
-        maidens.setText(bowlers.get(position).getMaiden());
-        runs.setText(bowlers.get(position).getRun());
-        wickets.setText(bowlers.get(position).getWicket());
-        economy.setText(bowlers.get(position).getEconomy());
-
-        return  view;
     }
 }

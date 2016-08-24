@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:fillViewport="true"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:scrollbars="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/labelFirstInnings"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="First Innings"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Player"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Status"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Run"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Ball"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="4"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="6"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Strike Rate"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lvBattingInnings1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent" />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Player"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Over"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Maiden"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Run"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Wicket"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lvBowlingInnings1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent" />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/labelSecondInnings"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:text="Second Innings"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Player"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Status"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Run"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Ball"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="4"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="6"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Strike Rate"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lvBattingInnings2"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent" />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Player"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Over"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Maiden"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Run"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Wicket"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lvBowlingInnings2"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent" />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/labelThirdInnings"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:text="Third Innings"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Player"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Status"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Run"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Ball"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="4"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="6"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Strike Rate"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lvBattingInnings3"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent" />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Player"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Over"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Maiden"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Run"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Wicket"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lvBowlingInnings3"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent" />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/labelFourthInnings"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:text="Fourth Innings"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Player"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Status"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Run"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Ball"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="4"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="6"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Strike Rate"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lvBattingInnings4"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent" />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Player"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Over"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Maiden"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Run"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_width="0dp"
+                android:text="Wicket"
+                android:textColor="#000000"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lvBowlingInnings4"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent" />
+    </LinearLayout>
+</ScrollView>

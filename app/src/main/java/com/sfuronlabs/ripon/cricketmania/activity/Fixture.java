@@ -61,19 +61,21 @@ public class Fixture extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 progressDialog.dismiss();
                 try {
-                    String team1,team2,venue,time;
+                    String team1,team2,venue,time,seriesName,matcNo;
                     response = response.getJSONObject("query").getJSONObject("results");
                     JSONArray jsonArray = response.getJSONArray("Match");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject obj = jsonArray.getJSONObject(i);
                         JSONArray array = obj.getJSONArray("Team");
+                        seriesName = obj.getString("series_name");
+                        matcNo = obj.getString("MatchNo");
 
                         team1 = array.getJSONObject(0).getString("Team");
                         team2 = array.getJSONObject(1).getString("Team");
 
                         venue = obj.getJSONObject("Venue").getString("content");
                         time = obj.getString("StartDate");
-                        Match match = new Match(team1,team2,venue,time);
+                        Match match = new Match(team1,team2,venue,time,seriesName,matcNo);
                         data.add(match);
                     }
                 } catch (JSONException e) {
