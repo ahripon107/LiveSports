@@ -11,6 +11,7 @@ import com.google.gson.GsonBuilder;
 import com.sfuronlabs.ripon.cricketmania.R;
 import com.sfuronlabs.ripon.cricketmania.adapter.MatchDetailsViewPagerAdapter;
 import com.sfuronlabs.ripon.cricketmania.fragment.FragmentMatchSummary;
+import com.sfuronlabs.ripon.cricketmania.fragment.FragmentScoreBoard;
 import com.sfuronlabs.ripon.cricketmania.model.LiveMatch;
 import com.sfuronlabs.ripon.cricketmania.model.Match;
 
