@@ -31,12 +31,11 @@ public class LiveScore extends AppCompatActivity {
         String url = intent.getStringExtra(EXTRA_URL);
         adView = (AdView) findViewById(R.id.adViewLivescore);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice("18D9D4FB40DF048C506091E42E0FDAFD").build();
-        //AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
         mWebview  = (WebView) findViewById(R.id.webView);
 
-        mWebview.getSettings().setJavaScriptEnabled(true); // enable javascript
+        mWebview.getSettings().setJavaScriptEnabled(true);
 
         final Activity activity = this;
 

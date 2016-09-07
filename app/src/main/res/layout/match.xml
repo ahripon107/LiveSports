@@ -9,14 +9,17 @@
         android:id="@+id/match_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical"
-            android:layout_margin="7dp">
+            android:layout_margin="7dp"
+            android:orientation="vertical">
 
 
             <TextView
@@ -25,8 +28,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="SBNCS"
-                android:textSize="13sp"
-                android:textColor="@color/Green"/>
+                android:textColor="@color/Green"
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/tvMatchNo"
@@ -34,8 +37,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="TIME"
-                android:textSize="18sp"
-                android:textColor="@color/Blue"/>
+                android:textColor="@color/Blue"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -65,8 +68,8 @@
                     android:id="@+id/tvTeam1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center_horizontal"
+                    android:gravity="center"
                     android:text="Large Text"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="15sp" />
@@ -75,12 +78,12 @@
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="VS"
-                android:gravity="center"
                 android:layout_gravity="center_vertical"
-                android:textSize="30sp"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="VS"
+                android:textSize="30sp" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -102,20 +105,21 @@
                     android:id="@+id/tvTeam2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center_horizontal"
+                    android:gravity="center"
                     android:text="Large Text"
 
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical"
-            android:layout_margin="7dp">
+            android:layout_margin="7dp"
+            android:orientation="vertical">
 
 
             <TextView
@@ -124,8 +128,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="SBNCS"
-                android:textSize="16sp"
-                android:textColor="@color/MediumPurple"/>
+                android:textColor="@color/MediumPurple"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvTime"
@@ -133,8 +137,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="TIME"
-                android:textSize="16sp"
-                android:textColor="@color/SkyBlue"/>
+                android:textColor="@color/SkyBlue"
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 

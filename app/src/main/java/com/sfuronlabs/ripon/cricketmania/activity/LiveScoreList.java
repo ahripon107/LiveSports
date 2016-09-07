@@ -10,12 +10,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.inject.Inject;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.sfuronlabs.ripon.cricketmania.adapter.FixtureAdapter;
 import com.sfuronlabs.ripon.cricketmania.model.Match;
 import com.sfuronlabs.ripon.cricketmania.R;
-import com.sfuronlabs.ripon.cricketmania.adapter.FixtureAdapter;
 import com.sfuronlabs.ripon.cricketmania.util.Constants;
 import com.sfuronlabs.ripon.cricketmania.util.FetchFromWeb;
+import com.sfuronlabs.ripon.cricketmania.util.RoboAppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,31 +26,36 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 
 /**
- * Created by Ripon on 11/23/15.
+ * @author ripon
  */
-public class LiveScoreList extends AppCompatActivity {
+@ContentView(R.layout.fixture)
+public class LiveScoreList extends RoboAppCompatActivity {
 
+    @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
-    ArrayList<Match> data;
+
+
     FixtureAdapter fixtureAdapter;
+
+    @InjectView(R.id.adViewFixture)
     AdView adView;
-    ArrayList<String> urls;
+
+    @Inject
+    ArrayList<Match> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fixture);
         setTitle("LIVE SCORE");
-        adView = (AdView) findViewById(R.id.adViewFixture);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        data = new ArrayList<>();
-        urls = new ArrayList<>();
-        fixtureAdapter = new FixtureAdapter(this, data,"livescore");
+        fixtureAdapter = new FixtureAdapter(this, data, "livescore");
         recyclerView.setAdapter(fixtureAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         String url = "http://cricinfo-mukki.rhcloud.com/api/match/live";
         Log.d("ripon", url);
 
@@ -66,7 +73,7 @@ public class LiveScoreList extends AppCompatActivity {
                         JSONObject obj = jsonArray.getJSONObject(i);
 
                         data.add(new Match(obj.getJSONObject("team1").getString("teamName"), obj.getJSONObject("team2").getString("teamName"),
-                                obj.getString("matchDescription"), "","",""));
+                                obj.getString("matchDescription"), "", "", "", obj.getString("matchId")));
                     }
                     fixtureAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {

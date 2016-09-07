@@ -12,7 +12,7 @@ import com.sfuronlabs.ripon.cricketmania.util.Constants;
 import java.util.ArrayList;
 
 /**
- * Created by Ripon on 12/17/15.
+ * @author ripon
  */
 public class TeamProfile extends AppCompatActivity {
 

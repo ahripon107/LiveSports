@@ -75,13 +75,13 @@ public class LiveScoreBoardFragment extends Fragment {
         TextView currentRunRate = (TextView) v.findViewById(R.id.crunrate);
         ListView batsmanDetails = (ListView) v.findViewById(R.id.list_batsmandetails);
 
-        batsmanDetails.setAdapter(batsmanAdapter);
+        //batsmanDetails.setAdapter(batsmanAdapter);
 
         ImageView team2Icon = (ImageView) v.findViewById(R.id.liveteamtwo_icon);
         TextView team2Score = (TextView) v.findViewById(R.id.team2sore);
         ListView bowlerDetails = (ListView) v.findViewById(R.id.list_bowlerdetails);
 
-        bowlerDetails.setAdapter(bowlerAdapter);
+        //bowlerDetails.setAdapter(bowlerAdapter);
 
 
         ListView commentaryList = (ListView)v.findViewById(R.id.livecommentarylist);

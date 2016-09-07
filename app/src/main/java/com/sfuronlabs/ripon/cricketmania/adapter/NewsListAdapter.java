@@ -19,20 +19,15 @@ import com.sfuronlabs.ripon.cricketmania.util.Constants;
 import com.sfuronlabs.ripon.cricketmania.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
- * Created by Ripon on 10/30/15.
+ * @author ripon
  */
 public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsViewHolder> {
 
     Context context;
     ArrayList<CricketNews> cricketNewses;
-    LayoutInflater layoutInflater;
 
     @Inject
     public NewsListAdapter(Context context, ArrayList<CricketNews> cricketNewses) {
@@ -42,7 +37,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
 
     @Override
     public NewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.singlenews,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.singlenews, parent, false);
         return new NewsViewHolder(view);
     }
 
@@ -60,7 +55,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, NewsDetailsActivity.class);
-                intent.putExtra(NewsDetailsActivity.EXTRA_NEWS_OBJECT,cricketNewses.get(position));
+                intent.putExtra(NewsDetailsActivity.EXTRA_NEWS_OBJECT, cricketNewses.get(position));
                 context.startActivity(intent);
             }
         });
@@ -82,11 +77,11 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
         public NewsViewHolder(View itemView) {
             super(itemView);
 
-            headline = ViewHolder.get(itemView,R.id.tv_headline);
-            author = ViewHolder.get(itemView,R.id.tv_author);
-            time = ViewHolder.get(itemView,R.id.tv_times_ago);
-            circleImageView = ViewHolder.get(itemView,R.id.civ_news_thumb);
-            linearLayout = ViewHolder.get(itemView,R.id.news_item_container);
+            headline = ViewHolder.get(itemView, R.id.tv_headline);
+            author = ViewHolder.get(itemView, R.id.tv_author);
+            time = ViewHolder.get(itemView, R.id.tv_times_ago);
+            circleImageView = ViewHolder.get(itemView, R.id.civ_news_thumb);
+            linearLayout = ViewHolder.get(itemView, R.id.news_item_container);
         }
     }
 }

@@ -2,6 +2,7 @@ package com.sfuronlabs.ripon.cricketmania.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +18,10 @@ import com.sfuronlabs.ripon.cricketmania.util.Constants;
 import com.sfuronlabs.ripon.cricketmania.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by Ripon on 10/29/15.
+ * @author ripon
  */
 public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureViewHolder> {
 
@@ -52,6 +52,7 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureV
                 .load(resolveLogo(data.get(position).getTeam2()))
                 .placeholder(R.drawable.bpl)
                 .into(holder.imgteam2);
+
         holder.textteam1.setText(data.get(position).getTeam1());
         holder.textteam2.setText(data.get(position).getTeam2());
         holder.venue.setText(data.get(position).getVenue());
@@ -68,7 +69,7 @@ public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.FixtureV
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, ActivityMatchDetails.class);
-                    intent.putExtra("match", (Serializable) data.get(position));
+                    intent.putExtra("match", data.get(position));
                 }
             });
         }

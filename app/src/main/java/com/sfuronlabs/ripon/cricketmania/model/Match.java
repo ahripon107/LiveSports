@@ -1,9 +1,12 @@
 package com.sfuronlabs.ripon.cricketmania.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Ripon on 10/29/15.
  */
-public class Match {
+public class Match implements Serializable {
+
 
     private String team1;
     private String team2;
@@ -11,14 +14,16 @@ public class Match {
     private String time;
     private String seriesName;
     private String matchNo;
+    private String matchId;
 
-    public Match(String team1, String team2, String venue, String time, String seriesName, String matchNo) {
+    public Match(String team1, String team2, String venue, String time, String seriesName, String matchNo, String matchId) {
         this.team1 = team1;
         this.team2 = team2;
         this.venue = venue;
         this.time = time;
         this.seriesName = seriesName;
         this.matchNo = matchNo;
+        this.matchId = matchId;
     }
 
     public String getTeam1() {
@@ -69,6 +74,14 @@ public class Match {
         this.matchNo = matchNo;
     }
 
+    public String getMatchId() {
+        return matchId;
+    }
+
+    public void setMatchId(String matchId) {
+        this.matchId = matchId;
+    }
+
     @Override
     public String toString() {
         return "Match{" +
@@ -78,6 +91,7 @@ public class Match {
                 ", time='" + time + '\'' +
                 ", seriesName='" + seriesName + '\'' +
                 ", matchNo='" + matchNo + '\'' +
+                ", matchId=" + matchId +
                 '}';
     }
 }

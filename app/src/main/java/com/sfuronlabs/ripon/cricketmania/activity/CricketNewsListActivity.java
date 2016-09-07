@@ -2,7 +2,6 @@ package com.sfuronlabs.ripon.cricketmania.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,7 +30,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 /**
- * Created by Ripon on 11/6/15.
+ * @author ripon
  */
 @ContentView(R.layout.news)
 public class CricketNewsListActivity extends RoboAppCompatActivity {
@@ -42,13 +41,13 @@ public class CricketNewsListActivity extends RoboAppCompatActivity {
     @InjectView(R.id.adViewNews)
     AdView adView;
 
-    NewsListAdapter newsListAdapter;
-
     @Inject
     ArrayList<CricketNews> cricketNewses;
 
     @Inject
     Gson gson;
+
+    NewsListAdapter newsListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

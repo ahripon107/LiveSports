@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by Ripon on 8/12/16.
+ * @author ripon
  */
 public class TrollPostListActivity extends AppCompatActivity {
 

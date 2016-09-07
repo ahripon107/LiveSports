@@ -75,7 +75,7 @@ public class Fixture extends AppCompatActivity {
 
                         venue = obj.getJSONObject("Venue").getString("content");
                         time = obj.getString("StartDate");
-                        Match match = new Match(team1,team2,venue,time,seriesName,matcNo);
+                        Match match = new Match(team1,team2,venue,time,seriesName,matcNo,"");
                         data.add(match);
                     }
                 } catch (JSONException e) {

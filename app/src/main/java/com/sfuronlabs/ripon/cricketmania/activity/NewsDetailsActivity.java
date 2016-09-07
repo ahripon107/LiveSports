@@ -1,9 +1,7 @@
 package com.sfuronlabs.ripon.cricketmania.activity;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,30 +11,42 @@ import com.google.android.gms.ads.AdView;
 import com.sfuronlabs.ripon.cricketmania.R;
 import com.sfuronlabs.ripon.cricketmania.model.CricketNews;
 import com.sfuronlabs.ripon.cricketmania.util.Constants;
+import com.sfuronlabs.ripon.cricketmania.util.RoboAppCompatActivity;
+
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 
 /**
- * Created by Ripon on 10/30/15.
+ * @author ripon
  */
-public class NewsDetailsActivity extends AppCompatActivity {
+@ContentView(R.layout.newsdetails)
+public class NewsDetailsActivity extends RoboAppCompatActivity {
 
     public static final String EXTRA_NEWS_OBJECT = "newsobject";
 
+    @InjectView(R.id.btn_details_news)
     Button detailsNews;
-    TextView headline, date,author, details;
+
+    @InjectView(R.id.text_view_headline)
+    TextView headline;
+
+    @InjectView(R.id.text_view_date)
+    TextView date;
+
+    @InjectView(R.id.text_view_author)
+    TextView author;
+
+    @InjectView(R.id.text_view_details)
+    TextView details;
+
+    @InjectView(R.id.adViewNewsDetails)
     AdView adView;
+
     CricketNews cricketNews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.newsdetails);
-
-        adView = (AdView) findViewById(R.id.adViewNewsDetails);
-        headline = (TextView) findViewById(R.id.text_view_headline);
-        date = (TextView) findViewById(R.id.text_view_date);
-        author = (TextView) findViewById(R.id.text_view_author);
-        details = (TextView) findViewById(R.id.text_view_details);
-        detailsNews = (Button) findViewById(R.id.btn_details_news);
 
         cricketNews = (CricketNews) getIntent().getSerializableExtra(EXTRA_NEWS_OBJECT);
 

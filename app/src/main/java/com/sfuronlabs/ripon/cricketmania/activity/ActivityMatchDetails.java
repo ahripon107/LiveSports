@@ -6,18 +6,31 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sfuronlabs.ripon.cricketmania.R;
 import com.sfuronlabs.ripon.cricketmania.adapter.MatchDetailsViewPagerAdapter;
 import com.sfuronlabs.ripon.cricketmania.fragment.FragmentMatchSummary;
 import com.sfuronlabs.ripon.cricketmania.fragment.FragmentScoreBoard;
-import com.sfuronlabs.ripon.cricketmania.model.LiveMatch;
+import com.sfuronlabs.ripon.cricketmania.model.CricketNews;
 import com.sfuronlabs.ripon.cricketmania.model.Match;
+import com.sfuronlabs.ripon.cricketmania.model.Summary;
+import com.sfuronlabs.ripon.cricketmania.util.Constants;
+import com.sfuronlabs.ripon.cricketmania.util.FetchFromWeb;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.transform.ErrorListener;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by amin on 8/24/16.
@@ -26,6 +39,7 @@ public class ActivityMatchDetails extends AppCompatActivity {
     private Match liveMatch;
     private MatchDetailsViewPagerAdapter matchDetailsViewPagerAdapter;
     private ViewPager viewPager;
+    private Gson gson;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +51,9 @@ public class ActivityMatchDetails extends AppCompatActivity {
         this.viewPager.setOffscreenPageLimit(3);
         setupViewPage(this.viewPager);
         ((TabLayout) findViewById(R.id.tabLayout)).setupWithViewPager(this.viewPager);
+        gson = new Gson();
         sendRequestForLiveMatchDetails();
+
     }
 
 
@@ -49,44 +65,44 @@ public class ActivityMatchDetails extends AppCompatActivity {
     }
 
     private void sendRequestForLiveMatchDetails() {
-        Volley.newRequestQueue(getApplicationContext()).add(new CustomStringRequest(0, "http://cricinfo-mukki.rhcloud.com/api/match/" + this.liveMatch.getMatchId(), new HashMap(), new Listener<String>() {
-            public void onResponse(String response) {
-                Log.d(ActivityMatchDetails.this.getResources().getString(R.string.app_name), "live match details: " + response);
+        String url = "http://cricinfo-mukki.rhcloud.com/api/match/" + this.liveMatch.getMatchId();
+        Log.d(Constants.TAG, url);
+
+        FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
                 try {
-                    LiveMatchDetailsApi liveMatchDetailsApi = (LiveMatchDetailsApi) new GsonBuilder().create().fromJson(response, LiveMatchDetailsApi.class);
-                    ((FragmentMatchSummary) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).setMatchSummary(liveMatchDetailsApi.getSummary());
-                    if (liveMatchDetailsApi.getFirstInnings() != null) {
-                        ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setFirstInningsBattingList(liveMatchDetailsApi.getFirstInnings().getBatting());
+                    JSONObject sumry = response.getJSONObject("summary");
+                    Summary summary = gson.fromJson(String.valueOf(sumry),Summary.class);
+                    ((FragmentMatchSummary) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).setMatchSummary(summary);
+
+                    if (response.has("innings1")) {
+                        ((FragmentScoreBoard)ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setFirstInningsBattingList(response.getJSONObject("innings1").getJSONArray("batting"));
+                        ((FragmentScoreBoard)ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setFirstInningsBowlingList(response.getJSONObject("innings1").getJSONArray("bowling"));
                     }
-                    if (liveMatchDetailsApi.getSecondInnings() != null) {
-                        ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setSecondInningsBattingList(liveMatchDetailsApi.getSecondInnings().getBatting());
+                    if (response.has("innings2")) {
+                        ((FragmentScoreBoard)ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setSecondInningsBattingList(response.getJSONObject("innings2").getJSONArray("batting"));
+                        ((FragmentScoreBoard)ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setSecondInningsBowlingList(response.getJSONObject("innings2").getJSONArray("bowling"));
                     }
-                    if (liveMatchDetailsApi.getThirdInnings() != null) {
-                        ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setThirdInningsBattingList(liveMatchDetailsApi.getThirdInnings().getBatting());
+                    if (response.has("innings3")) {
+                        ((FragmentScoreBoard)ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setThirdInningsBattingList(response.getJSONObject("innings3").getJSONArray("batting"));
+                        ((FragmentScoreBoard)ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setThirdInningsBowlingList(response.getJSONObject("innings3").getJSONArray("bowling"));
                     }
-                    if (liveMatchDetailsApi.getFourthInnings() != null) {
-                        ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setFourthInningsBattingList(liveMatchDetailsApi.getFourthInnings().getBatting());
+                    if (response.has("innings4")) {
+                        ((FragmentScoreBoard)ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setFourthInningsBattingList(response.getJSONObject("innings4").getJSONArray("batting"));
+                        ((FragmentScoreBoard)ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setFourthInningsBowlingList(response.getJSONObject("innings4").getJSONArray("bowling"));
                     }
-                    if (liveMatchDetailsApi.getFirstInnings() != null) {
-                        ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setFirstInningsBowlingList(liveMatchDetailsApi.getFirstInnings().getBowling());
-                    }
-                    if (liveMatchDetailsApi.getSecondInnings() != null) {
-                        ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setSecondInningsBowlingList(liveMatchDetailsApi.getSecondInnings().getBowling());
-                    }
-                    if (liveMatchDetailsApi.getThirdInnings() != null) {
-                        ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setThirdInningsBowlingList(liveMatchDetailsApi.getThirdInnings().getBowling());
-                    }
-                    if (liveMatchDetailsApi.getFourthInnings() != null) {
-                        ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(1)).setFourthInningsBowlingList(liveMatchDetailsApi.getFourthInnings().getBowling());
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+                Log.d(Constants.TAG, response.toString());
             }
-        }, new ErrorListener() {
-            public void onErrorResponse(VolleyError error) {
-                Log.d(ActivityMatchDetails.this.getResources().getString(R.string.app_name), "live: " + error.toString());
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(ActivityMatchDetails.this, "Failed", Toast.LENGTH_LONG).show();
             }
-        }));
+        });
     }
 }

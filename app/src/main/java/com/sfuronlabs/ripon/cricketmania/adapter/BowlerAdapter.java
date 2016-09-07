@@ -23,8 +23,7 @@ public class BowlerAdapter extends RecyclerView.Adapter<BowlerAdapter.BowlerView
     ArrayList<Bowler> bowlers;
     LayoutInflater layoutInflater;
 
-    public BowlerAdapter(Context context, ArrayList<Bowler> bowlers)
-    {
+    public BowlerAdapter(Context context, ArrayList<Bowler> bowlers) {
         this.context = context;
         this.bowlers = bowlers;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -33,7 +32,7 @@ public class BowlerAdapter extends RecyclerView.Adapter<BowlerAdapter.BowlerView
 
     @Override
     public BowlerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new BowlerViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.singlebowler,parent,false));
+        return new BowlerViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.singlebowler, parent, false));
     }
 
     @Override
@@ -63,12 +62,12 @@ public class BowlerAdapter extends RecyclerView.Adapter<BowlerAdapter.BowlerView
         public BowlerViewHolder(View itemView) {
             super(itemView);
 
-            name = ViewHolder.get(itemView,R.id.bowl_Name);
-            overs = ViewHolder.get(itemView,R.id.bowl_Name);
-            maidens = ViewHolder.get(itemView,R.id.bowl_Name);
-            runs = ViewHolder.get(itemView,R.id.bowl_Name);
-            wickets =ViewHolder.get(itemView,R.id.bowl_Name);
-            economy = ViewHolder.get(itemView,R.id.bowl_Name);
+            name = ViewHolder.get(itemView, R.id.bowl_Name);
+            overs = ViewHolder.get(itemView, R.id.bowl_Name);
+            maidens = ViewHolder.get(itemView, R.id.bowl_Name);
+            runs = ViewHolder.get(itemView, R.id.bowl_Name);
+            wickets = ViewHolder.get(itemView, R.id.bowl_Name);
+            economy = ViewHolder.get(itemView, R.id.bowl_Name);
         }
     }
 }
