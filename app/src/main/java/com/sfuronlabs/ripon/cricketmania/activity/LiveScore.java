@@ -10,30 +10,33 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.inject.Inject;
 import com.sfuronlabs.ripon.cricketmania.R;
+import com.sfuronlabs.ripon.cricketmania.util.Constants;
+import com.sfuronlabs.ripon.cricketmania.util.RoboAppCompatActivity;
+
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 
 /**
- * Created by Ripon on 11/23/15.
+ * @author ripon
  */
-public class LiveScore extends AppCompatActivity {
+@ContentView(R.layout.livescore)
+public class LiveScore extends RoboAppCompatActivity {
 
     public static final String EXTRA_URL = "url";
 
+    @InjectView(R.id.webView)
     private WebView mWebview ;
+    @InjectView(R.id.adViewLivescore)
     AdView adView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.livescore);
-        Intent intent = getIntent();
-        String url = intent.getStringExtra(EXTRA_URL);
-        adView = (AdView) findViewById(R.id.adViewLivescore);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("18D9D4FB40DF048C506091E42E0FDAFD").build();
-        adView.loadAd(adRequest);
 
-        mWebview  = (WebView) findViewById(R.id.webView);
+        String url = getIntent().getStringExtra(EXTRA_URL);
+
 
         mWebview.getSettings().setJavaScriptEnabled(true);
 
@@ -46,7 +49,8 @@ public class LiveScore extends AppCompatActivity {
         });
 
         mWebview .loadUrl(url);
-
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE).build();
+        adView.loadAd(adRequest);
 
     }
 }

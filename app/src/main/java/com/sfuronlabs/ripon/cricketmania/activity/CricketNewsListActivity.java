@@ -1,10 +1,16 @@
 package com.sfuronlabs.ripon.cricketmania.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -12,12 +18,16 @@ import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.sfuronlabs.ripon.cricketmania.adapter.NewsListAdapter;
+import com.sfuronlabs.ripon.cricketmania.adapter.BasicListAdapter;
 import com.sfuronlabs.ripon.cricketmania.R;
 import com.sfuronlabs.ripon.cricketmania.model.CricketNews;
+import com.sfuronlabs.ripon.cricketmania.util.CircleImageView;
 import com.sfuronlabs.ripon.cricketmania.util.Constants;
 import com.sfuronlabs.ripon.cricketmania.util.FetchFromWeb;
+import com.sfuronlabs.ripon.cricketmania.util.RecyclerItemClickListener;
 import com.sfuronlabs.ripon.cricketmania.util.RoboAppCompatActivity;
+import com.sfuronlabs.ripon.cricketmania.util.ViewHolder;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,17 +57,53 @@ public class CricketNewsListActivity extends RoboAppCompatActivity {
     @Inject
     Gson gson;
 
-    NewsListAdapter newsListAdapter;
+    Typeface typeface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTitle("CRICKET NEWS");
+        setTitle("Cricket News");
+        typeface = Typeface.createFromAsset(getAssets(),Constants.TIMES_NEW_ROMAN_FONT);
 
-        newsListAdapter = new NewsListAdapter(this,cricketNewses);
-        recyclerView.setAdapter(newsListAdapter);
+        recyclerView.setAdapter(new BasicListAdapter<CricketNews,NewsViewHolder>(cricketNewses) {
+            @Override
+            public NewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.singlenews, parent, false);
+                return new NewsViewHolder(view);
+            }
+
+            @Override
+            public void onBindViewHolder(NewsViewHolder holder, final int position) {
+                holder.headline.setTypeface(typeface);
+                holder.author.setTypeface(typeface);
+                holder.time.setTypeface(typeface);
+
+                holder.headline.setText(cricketNewses.get(position).getTitle());
+                holder.author.setText(cricketNewses.get(position).getAuthor());
+
+                String dateAndTime = cricketNewses.get(position).getPubDate();
+                String arr[] = dateAndTime.split("T");
+                holder.time.setText(arr[0] +" "+arr[1]);
+                Picasso.with(CricketNewsListActivity.this)
+                        .load(cricketNewses.get(position).getThumburl())
+                        .placeholder(R.drawable.default_image)
+                        .into(holder.circleImageView);
+            }
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(CricketNewsListActivity.this, NewsDetailsActivity.class);
+                        intent.putExtra(NewsDetailsActivity.EXTRA_NEWS_OBJECT, cricketNewses.get(position));
+                        CricketNewsListActivity.this.startActivity(intent);
+                    }
+                })
+        );
 
         String url = Constants.NEWS_URL;
         Log.d(Constants.TAG, url);
@@ -80,7 +126,7 @@ public class CricketNewsListActivity extends RoboAppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                newsListAdapter.notifyDataSetChanged();
+                recyclerView.getAdapter().notifyDataSetChanged();
                 Log.d(Constants.TAG, response.toString());
             }
 
@@ -93,5 +139,21 @@ public class CricketNewsListActivity extends RoboAppCompatActivity {
 
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE).build();
         adView.loadAd(adRequest);
+    }
+
+    private static class NewsViewHolder extends RecyclerView.ViewHolder {
+        protected TextView headline;
+        protected TextView author;
+        protected TextView time;
+        protected CircleImageView circleImageView;
+
+        public NewsViewHolder(View itemView) {
+            super(itemView);
+
+            headline = ViewHolder.get(itemView, R.id.tv_headline);
+            author = ViewHolder.get(itemView, R.id.tv_author);
+            time = ViewHolder.get(itemView, R.id.tv_times_ago);
+            circleImageView = ViewHolder.get(itemView, R.id.civ_news_thumb);
+        }
     }
 }

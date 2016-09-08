@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by amin on 8/24/16.
+ * @author ripon
  */
 public class MatchDetailsViewPagerAdapter extends FragmentStatePagerAdapter {
     private final List<Fragment> fragmentList;
@@ -16,8 +16,8 @@ public class MatchDetailsViewPagerAdapter extends FragmentStatePagerAdapter {
 
     public MatchDetailsViewPagerAdapter(FragmentManager fm) {
         super(fm);
-        this.fragmentList = new ArrayList();
-        this.titleList = new ArrayList();
+        this.fragmentList = new ArrayList<>();
+        this.titleList = new ArrayList<>();
     }
 
     public int getCount() {

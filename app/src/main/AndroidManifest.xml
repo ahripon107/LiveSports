@@ -28,184 +28,101 @@
             </intent-filter>
         </activity>
 
+
         <activity
             android:name=".activity.CricketNewsListActivity"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.CRICKETNEWS" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"/>
 
         <activity
-            android:name=".activity.Fixture"
+            android:name=".activity.FixtureActivity"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.FIXTURE" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:label="Fixture"/>
 
         <activity
             android:name=".activity.NewsDetailsActivity"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.NEWSDETAILS" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"/>
 
         <activity
             android:name=".activity.Highlights"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.HIGHLIGHTS" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"/>
 
         <activity
             android:name=".videoplayers.HighlightsVids"
             android:screenOrientation="landscape"
-            android:label="@string/app_name"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.HIGHLIGHTSVIDS" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"/>
 
         <activity
             android:name=".activity.LiveScore"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.LIVESCORE" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"/>
 
         <activity
-            android:name=".activity.LiveScoreList"
+            android:name=".activity.LiveScoreListActivity"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.LICESCORELIST" />
+            android:label="@string/app_name"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".activity.TestActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name"/>
+
 
         <activity
             android:name=".activity.ScoreFromYahoo"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.SCOREFROMYAHOO" />
+            android:label="@string/app_name"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".activity.TeamDetailsActivity"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.TEAMDETAILSACTIVITY" />
+            android:label="@string/app_name"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".activity.TeamProfile"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.TEAMPROFILE" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"/>
 
         <activity
             android:name=".activity.LiveScoreFromTotalCricinfo"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.LIVESCOREFROMTOTALCRICINFO" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"/>
 
         <activity
             android:name=".videoplayers.FrameStream"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.FRAMESTREAM" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".videoplayers.LiveStreamView"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.LIVESTREAMVIEW" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".videoplayers.DMPlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+
+
         <activity
             android:name=".activity.TrollPostListActivity"
             android:screenOrientation="portrait"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.TROLLPOSTLISTACTIVITY" />
+            android:label="@string/app_name"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".activity.PlayerProfileActivity"
             android:screenOrientation="portrait"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.PLAYERPROFILEACTIVITY" />
+            android:label="@string/app_name"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".activity.ActivityMatchDetails"

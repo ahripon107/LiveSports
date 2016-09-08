@@ -13,6 +13,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.sfuronlabs.ripon.cricketmania.R;
+import com.sfuronlabs.ripon.cricketmania.util.Constants;
 
 /**
  * Created by Ripon on 11/3/15.
@@ -24,7 +25,6 @@ public class HighlightsVids extends YouTubeBaseActivity implements
     String url;
     AdView adView;
 
-    // YouTube player view
     private YouTubePlayerView youTubeView;
 
     @Override
@@ -38,8 +38,7 @@ public class HighlightsVids extends YouTubeBaseActivity implements
 
         adView = (AdView) findViewById(R.id.adViewHighlightsVids);
 
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("18D9D4FB40DF048C506091E42E0FDAFD").build();
-        //AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE).build();
         adView.loadAd(adRequest);
 
         Intent intent = getIntent();
@@ -47,7 +46,6 @@ public class HighlightsVids extends YouTubeBaseActivity implements
 
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_viewhighlights);
 
-        // Initializing video player with developer key
         youTubeView.initialize("AIzaSyDPm-0hit-BeRpVgGiQ2B5vjtSHhxveayQ", this);
 
     }

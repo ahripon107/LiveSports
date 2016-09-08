@@ -17,6 +17,7 @@
     <string name="fpage">ca-app-pub-9201945236996508/5930757279</string>
     <string name="underframe">ca-app-pub-9201945236996508/6270869676</string>
     <string name="streamm3u8">ca-app-pub-9201945236996508/9982178079</string>
+    <string name="dmplayer">xyz</string>
 
     <string name="youtube">AIzaSyDPm-0hit-BeRpVgGiQ2B5vjtSHhxveayQ</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>

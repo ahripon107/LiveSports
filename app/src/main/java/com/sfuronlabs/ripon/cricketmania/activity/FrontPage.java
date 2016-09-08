@@ -1,76 +1,100 @@
 package com.sfuronlabs.ripon.cricketmania.activity;
 
-
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
+import android.content.Intent;;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.Button;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.sfuronlabs.ripon.cricketmania.util.Constants;
-import com.sfuronlabs.ripon.cricketmania.util.HttpRequest;
-import com.sfuronlabs.ripon.cricketmania.adapter.OptionsAdapter;
+import com.google.inject.Inject;
 import com.sfuronlabs.ripon.cricketmania.R;
 
 /**
- * Created by Ripon on 11/5/15.
+ * @author ripon
  */
 public class FrontPage extends AppCompatActivity {
 
-    AdView adView;
+    Button cricketLive,cricketLiveScore,cricketHighlights,cricketFixture,cricketNews,trollPosts,teamProfile,testbtn;
 
-    String[] itemName = {"Live Streaming", "Live Score", "Highlights", "Fixture", "News", "Funny Cricket Trolls", "Team Profile"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firstpage);
 
-        adView = (AdView) findViewById(R.id.adViewFPage);
+        cricketLive = (Button) findViewById(R.id.button_cricket_live);
+        cricketLiveScore = (Button) findViewById(R.id.button_cricket_live_score);
+        cricketHighlights = (Button) findViewById(R.id.button_cricket_highlights);
+        cricketFixture = (Button) findViewById(R.id.button_cricket_fixture);
+        cricketNews = (Button) findViewById(R.id.button_cricket_news);
+        trollPosts = (Button) findViewById(R.id.button_troll_posts);
+        teamProfile = (Button) findViewById(R.id.button_team_profile);
+        testbtn = (Button) findViewById(R.id.button_test);
 
-        GridView gridView = (GridView) findViewById(R.id.gvFirstPage);
-        OptionsAdapter optionsAdapter = new OptionsAdapter(this, itemName);
-        gridView.setAdapter(optionsAdapter);
-
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        cricketLive.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if (position == 0) {
-                    Intent intent = new Intent(FrontPage.this, Highlights.class);
-                    intent.putExtra("cause", "livestream");
-                    startActivity(intent);
-                } else if (position == 1) {
-                    Intent intent = new Intent(FrontPage.this, LiveScoreList.class);
-                    startActivity(intent);
-                } else if (position == 2) {
-                    Intent intent = new Intent(FrontPage.this, Highlights.class);
-                    intent.putExtra("cause", "highlights");
-                    startActivity(intent);
-                } else if (position == 3) {
-                    Intent intent = new Intent(FrontPage.this, Fixture.class);
-                    startActivity(intent);
-                } else if (position == 4) {
-                    Intent intent = new Intent(FrontPage.this, CricketNewsListActivity.class);
-                    startActivity(intent);
-                } else if (position == 5) {
-                    Intent intent = new Intent(FrontPage.this,TrollPostListActivity.class);
-                    startActivity(intent);
-                } else if (position == 6) {
-                    Intent intent = new Intent(FrontPage.this, TeamProfile.class);
-                    startActivity(intent);
-                }
+            public void onClick(View v) {
+                Intent intent = new Intent(FrontPage.this, Highlights.class);
+                intent.putExtra("cause", "livestream");
+                startActivity(intent);
             }
         });
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE).build();
-        adView.loadAd(adRequest);
+
+        cricketLiveScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FrontPage.this, LiveScoreListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cricketHighlights.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FrontPage.this, Highlights.class);
+                intent.putExtra("cause", "highlights");
+                startActivity(intent);
+            }
+        });
+
+        cricketFixture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FrontPage.this, FixtureActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cricketNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FrontPage.this, CricketNewsListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        trollPosts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FrontPage.this,TrollPostListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        teamProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FrontPage.this, TeamProfile.class);
+                startActivity(intent);
+            }
+        });
+
+        testbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FrontPage.this,TestActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

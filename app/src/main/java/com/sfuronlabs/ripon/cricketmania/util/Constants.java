@@ -6,11 +6,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by amin on 8/11/16.
+ * @author ripon
  */
 public class Constants {
 
     public static final String SOLAIMAN_LIPI_FONT = "fonts/solaimanlipi.ttf";
+    public static final String TIMES_NEW_ROMAN_FONT = "fonts/timesnewroman.ttf";
     public static final String ONE_PLUS_TEST_DEVICE = "7D3F3DF2A7214E839DBE70BE2132D5B9";
     public static final String NEWS_URL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20cricket.news(0,50)%20where%20region=%22IN%22&format=json&diagnostics=true&env=store%3A%2F%2F0TxIGQMQbObzvU4Apia0V0&callback=";
     public static final String FIXTURE_URL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20cricket.upcoming_matches(0,50)&format=json&diagnostics=true&env=store%3A%2F%2F0TxIGQMQbObzvU4Apia0V0&callback=";
@@ -84,5 +85,41 @@ public class Constants {
             e.printStackTrace();
         }
         return timeAgo;
+    }
+
+    public static String resolveLogo(String teamName) {
+        if (teamName.contains("Australia"))
+            return Constants.AUS_TEAM_LOGO_URL;
+        else if (teamName.contains("Bangladesh"))
+            return Constants.BD_TEAM_LOGO_URL;
+        else if (teamName.contains("England"))
+            return Constants.ENG_TEAM_LOGO_URL;
+        else if (teamName.contains("India"))
+            return Constants.IND_TEAm_LOGO_URL;
+        else if (teamName.contains("New Zealand"))
+            return Constants.NZ_TEAM_LOGO_URL;
+        else if (teamName.contains("Pakistan"))
+            return Constants.PAK_TEAM_LOGO_URL;
+        else if (teamName.contains("South Africa"))
+            return Constants.SA_TEAM_LOGO_URL;
+        else if (teamName.contains("Sri Lanka"))
+            return Constants.SL_TEAM_LOGO_URL;
+        else if (teamName.contains("West Indies"))
+            return Constants.WI_TEAM_LOGO_URL;
+        else if (teamName.contains("Zimbabwe"))
+            return Constants.ZIM_TEAM_LOGO_URL;
+        else if (teamName.contains("Bermuda"))
+            return Constants.BER_TEAM_LOGO_URL;
+        else if (teamName.contains("Canada"))
+            return Constants.CAN_TEAM_LOGO_URL;
+        else if (teamName.contains("Ireland"))
+            return Constants.IRE_TEAM_LOGO_URL;
+        else if (teamName.contains("Kenya"))
+            return Constants.KEN_TEAM_LOGO_URL;
+        else if (teamName.contains("Netherland"))
+            return Constants.NED_TEAM_LOGO_URL;
+        else if (teamName.contains("Scotland"))
+            return Constants.SCO_TEAM_LOGO_URL;
+        else return "n";
     }
 }

@@ -17,7 +17,7 @@ import com.sfuronlabs.ripon.cricketmania.R;
 /**
  * Created by Ripon on 2/13/16.
  */
-public class FrameStream extends Activity {
+public class FrameStream extends AppCompatActivity {
 
     WebView webView;
     String html;
@@ -33,11 +33,9 @@ public class FrameStream extends Activity {
 
         adView = (AdView) findViewById(R.id.adViewFrameStream);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice("18D9D4FB40DF048C506091E42E0FDAFD").build();
-        //AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
         Intent intent = getIntent();
         String str = intent.getStringExtra("url");
-        //html = "<iframe frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\" height=\"455\" src=\"http://footyfire.com/mike17.php\" scrolling=\"no\" width=\"620\" name=\"iframe1\"/>Your browser does not support iframes.</iframe>";
 
         html = "<html>\n" +
                 "    <head>\n" +
@@ -65,7 +63,6 @@ public class FrameStream extends Activity {
 
 
         webView.setWebChromeClient(new WebChromeClient());
-        //webView.loadUrl("http://cricfree.tv/update/skys3.php");
         webView.loadDataWithBaseURL("", html , "text/html",  "UTF-8", "");
 
         Toast.makeText(getApplicationContext(),"Zoom in or out to adjust with device screen",Toast.LENGTH_LONG).show();

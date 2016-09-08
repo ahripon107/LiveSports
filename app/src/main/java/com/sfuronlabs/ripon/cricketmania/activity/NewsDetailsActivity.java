@@ -1,6 +1,7 @@
 package com.sfuronlabs.ripon.cricketmania.activity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,14 +45,22 @@ public class NewsDetailsActivity extends RoboAppCompatActivity {
 
     CricketNews cricketNews;
 
+    Typeface typeface;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         cricketNews = (CricketNews) getIntent().getSerializableExtra(EXTRA_NEWS_OBJECT);
 
+        typeface = Typeface.createFromAsset(getAssets(),Constants.TIMES_NEW_ROMAN_FONT);
+        headline.setTypeface(typeface);
+        date.setTypeface(typeface);
+        author.setTypeface(typeface);
+        details.setTypeface(typeface);
         headline.setText(cricketNews.getTitle());
-        date.setText(Constants.timestamp(cricketNews.getPubDate()));
+        String arr[] = cricketNews.getPubDate().split("T");
+        date.setText(arr[0]+" "+arr[1]);
         author.setText(cricketNews.getAuthor());
         details.setText(cricketNews.getDescription());
 

@@ -3,22 +3,30 @@ package com.sfuronlabs.ripon.cricketmania.activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
+import com.google.inject.Inject;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sfuronlabs.ripon.cricketmania.R;
-import com.sfuronlabs.ripon.cricketmania.adapter.TrollPostImageAdapter;
+import com.sfuronlabs.ripon.cricketmania.adapter.BasicListAdapter;
 import com.sfuronlabs.ripon.cricketmania.model.TrollPost;
 import com.sfuronlabs.ripon.cricketmania.util.Constants;
 import com.sfuronlabs.ripon.cricketmania.util.FetchFromWeb;
+import com.sfuronlabs.ripon.cricketmania.util.RoboAppCompatActivity;
+import com.sfuronlabs.ripon.cricketmania.util.ViewHolder;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,38 +35,59 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 
 /**
  * @author ripon
  */
-public class TrollPostListActivity extends AppCompatActivity {
+@ContentView(R.layout.fixture)
+public class TrollPostListActivity extends RoboAppCompatActivity {
 
+    @InjectView(R.id.adViewFixture)
     AdView adView;
+
+    @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @Inject
     ArrayList<TrollPost> trollPosts;
-    TrollPostImageAdapter trollPostImageAdapter;
+
+    @Inject
     Gson gson;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fixture);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        gson = new Gson();
-        adView = (AdView) findViewById(R.id.adViewFixture);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        trollPosts = new ArrayList<>();
-        trollPostImageAdapter = new TrollPostImageAdapter(this,trollPosts);
-        recyclerView.setAdapter(trollPostImageAdapter);
+
+        recyclerView.setAdapter(new BasicListAdapter<TrollPost, TrollPostViewHolder>(trollPosts) {
+            @Override
+            public TrollPostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_troll_posts, parent, false);
+                return new TrollPostViewHolder(view);
+            }
+
+            @Override
+            public void onBindViewHolder(TrollPostViewHolder holder, int position) {
+                holder.courtesy.setText(trollPosts.get(position).getCourtesy());
+                holder.title.setText(trollPosts.get(position).getImagetext());
+                Picasso.with(TrollPostListActivity.this)
+                        .load((trollPosts.get(position).getImageurl()))
+                        .placeholder(R.drawable.default_image)
+                        .into(holder.imageView);
+            }
+        });
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         String url = "http://apisea.xyz/Cricket/apis/v1/FetchFunPosts.php?key=bl905577";
         Log.d(Constants.TAG, url);
 
         final ProgressDialog progressDialog;
-        progressDialog= ProgressDialog.show(TrollPostListActivity.this, "", "Loading. Please wait...", true);
+        progressDialog = ProgressDialog.show(TrollPostListActivity.this, "", "Loading. Please wait...", true);
         progressDialog.setCancelable(true);
 
         FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
@@ -69,13 +98,13 @@ public class TrollPostListActivity extends AppCompatActivity {
                     JSONArray jsonArray = response.getJSONArray("content");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject obj = jsonArray.getJSONObject(i);
-                        TrollPost trollPost = gson.fromJson(String.valueOf(obj),TrollPost.class);
+                        TrollPost trollPost = gson.fromJson(String.valueOf(obj), TrollPost.class);
                         trollPosts.add(trollPost);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                trollPostImageAdapter.notifyDataSetChanged();
+                recyclerView.getAdapter().notifyDataSetChanged();
                 Log.d(Constants.TAG, response.toString());
             }
 
@@ -85,6 +114,7 @@ public class TrollPostListActivity extends AppCompatActivity {
                 Toast.makeText(TrollPostListActivity.this, "Failed", Toast.LENGTH_LONG).show();
             }
         });
+
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE).build();
         adView.loadAd(adRequest);
     }
@@ -98,6 +128,19 @@ public class TrollPostListActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private static class TrollPostViewHolder extends RecyclerView.ViewHolder {
+        protected ImageView imageView;
+        protected TextView title;
+        protected TextView courtesy;
+
+        public TrollPostViewHolder(View itemView) {
+            super(itemView);
+            imageView = ViewHolder.get(itemView, R.id.img_troll_post);
+            title = ViewHolder.get(itemView, R.id.tv_troll_post_title);
+            courtesy = ViewHolder.get(itemView, R.id.tv_troll_post_courtesy);
         }
     }
 }

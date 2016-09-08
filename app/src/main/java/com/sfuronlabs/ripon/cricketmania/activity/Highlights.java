@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.sfuronlabs.ripon.cricketmania.util.Constants;
 import com.sfuronlabs.ripon.cricketmania.videoplayers.HighlightsVids;
 import com.sfuronlabs.ripon.cricketmania.util.HttpRequest;
 import com.sfuronlabs.ripon.cricketmania.videoplayers.LiveStreamView;
@@ -27,7 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * Created by Ripon on 11/3/15.
+ * @author ripon
  */
 public class Highlights extends AppCompatActivity {
 
@@ -112,8 +113,7 @@ public class Highlights extends AppCompatActivity {
             }
         });
 
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("18D9D4FB40DF048C506091E42E0FDAFD").build();
-        //AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE).build();
         adView.loadAd(adRequest);
 
 

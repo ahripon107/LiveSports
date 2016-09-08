@@ -9,31 +9,23 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sfuronlabs.ripon.cricketmania.R;
 import com.sfuronlabs.ripon.cricketmania.adapter.MatchDetailsViewPagerAdapter;
 import com.sfuronlabs.ripon.cricketmania.fragment.FragmentMatchSummary;
 import com.sfuronlabs.ripon.cricketmania.fragment.FragmentScoreBoard;
-import com.sfuronlabs.ripon.cricketmania.model.CricketNews;
 import com.sfuronlabs.ripon.cricketmania.model.Match;
 import com.sfuronlabs.ripon.cricketmania.model.Summary;
 import com.sfuronlabs.ripon.cricketmania.util.Constants;
 import com.sfuronlabs.ripon.cricketmania.util.FetchFromWeb;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import javax.xml.transform.ErrorListener;
 
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by amin on 8/24/16.
+ * @author ripon
  */
 public class ActivityMatchDetails extends AppCompatActivity {
     private Match liveMatch;
@@ -43,10 +35,12 @@ public class ActivityMatchDetails extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_match_details);
         this.liveMatch = (Match) getIntent().getSerializableExtra("match");
-        setContentView((int) R.layout.activity_match_details);
+
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         this.viewPager = (ViewPager) findViewById(R.id.viewPager);
         this.viewPager.setOffscreenPageLimit(3);
         setupViewPage(this.viewPager);
