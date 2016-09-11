@@ -1,21 +1,32 @@
 package com.sfuronlabs.ripon.cricketmania.model;
 
 /**
- * Created by Ripon on 3/25/16.
+ * @author Ripon
  */
 public class Batsman {
 
+    private String playerId;
     private String name;
     private String out;
-    private String runs, balls, fours, sixes;
+    private String runs, balls, fours, sixes,sr;
 
-    public Batsman(String name, String out, String runs, String balls, String fours, String sixes) {
+    public Batsman(String playerId, String name, String out, String runs, String balls, String fours, String sixes, String sr) {
+        this.playerId = playerId;
         this.name = name;
         this.out = out;
         this.runs = runs;
         this.balls = balls;
         this.fours = fours;
         this.sixes = sixes;
+        this.sr = sr;
+    }
+
+    public String getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(String playerId) {
+        this.playerId = playerId;
     }
 
     public String getName() {
@@ -66,15 +77,11 @@ public class Batsman {
         this.sixes = sixes;
     }
 
-    @Override
-    public String toString() {
-        return "Batsman{" +
-                "name='" + name + '\'' +
-                ", out='" + out + '\'' +
-                ", runs='" + runs + '\'' +
-                ", balls='" + balls + '\'' +
-                ", fours='" + fours + '\'' +
-                ", sixes='" + sixes + '\'' +
-                '}';
+    public String getSr() {
+        return sr;
+    }
+
+    public void setSr(String sr) {
+        this.sr = sr;
     }
 }

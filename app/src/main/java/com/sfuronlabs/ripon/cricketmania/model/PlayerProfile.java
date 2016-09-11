@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by Ripon on 8/13/16.
+ * @author Ripon
  */
 public class PlayerProfile implements Serializable{
     String Profile;

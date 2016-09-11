@@ -66,12 +66,12 @@ public class FixtureActivity extends RoboAppCompatActivity {
             public void onBindViewHolder(FixtureViewHolder holder, int position) {
                 Picasso.with(FixtureActivity.this)
                         .load(Constants.resolveLogo(data.get(position).getTeam1()))
-                        .placeholder(R.drawable.bpl)
+                        .placeholder(R.drawable.default_image)
                         .into(holder.imgteam1);
 
                 Picasso.with(FixtureActivity.this)
                         .load(Constants.resolveLogo(data.get(position).getTeam2()))
-                        .placeholder(R.drawable.bpl)
+                        .placeholder(R.drawable.default_image)
                         .into(holder.imgteam2);
 
                 holder.textteam1.setText(data.get(position).getTeam1());

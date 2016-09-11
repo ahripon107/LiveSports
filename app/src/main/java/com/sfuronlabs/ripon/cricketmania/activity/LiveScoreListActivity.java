@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +74,7 @@ public class LiveScoreListActivity extends RoboAppCompatActivity {
 
                 holder.textteam1.setText(datas.get(position).getTeam1());
                 holder.textteam2.setText(datas.get(position).getTeam2());
-                holder.venue.setText(datas.get(position).getVenue());
+                holder.venue.setText(Html.fromHtml(datas.get(position).getVenue()));
                 holder.time.setText(datas.get(position).getTime());
             }
         });
@@ -85,6 +86,7 @@ public class LiveScoreListActivity extends RoboAppCompatActivity {
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(LiveScoreListActivity.this, ActivityMatchDetails.class);
                         intent.putExtra("match", datas.get(position));
+                        startActivity(intent);
                     }
                 })
         );

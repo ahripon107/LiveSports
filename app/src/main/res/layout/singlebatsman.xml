@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -15,41 +18,49 @@
             android:id="@+id/batsmenName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_weight="1.2"
             android:text="Batsman Name"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/cpb_blue" />
 
         <TextView
             android:id="@+id/runs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:text="Runs"
-            android:textColor="@color/colorPrimary" />
+            android:textSize="12sp"
+            android:text="Runs" />
 
         <TextView
             android:id="@+id/balls"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:text="Balls"
-            android:textColor="@color/colorPrimary" />
+            android:textSize="12sp"
+            android:text="Balls" />
 
         <TextView
             android:id="@+id/fours"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:text="Fours"
-            android:textColor="@color/colorPrimary" />
+            android:textSize="12sp"
+            android:text="Fours" />
 
         <TextView
             android:id="@+id/six"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:text="Sixes"
-            android:textColor="@color/colorPrimary" />
+            android:textSize="12sp"
+            android:text="Sixes" />
+
+        <TextView
+            android:id="@+id/sr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textSize="12sp"
+            android:text="SR" />
     </LinearLayout>
 
     <LinearLayout
@@ -62,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Out description"
-            android:textColor="#ef5350"
+            android:textColor="@color/OliveDrab"
             android:textSize="10dp" />
     </LinearLayout>
 </LinearLayout>

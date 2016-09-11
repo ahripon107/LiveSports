@@ -1,7 +1,7 @@
 package com.sfuronlabs.ripon.cricketmania.model;
 
 /**
- * Created by Ripon on 10/29/15.
+ * @author Ripon
  */
 public class Player {
 

@@ -78,35 +78,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Highest Innings: "
-            android:textSize="18sp" />
+            android:textColor="@color/Black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tvBBI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Best Bowling Innings: "
-            android:textSize="18sp" />
+            android:textColor="@color/Black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tvBestIndividual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Best Individual Innings: "
-            android:textSize="18sp" />
+            android:textColor="@color/Black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tvMostWickets"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Most Wickets: "
-            android:textSize="18sp" />
+            android:textColor="@color/Black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tvMostRuns"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Most Runs: "
-            android:textSize="18sp" />
+            android:textColor="@color/Black"
+            android:textSize="15sp" />
 
 
     </LinearLayout>

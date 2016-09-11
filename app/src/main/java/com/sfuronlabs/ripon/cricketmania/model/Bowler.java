@@ -1,19 +1,19 @@
 package com.sfuronlabs.ripon.cricketmania.model;
 
 /**
- * Created by Ripon on 3/25/16.
+ * @author Ripon
  */
 public class Bowler {
 
-    private String name, over, maiden, run, wicket, economy;
+    private String playerId,name, over, maiden, run, wicket;
 
-    public Bowler(String name, String over, String maiden, String run, String wicket, String economy) {
+    public Bowler(String playerId,String name, String over, String maiden, String run, String wicket) {
+        this.playerId = playerId;
         this.name = name;
         this.over = over;
         this.maiden = maiden;
         this.run = run;
         this.wicket = wicket;
-        this.economy = economy;
     }
 
     public String getName() {
@@ -56,23 +56,23 @@ public class Bowler {
         this.wicket = wicket;
     }
 
-    public String getEconomy() {
-        return economy;
+    public String getPlayerId() {
+        return playerId;
     }
 
-    public void setEconomy(String economy) {
-        this.economy = economy;
+    public void setPlayerId(String playerId) {
+        this.playerId = playerId;
     }
 
     @Override
     public String toString() {
         return "Bowler{" +
-                "name='" + name + '\'' +
+                "playerId='" + playerId + '\'' +
+                ", name='" + name + '\'' +
                 ", over='" + over + '\'' +
                 ", maiden='" + maiden + '\'' +
                 ", run='" + run + '\'' +
                 ", wicket='" + wicket + '\'' +
-                ", economy='" + economy + '\'' +
                 '}';
     }
 }

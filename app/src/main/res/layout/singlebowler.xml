@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@id/batsmanScoredetails"
+        android:id="@+id/batsmanScoredetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
@@ -15,28 +18,25 @@
             android:id="@+id/bowl_Name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-
+            android:layout_weight="1.0"
             android:text="Bowler Name"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/cpb_blue" />
 
         <TextView
             android:id="@+id/bowl_overs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-
             android:text="Overs"
-            android:textColor="@color/colorPrimary" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/bowl_maiden"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-
             android:text="Mdns"
-            android:textColor="@color/colorPrimary" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/bowl_runs"
@@ -45,24 +45,15 @@
             android:layout_weight="0.3"
 
             android:text="Runs"
-            android:textColor="@color/colorPrimary" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/bowl_wickets"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-
             android:text="Wkts"
-            android:textColor="@color/colorPrimary" />
+            android:textSize="12sp" />
 
-        <TextView
-            android:id="@+id/bowl_economy"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-
-            android:text="Eco"
-            android:textColor="@color/colorPrimary" />
     </LinearLayout>
 </LinearLayout>

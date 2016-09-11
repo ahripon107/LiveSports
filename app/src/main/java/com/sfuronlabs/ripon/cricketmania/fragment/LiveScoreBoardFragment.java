@@ -28,7 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * Created by Ripon on 3/25/16.
+ * @author Ripon
  */
 public class LiveScoreBoardFragment extends Fragment {
     ArrayList<Batsman> batsmans;
@@ -55,10 +55,9 @@ public class LiveScoreBoardFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        inflater = (LayoutInflater)getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
 
 
-        View v = inflater.inflate(R.layout.livescoreboard,null,false);
+        View v = inflater.inflate(R.layout.livescoreboard,container,false);
 
         batsmans = new ArrayList<>();
         batsmanAdapter = new BatsmanAdapter(this.getActivity(),batsmans);
@@ -103,19 +102,19 @@ public class LiveScoreBoardFragment extends Fragment {
             currentRunRate.setText("Run rate: "+scr.getString("runrate"));
 
             JSONObject obj = jsonObject.getJSONArray("batsman").getJSONObject(0);
-            Batsman batsman = new Batsman(obj.getString("name"),"",obj.getString("runs"),obj.getString("balls"),obj.getString("fours"),obj.getString("sixes"));
+            Batsman batsman = new Batsman("",obj.getString("name"),"",obj.getString("runs"),obj.getString("balls"),obj.getString("fours"),obj.getString("sixes"),"");
             batsmans.add(batsman);
             obj = jsonObject.getJSONArray("batsman").getJSONObject(1);
-            batsman = new Batsman(obj.getString("name"),"",obj.getString("runs"),obj.getString("balls"),obj.getString("fours"),obj.getString("sixes"));
+            batsman = new Batsman("",obj.getString("name"),"",obj.getString("runs"),obj.getString("balls"),obj.getString("fours"),obj.getString("sixes"),"");
             batsmans.add(batsman);
 
             batsmanAdapter.notifyDataSetChanged();
 
             obj = jsonObject.getJSONArray("bowler").getJSONObject(0);
-            Bowler bowler = new Bowler(obj.getString("name"),obj.getString("overs"),obj.getString("maiden"),obj.getString("runs"),obj.getString("wickets"),obj.getString("economy"));
+            Bowler bowler = new Bowler("",obj.getString("name"),obj.getString("overs"),obj.getString("maiden"),obj.getString("runs"),obj.getString("wickets"));
             bowlers.add(bowler);
             obj = jsonObject.getJSONArray("bowler").getJSONObject(1);
-            bowler = new Bowler(obj.getString("name"),obj.getString("overs"),obj.getString("maiden"),obj.getString("runs"),obj.getString("wickets"),obj.getString("economy"));
+            bowler = new Bowler("",obj.getString("name"),obj.getString("overs"),obj.getString("maiden"),obj.getString("runs"),obj.getString("wickets"));
             bowlers.add(bowler);
 
 

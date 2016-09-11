@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by Ripon on 12/17/15.
+ * @author Ripon
  */
 public class TeamProfileAdapter extends RecyclerView.Adapter<TeamProfileAdapter.TeamProfileViewHolder> {
 
@@ -59,7 +59,7 @@ public class TeamProfileAdapter extends RecyclerView.Adapter<TeamProfileAdapter.
         holder.tname.setText(teamname.get(position));
         Picasso.with(context)
                 .load(teamImage.get(position))
-                .placeholder(R.drawable.bpl)
+                .placeholder(R.drawable.default_image)
                 .into(holder.circleImageView);
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override

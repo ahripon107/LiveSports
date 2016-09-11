@@ -90,7 +90,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_margin="7dp"
             android:orientation="vertical">
 
@@ -99,16 +99,16 @@
                 android:id="@+id/tvVenue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center_horizontal"
                 android:text="SBNCS"
-                android:textColor="@color/MediumPurple"
+                android:textColor="@color/Green"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:text="TIME"
                 android:textColor="@color/SkyBlue"
                 android:textSize="16sp" />

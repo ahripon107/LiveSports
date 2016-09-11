@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sfuronlabs.ripon.cricketmania.R;
 import com.sfuronlabs.ripon.cricketmania.activity.PlayerProfileActivity;
+import com.sfuronlabs.ripon.cricketmania.fragment.FragmentMatchSummary;
 import com.sfuronlabs.ripon.cricketmania.model.Match;
 import com.sfuronlabs.ripon.cricketmania.model.Player;
 import com.sfuronlabs.ripon.cricketmania.model.PlayerProfile;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by Ripon on 12/16/15.
+ * @author Ripon
  */
 public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.PlayerListViewHolder> {
 
@@ -60,9 +61,8 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Pl
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20cricket.player.profile%20where%20player_id=" + players.get(position).getPersonid() + "&format=json&diagnostics=false&env=store%3A%2F%2F0TxIGQMQbObzvU4Apia0V0&callback=";
-                Log.d(Constants.TAG, url);
 
+                String url = "http://apisea.xyz/Cricket/apis/v1/YahooToCricAPI.php?key=bl905577&yahoo="+players.get(position).getPersonid();
                 final ProgressDialog progressDialog;
                 progressDialog = ProgressDialog.show(context, "", "Loading. Please wait...", true);
                 progressDialog.setCancelable(true);
@@ -72,16 +72,17 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Pl
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         progressDialog.dismiss();
                         try {
-                            response = response.getJSONObject("query").getJSONObject("results").getJSONObject("PlayerProfile").getJSONObject("CareerDetails");
-                            PlayerProfile p = gson.fromJson(String.valueOf(response),PlayerProfile.class);
-                            Intent intent = new Intent(context, PlayerProfileActivity.class);
-                            intent.putExtra("profile",p);
-                            context.startActivity(intent);
-
+                            if (response.getString("msg").equals("Successful")) {
+                                String playerID = (response.getJSONArray("content").getJSONObject(0).getString("cricapiID"));
+                                Intent intent = new Intent(context, PlayerProfileActivity.class);
+                                intent.putExtra("playerID",playerID);
+                                context.startActivity(intent);
+                            } else {
+                                Toast.makeText(context,"Profile Not Found",Toast.LENGTH_LONG).show();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                         Log.d(Constants.TAG, response.toString());
                     }
 
@@ -91,6 +92,8 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Pl
                         Toast.makeText(context, "Failed", Toast.LENGTH_LONG).show();
                     }
                 });
+
+
             }
         });
     }

@@ -15,7 +15,7 @@ import com.sfuronlabs.ripon.cricketmania.fragment.PlayersFragment;
 import com.sfuronlabs.ripon.cricketmania.fragment.RecordFragment;
 
 /**
- * Created by Ripon on 12/16/15.
+ * @author Ripon
  */
 public class TeamDetailsActivity extends AppCompatActivity{
 

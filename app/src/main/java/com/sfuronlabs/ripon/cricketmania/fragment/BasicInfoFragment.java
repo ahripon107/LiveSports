@@ -3,6 +3,7 @@ package com.sfuronlabs.ripon.cricketmania.fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by Ripon on 12/16/15.
+ * @author Ripon
  */
 public class BasicInfoFragment extends Fragment {
 
@@ -139,7 +140,8 @@ public class BasicInfoFragment extends Fragment {
             coach.setText(s);
 
             //object = jsonObject.getJSONObject("Castrol");
-            description.setText(jsonObject.getString("Description"));
+            //description.setText(jsonObject.getString("Description"));
+            description.setText(Html.fromHtml(jsonObject.getString("Description")));
 
         } catch (JSONException e) {
             e.printStackTrace();

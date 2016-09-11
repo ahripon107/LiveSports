@@ -1,26 +1,36 @@
 package com.sfuronlabs.ripon.cricketmania.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sfuronlabs.ripon.cricketmania.R;
+import com.sfuronlabs.ripon.cricketmania.activity.ActivityMatchDetails;
+import com.sfuronlabs.ripon.cricketmania.activity.FullCommentryActivity;
+import com.sfuronlabs.ripon.cricketmania.adapter.BasicListAdapter;
 import com.sfuronlabs.ripon.cricketmania.model.Summary;
+import com.sfuronlabs.ripon.cricketmania.util.ViewHolder;
+
+import java.util.ArrayList;
 
 /**
- * Created by amin on 8/24/16.
+ * @author Ripon
  */
 public class FragmentMatchSummary extends Fragment {
-    private TextView labelGround;
-    private TextView labelInfo;
-    private TextView labelMatchStatus;
-    private TextView labelTeam1;
-    private TextView labelTeam2;
-    private TextView labelTournament;
+    private RecyclerView commentry;
+    private TextView noCommentry;
+    private Button fullCommentry;
+    private String yahooID = "0";
 
     @Nullable
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,22 +39,61 @@ public class FragmentMatchSummary extends Fragment {
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.labelTournament = (TextView) view.findViewById(R.id.labelTournament);
-        this.labelTeam1 = (TextView) view.findViewById(R.id.labelTeam1);
-        this.labelTeam2 = (TextView) view.findViewById(R.id.labelTeam2);
-        this.labelGround = (TextView) view.findViewById(R.id.labelGround);
-        this.labelInfo = (TextView) view.findViewById(R.id.labelInfo);
-        this.labelMatchStatus = (TextView) view.findViewById(R.id.labelMatchStatus);
+        this.commentry = (RecyclerView) view.findViewById(R.id.commentry_list);
+        this.noCommentry = (TextView) view.findViewById(R.id.no_commentry);
+        this.fullCommentry = (Button) view.findViewById(R.id.btn_full_commentry);
+
+        fullCommentry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), FullCommentryActivity.class);
+                intent.putExtra("numberofinnings",((ActivityMatchDetails)getActivity()).numberOfInnings);
+                intent.putExtra("id",yahooID);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
-    public void setMatchSummary(Summary matchSummary) {
+    public void setCommentry(final ArrayList<String> commentries) {
         if (isAdded()) {
-            this.labelTournament.setText(matchSummary.getTournament());
-            this.labelTeam1.setText(matchSummary.getTeam1());
-            this.labelTeam2.setText(matchSummary.getTeam2());
-            this.labelGround.setText(matchSummary.getGround());
-            this.labelInfo.setText(matchSummary.getInfo());
-            this.labelMatchStatus.setText(matchSummary.getMatchStatus());
+            commentry.setAdapter(new BasicListAdapter<String, CommentryViewHolder>(commentries) {
+                @Override
+                public CommentryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.singlecommentary, parent, false);
+                    return new CommentryViewHolder(view);
+                }
+
+                @Override
+                public void onBindViewHolder(CommentryViewHolder holder, int position) {
+                    holder.item.setText(Html.fromHtml(commentries.get(position)));
+                }
+            });
+            commentry.setLayoutManager(new LinearLayoutManager(getContext()));
+            noCommentry.setVisibility(View.GONE);
+            fullCommentry.setVisibility(View.VISIBLE);
+
+        }
+    }
+
+    public void setNoCommentry() {
+        noCommentry.setVisibility(View.VISIBLE);
+        fullCommentry.setVisibility(View.GONE);
+    }
+
+    public void setMatchID (String id) {
+        this.yahooID = id;
+    }
+
+    private static class CommentryViewHolder extends RecyclerView.ViewHolder {
+
+        protected TextView item;
+
+        public CommentryViewHolder(View itemView) {
+            super(itemView);
+            item = ViewHolder.get(itemView, R.id.live_commentary);
         }
     }
 }

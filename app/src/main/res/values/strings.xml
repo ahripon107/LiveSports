@@ -21,4 +21,6 @@
 
     <string name="youtube">AIzaSyDPm-0hit-BeRpVgGiQ2B5vjtSHhxveayQ</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+
+    <string name="load">Refresh</string>
 </resources>

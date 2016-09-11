@@ -15,7 +15,7 @@ import com.sfuronlabs.ripon.cricketmania.util.ViewHolder;
 import java.util.ArrayList;
 
 /**
- * Created by Ripon on 12/16/15.
+ * @author Ripon
  */
 public class TeamRecordAdapter extends RecyclerView.Adapter<TeamRecordAdapter.TeamRecordViewHolder> {
 

@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * Created by Ripon on 12/16/15.
+ * @author Ripon
  */
 public class PlayersFragment extends Fragment {
     RecyclerView recyclerView;

@@ -15,11 +15,10 @@
         ads:adUnitId="@string/highlights">
     </com.google.android.gms.ads.AdView>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/lvHighlights"
-        android:background="@drawable/bpl"
         android:layout_above="@id/adViewHighlights"
         android:layout_gravity="center_horizontal" />
 </RelativeLayout>

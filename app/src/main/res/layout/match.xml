@@ -24,9 +24,9 @@
 
             <TextView
                 android:id="@+id/tvSeriesname"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
                 android:text="SBNCS"
                 android:textColor="@color/Green"
                 android:textSize="13sp" />
@@ -119,6 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="7dp"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
 
@@ -126,7 +127,7 @@
                 android:id="@+id/tvVenue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center_horizontal"
                 android:text="SBNCS"
                 android:textColor="@color/MediumPurple"
                 android:textSize="16sp" />
@@ -137,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="TIME"
-                android:textColor="@color/SkyBlue"
+                android:textColor="@color/Black"
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>

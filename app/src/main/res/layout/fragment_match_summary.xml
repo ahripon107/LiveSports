@@ -1,77 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:padding="12dp">
 
     <TextView
-        android:gravity="center"
-        android:id="@+id/labelTournament"
-        android:layout_height="wrap_content"
+        android:id="@+id/no_commentry"
         android:layout_width="match_parent"
-        android:padding="8dp"
-        android:text="tournament"
-        android:textColor="#000000"
-        android:textSize="18sp" />
-
-    <LinearLayout
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:gravity="center_horizontal"
+        android:text="Commentry is not available for this match."
+        android:textColor="@color/Black"
+        android:textSize="17sp"
+        android:visibility="gone" />
 
-        <TextView
-            android:gravity="center_horizontal"
-            android:id="@+id/labelTeam1"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:layout_weight="1.0"
-            android:layout_width="0dp"
-            android:text="team1"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
-        <TextView
-            android:gravity="center_horizontal"
-            android:id="@+id/labelTeam2"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_weight="1.0"
-            android:layout_width="0dp"
-            android:text="team2"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <TextView
-        android:gravity="left"
-        android:id="@+id/labelGround"
+    <Button
+        android:id="@+id/btn_full_commentry"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="Full Commentry" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/commentry_list"
         android:layout_width="match_parent"
-        android:padding="8dp"
-        android:singleLine="true"
-        android:text="ground"
-        android:textColor="#000000"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content" />
 
-    <TextView
-        android:gravity="left"
-        android:id="@+id/labelInfo"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:padding="8dp"
-        android:text="info"
-        android:textColor="#000000"
-        android:textSize="18sp" />
 
-    <TextView
-        android:gravity="left"
-        android:id="@+id/labelMatchStatus"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:padding="8dp"
-        android:text="match status"
-        android:textColor="#000000"
-        android:textSize="18sp" />
 </LinearLayout>

@@ -12,7 +12,7 @@ import com.sfuronlabs.ripon.cricketmania.R;
 import java.util.ArrayList;
 
 /**
- * Created by Ripon on 3/25/16.
+ * @author Ripon
  */
 public class CommentaryAdapter extends BaseAdapter {
 
@@ -20,8 +20,7 @@ public class CommentaryAdapter extends BaseAdapter {
     ArrayList<String> commentaries;
     LayoutInflater layoutInflater;
 
-    public CommentaryAdapter(Context context, ArrayList<String> commentaries)
-    {
+    public CommentaryAdapter(Context context, ArrayList<String> commentaries) {
         this.context = context;
         this.commentaries = commentaries;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -45,16 +44,12 @@ public class CommentaryAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
-        view = convertView;
-        if(convertView == null)
-        {
-            view = layoutInflater.inflate(R.layout.singlecommentary,null);
+        View view = convertView;
+        if (convertView == null) {
+            view = layoutInflater.inflate(R.layout.singlecommentary, parent, false);
         }
-
         TextView c = (TextView) view.findViewById(R.id.live_commentary);
         c.setText(commentaries.get(position));
-
         return view;
     }
 }
