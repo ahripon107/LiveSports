@@ -1,5 +1,6 @@
 package com.sfuronlabs.ripon.cricketmania.fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import dmax.dialog.SpotsDialog;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -71,10 +73,14 @@ public class FullCommentryFragment extends RoboFragment {
     public void fetchCommentries() {
 
         String url = getArguments().getString("url");
+        final AlertDialog progressDialog = new SpotsDialog(getContext(), R.style.Custom);
+        progressDialog.show();
+        progressDialog.setCancelable(true);
         FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                progressDialog.dismiss();
                 commentries.clear();
 
                 try {
@@ -138,8 +144,10 @@ public class FullCommentryFragment extends RoboFragment {
                 Log.d(Constants.TAG, response.toString());
             }
 
+
             @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                progressDialog.dismiss();
                 Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
             }
         });

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.sfuronlabs.ripon.cricketmania"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -32,6 +32,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-ads:9.2.1'
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.github.dmytrodanylyk.shadow-layout:library:1.0.3'
+    compile 'com.github.d-max:spots-dialog:0.4@aar'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile files('libs/gson-2.3.1.jar')
 }

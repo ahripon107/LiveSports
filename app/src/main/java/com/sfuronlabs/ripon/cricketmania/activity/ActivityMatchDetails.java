@@ -1,5 +1,6 @@
 package com.sfuronlabs.ripon.cricketmania.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -31,24 +32,24 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import dmax.dialog.SpotsDialog;
 
 /**
  * @author ripon
  */
 public class ActivityMatchDetails extends AppCompatActivity {
-    private Match liveMatch;
+    private String liveMatchID;
     private MatchDetailsViewPagerAdapter matchDetailsViewPagerAdapter;
     private ViewPager viewPager;
     private Gson gson;
     ArrayList<String> commentry = new ArrayList<>();
-    ArrayList<String> commentrySecondInnings = new ArrayList<>();
 
     public int numberOfInnings;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_details);
-        this.liveMatch = (Match) getIntent().getSerializableExtra("match");
+        this.liveMatchID = getIntent().getStringExtra("matchID");
         numberOfInnings = 0;
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -71,12 +72,12 @@ public class ActivityMatchDetails extends AppCompatActivity {
     }
 
     private void sendRequestForLiveMatchDetails() {
-        String url = "http://cricinfo-mukki.rhcloud.com/api/match/" + this.liveMatch.getMatchId();
+        String url = "http://cricinfo-mukki.rhcloud.com/api/match/" + this.liveMatchID;
         Log.d(Constants.TAG, url);
 
-        final ProgressDialog progressDialog = new ProgressDialog(ActivityMatchDetails.this);
-        progressDialog.setMessage("Loading...");
+        final AlertDialog progressDialog = new SpotsDialog(ActivityMatchDetails.this, R.style.Custom);
         progressDialog.show();
+        progressDialog.setCancelable(true);
 
         FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
             @Override
@@ -161,7 +162,7 @@ public class ActivityMatchDetails extends AppCompatActivity {
 
         RequestParams params = new RequestParams();
         params.add("key", "bl905577");
-        params.add("cricinfo", liveMatch.getMatchId());
+        params.add("cricinfo", liveMatchID);
         FetchFromWeb.get(idMatcherURL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

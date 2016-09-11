@@ -1,5 +1,6 @@
 package com.sfuronlabs.ripon.cricketmania.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -37,6 +41,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import dmax.dialog.SpotsDialog;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
@@ -90,39 +95,56 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         String playerID = getIntent().getStringExtra("playerID");
 
         String url = "http://cricapi.com/api/playerStats?pid="+playerID;
         Log.d(Constants.TAG, url);
 
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
+        final AlertDialog progressDialog = new SpotsDialog(PlayerProfileActivity.this, R.style.Custom);
         progressDialog.show();
+        progressDialog.setCancelable(true);
         FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 progressDialog.dismiss();
                 try {
                     playerName.setText(response.getString("name"));
-                    playerBorn.setText(Html.fromHtml("<b>Born:</b> "+response.getString("born")));
-                    playerAge.setText(Html.fromHtml("<b>Current Age:</b> "+response.getString("currentAge")));
-                    majorTeams.setText(Html.fromHtml("<b>Major Teams:</b> "+response.getString("majorTeams")));
-                    playingRole.setText(Html.fromHtml("<b>Playing Role:</b> "+response.getString("playingRole")));
+
+                    if (response.has("born")) playerBorn.setText(Html.fromHtml("<b>Born:</b> "+response.getString("born")));
+                    else playerBorn.setText("");
+
+                    if (response.has("currentAge"))playerAge.setText(Html.fromHtml("<b>Current Age:</b> "+response.getString("currentAge")));
+                    else playerAge.setText("");
+
+                    if (response.has("majorTeams")) majorTeams.setText(Html.fromHtml("<b>Major Teams:</b> "+response.getString("majorTeams")));
+                    else majorTeams.setText("");
+
+                    if (response.has("playingRole")) playingRole.setText(Html.fromHtml("<b>Playing Role:</b> "+response.getString("playingRole")));
+                    else playingRole.setText("");
+
                     if (response.has("battingStyle")) battingStyle.setText(Html.fromHtml("<b>Batting Style:</b> "+response.getString("battingStyle")));
                     else battingStyle.setText("");
+
                     if (response.has("bowlingStyle")) bowlingStyle.setText(Html.fromHtml("<b>Bowling Style:</b> "+response.getString("bowlingStyle")));
                     else bowlingStyle.setText("");
-                    playerProfile.setText(response.getString("profile"));
-                    Picasso.with(PlayerProfileActivity.this)
-                            .load(response.getString("imageURL"))
-                            .placeholder(R.drawable.default_image)
-                            .into(imageView);
+
+                    if (response.has("profile")) playerProfile.setText(response.getString("profile"));
+                    else playerProfile.setText("");
+
+                    if (response.has("imageURL")) {
+                        Picasso.with(PlayerProfileActivity.this)
+                                .load(response.getString("imageURL"))
+                                .placeholder(R.drawable.default_image)
+                                .into(imageView);
+                    }
+
 
                     JSONObject battingObject = response.getJSONObject("data").getJSONObject("batting");
 
                     if (battingObject.has("tests")) {
                         ProfileBatting profileBat = processProfileBatting(battingObject.getJSONObject("tests"));
-                        if (profileBat!=null) profileBat.setGametype("tests");
+                        if (profileBat!=null) profileBat.setGametype("Tests");
                         profileBattings.add(profileBat);
                     }
                     if (battingObject.has("ODIs")) {
@@ -142,12 +164,12 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
                     }
                     if (battingObject.has("listA")) {
                         ProfileBatting profileBat = processProfileBatting(battingObject.getJSONObject("listA"));
-                        if (profileBat!=null) profileBat.setGametype("listA");
+                        if (profileBat!=null) profileBat.setGametype("ListA");
                         profileBattings.add(profileBat);
                     }
                     if (battingObject.has("twenty20")) {
                         ProfileBatting profileBat = processProfileBatting(battingObject.getJSONObject("twenty20"));
-                        if (profileBat!=null) profileBat.setGametype("twenty20");
+                        if (profileBat!=null) profileBat.setGametype("Twenty20");
                         profileBattings.add(profileBat);
                     }
 
@@ -240,12 +262,30 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 progressDialog.dismiss();
                 Toast.makeText(PlayerProfileActivity.this, "Failed", Toast.LENGTH_LONG).show();
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public ProfileBatting processProfileBatting(JSONObject jsonObject) {

@@ -35,7 +35,7 @@ import roboguice.inject.InjectView;
  */
 public class FrontPage extends AppCompatActivity {
 
-    Button cricketLive,cricketLiveScore,cricketHighlights,cricketFixture,cricketNews,trollPosts,teamProfile;
+    Button cricketLive,cricketLiveScore,cricketHighlights,cricketFixture,cricketNews,trollPosts,teamProfile,pastMatches;
 
     TextView[] dots1;
 
@@ -44,7 +44,7 @@ public class FrontPage extends AppCompatActivity {
 
     SlideShowViewPagerAdapter viewPagerAdapter;
 
-    LinearLayout placeImageDotsLayout;
+    LinearLayout placeImageDotsLayout,cardContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +58,11 @@ public class FrontPage extends AppCompatActivity {
         cricketNews = (Button) findViewById(R.id.button_cricket_news);
         trollPosts = (Button) findViewById(R.id.button_troll_posts);
         teamProfile = (Button) findViewById(R.id.button_team_profile);
+        pastMatches = (Button) findViewById(R.id.button_cricket_past_matches);
+
         viewPager = (ViewPager) findViewById(R.id.placeViewPagerImageSlideShow);
         placeImageDotsLayout = (LinearLayout) findViewById(R.id.placeImageDots);
+        cardContainer = (LinearLayout) findViewById(R.id.placecardcontainer);
 
         imageUrls = new ArrayList<>();
         texts = new ArrayList<>();
@@ -125,10 +128,19 @@ public class FrontPage extends AppCompatActivity {
             }
         });
 
+        pastMatches.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FrontPage.this, PastMatchesActivity.class);
+                startActivity(intent);
+            }
+        });
+
         String url = "https://skysportsapi.herokuapp.com/sky/getnews/cricket/v1.0/";
         Log.d(Constants.TAG, url);
 
         if (isNetworkAvailable()) {
+            cardContainer.setVisibility(View.VISIBLE);
             FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -150,9 +162,12 @@ public class FrontPage extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
                 }
             });
+        } else {
+            cardContainer.setVisibility(View.GONE);
         }
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

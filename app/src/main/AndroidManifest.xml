@@ -76,6 +76,11 @@
             android:label="Team Profile"/>
 
         <activity
+            android:name=".activity.PastMatchesActivity"
+            android:screenOrientation="portrait"
+            android:label="Past Matches"/>
+
+        <activity
             android:name=".videoplayers.FrameStream"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
@@ -110,7 +115,7 @@
         <activity
             android:name=".activity.ActivityMatchDetails"
             android:screenOrientation="portrait"
-            android:label="Live Score Details"/>
+            android:label="Score Details"/>
 
         <activity
             android:name=".activity.FullCommentryActivity"

@@ -58,40 +58,12 @@ public class BowlerAdapter extends RecyclerView.Adapter<BowlerAdapter.BowlerView
         holder.name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://apisea.xyz/Cricket/apis/v1/CricinfoToCricAPI.php?key=bl905577&cricinfo="+bowlers.get(position).getPlayerId();
-                final ProgressDialog progressDialog;
-                progressDialog = ProgressDialog.show(context, "", "Loading. Please wait...", true);
-                progressDialog.setCancelable(true);
-
-                FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        progressDialog.dismiss();
-                        try {
-                            if (response.getString("msg").equals("Successful")) {
-                                String playerID = (response.getJSONArray("content").getJSONObject(0).getString("cricapiID"));
-                                Intent intent = new Intent(context, PlayerProfileActivity.class);
-                                intent.putExtra("playerID",playerID);
-                                context.startActivity(intent);
-                            } else {
-                                Toast.makeText(context,"Profile Not Found",Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        Log.d(Constants.TAG, response.toString());
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        progressDialog.dismiss();
-                        Toast.makeText(context, "Failed", Toast.LENGTH_LONG).show();
-                    }
-                });
+                Intent intent = new Intent(context, PlayerProfileActivity.class);
+                intent.putExtra("playerID", bowlers.get(position).getPlayerId());
+                context.startActivity(intent);
             }
         });
     }
-
 
     @Override
     public int getItemCount() {

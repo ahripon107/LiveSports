@@ -1,5 +1,6 @@
 package com.sfuronlabs.ripon.cricketmania.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -33,6 +37,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import dmax.dialog.SpotsDialog;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
@@ -52,6 +57,7 @@ public class LiveScoreListActivity extends RoboAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Live Score");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView.setAdapter(new BasicListAdapter<Match, LiveScoreViewHolder>(datas) {
             @Override
@@ -85,7 +91,7 @@ public class LiveScoreListActivity extends RoboAppCompatActivity {
                     @Override
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(LiveScoreListActivity.this, ActivityMatchDetails.class);
-                        intent.putExtra("match", datas.get(position));
+                        intent.putExtra("matchID", datas.get(position).getMatchId());
                         startActivity(intent);
                     }
                 })
@@ -94,9 +100,9 @@ public class LiveScoreListActivity extends RoboAppCompatActivity {
         String url = "http://cricinfo-mukki.rhcloud.com/api/match/live";
         Log.d(Constants.TAG, url);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LiveScoreListActivity.this);
-        progressDialog.setMessage("Loading...");
+        final AlertDialog progressDialog = new SpotsDialog(LiveScoreListActivity.this, R.style.Custom);
         progressDialog.show();
+        progressDialog.setCancelable(true);
         FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -122,6 +128,24 @@ public class LiveScoreListActivity extends RoboAppCompatActivity {
                 Toast.makeText(LiveScoreListActivity.this, "Failed", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private static class LiveScoreViewHolder extends RecyclerView.ViewHolder {

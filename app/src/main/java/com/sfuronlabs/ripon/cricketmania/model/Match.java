@@ -3,7 +3,7 @@ package com.sfuronlabs.ripon.cricketmania.model;
 import java.io.Serializable;
 
 /**
- * Created by Ripon on 10/29/15.
+ * @author ripon
  */
 public class Match implements Serializable {
 
