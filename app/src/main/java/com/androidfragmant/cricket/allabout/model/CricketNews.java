@@ -3,7 +3,7 @@ package com.androidfragmant.cricket.allabout.model;
 import java.io.Serializable;
 
 /**
- * Created by amin on 8/11/16.
+ * @author Ripon
  */
 public class CricketNews implements Serializable {
 

@@ -35,7 +35,7 @@ import cz.msebera.android.httpclient.Header;
  */
 public class FrontPage extends AppCompatActivity {
 
-    Button cricketLive,cricketLiveScore,cricketHighlights,cricketFixture,cricketNews,trollPosts,teamProfile,pastMatches,rate,ranking;
+    Button cricketLive,cricketLiveScore,cricketHighlights,cricketFixture,cricketNews,trollPosts,teamProfile,pastMatches,rate,ranking,records,pointsTable;
 
     TextView[] dots1;
 
@@ -61,6 +61,8 @@ public class FrontPage extends AppCompatActivity {
         pastMatches = (Button) findViewById(R.id.button_cricket_past_matches);
         rate = (Button) findViewById(R.id.button_rate);
         ranking = (Button) findViewById(R.id.button_ranking);
+        records = (Button) findViewById(R.id.button_records);
+        pointsTable = (Button) findViewById(R.id.button_points_table);
 
         viewPager = (ViewPager) findViewById(R.id.placeViewPagerImageSlideShow);
         placeImageDotsLayout = (LinearLayout) findViewById(R.id.placeImageDots);
@@ -154,6 +156,22 @@ public class FrontPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FrontPage.this, RankingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        records.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FrontPage.this, RecordsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        pointsTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FrontPage.this, PointsTableActivity.class);
                 startActivity(intent);
             }
         });

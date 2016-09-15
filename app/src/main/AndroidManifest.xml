@@ -132,6 +132,21 @@
             android:screenOrientation="portrait"
             android:label="Ranking"/>
 
+        <activity
+            android:name="com.androidfragmant.cricket.allabout.activity.RecordsActivity"
+            android:screenOrientation="portrait"
+            android:label="Records"/>
+
+        <activity
+            android:name="com.androidfragmant.cricket.allabout.activity.RecordDetailsActivity"
+            android:screenOrientation="portrait"
+            android:label="Record Details"/>
+
+        <activity
+            android:name="com.androidfragmant.cricket.allabout.activity.PointsTableActivity"
+            android:screenOrientation="portrait"
+            android:label="Points Table"/>
+
         <service android:name="com.batch.android.BatchPushService" />
         <receiver android:name="com.batch.android.BatchPushReceiver" android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
