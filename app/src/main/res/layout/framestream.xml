@@ -12,7 +12,7 @@
 
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/underframe">
+        ads:adUnitId="@string/iframe">
 
     </com.google.android.gms.ads.AdView>
 

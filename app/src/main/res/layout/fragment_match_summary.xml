@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="12dp">
 
@@ -15,12 +16,31 @@
         android:textSize="17sp"
         android:visibility="gone" />
 
-    <Button
-        android:id="@+id/btn_full_commentry"
+    <com.dd.ShadowLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="Full Commentry" />
+        android:layout_marginBottom="5dp"
+        app:sl_cornerRadius="2dp"
+        app:sl_dx="5dp"
+        app:sl_dy="5dp"
+        app:sl_shadowColor="#AA000000">
+
+        <Button
+            android:id="@+id/btn_full_commentry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/raised_selector"
+            android:minHeight="36dp"
+            android:minWidth="88dp"
+            android:paddingRight="4dp"
+            android:text="Full Commentry"
+            android:layout_gravity="right"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@android:color/white" />
+
+    </com.dd.ShadowLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/commentry_list"
         android:layout_width="match_parent"

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/news">
+        ads:adUnitId="@string/newslist">
     </com.google.android.gms.ads.AdView>
 
     <include

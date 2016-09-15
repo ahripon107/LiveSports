@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sfuronlabs.ripon.cricketmania" >
+    package="com.androidfragmant.cricket.allabout" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <permission android:name="${applicationId}.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE"/>
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+
     <application
-        android:name="com.sfuronlabs.ripon.cricketmania.ParseApplication"
+        android:name="com.androidfragmant.cricket.allabout.ParseApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,10 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
 
-        <meta-data android:name="com.parse.push.notification_icon"
-            android:resource="@drawable/bpl"/>
         <activity
-            android:name=".activity.FrontPage"
+            android:name="com.androidfragmant.cricket.allabout.activity.FrontPage"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
             >
@@ -30,97 +35,141 @@
 
 
         <activity
-            android:name=".activity.CricketNewsListActivity"
+            android:name="com.androidfragmant.cricket.allabout.activity.CricketNewsListActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
 
         <activity
-            android:name=".activity.FixtureActivity"
+            android:name="com.androidfragmant.cricket.allabout.activity.FixtureActivity"
             android:screenOrientation="portrait"
             android:label="Fixture"/>
 
         <activity
-            android:name=".activity.NewsDetailsActivity"
+            android:name="com.androidfragmant.cricket.allabout.activity.NewsDetailsActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
 
         <activity
-            android:name=".activity.Highlights"
+            android:name="com.androidfragmant.cricket.allabout.activity.Highlights"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
 
         <activity
-            android:name=".videoplayers.HighlightsVids"
+            android:name="com.androidfragmant.cricket.allabout.videoplayers.HighlightsVids"
             android:screenOrientation="landscape"
             android:label="@string/app_name"/>
 
         <activity
-            android:name=".activity.LiveScore"
+            android:name="com.androidfragmant.cricket.allabout.activity.LiveScore"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
 
         <activity
-            android:name=".activity.LiveScoreListActivity"
+            android:name="com.androidfragmant.cricket.allabout.activity.LiveScoreListActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
 
 
         <activity
-            android:name=".activity.TeamDetailsActivity"
+            android:name="com.androidfragmant.cricket.allabout.activity.TeamDetailsActivity"
             android:screenOrientation="portrait"
             android:label="Team Profile"/>
 
         <activity
-            android:name=".activity.TeamProfile"
+            android:name="com.androidfragmant.cricket.allabout.activity.TeamProfile"
             android:screenOrientation="portrait"
             android:label="Team Profile"/>
 
         <activity
-            android:name=".activity.PastMatchesActivity"
+            android:name="com.androidfragmant.cricket.allabout.activity.PastMatchesActivity"
             android:screenOrientation="portrait"
             android:label="Past Matches"/>
 
         <activity
-            android:name=".videoplayers.FrameStream"
+            android:name="com.androidfragmant.cricket.allabout.videoplayers.FrameStream"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
 
 
         <activity
-            android:name=".videoplayers.LiveStreamView"
+            android:name="com.androidfragmant.cricket.allabout.videoplayers.LiveStreamView"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
 
         <activity
-            android:name=".videoplayers.DMPlayerActivity"
+            android:name="com.androidfragmant.cricket.allabout.videoplayers.DMPlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
 
 
         <activity
-            android:name=".activity.TrollPostListActivity"
+            android:name="com.androidfragmant.cricket.allabout.activity.TrollPostListActivity"
             android:screenOrientation="portrait"
             android:label="Cricket Trolls"/>
 
 
         <activity
-            android:name=".activity.PlayerProfileActivity"
+            android:name="com.androidfragmant.cricket.allabout.activity.PlayerProfileActivity"
             android:screenOrientation="portrait"
             android:label="Player Profile"/>
 
 
         <activity
-            android:name=".activity.ActivityMatchDetails"
+            android:name="com.androidfragmant.cricket.allabout.activity.ActivityMatchDetails"
             android:screenOrientation="portrait"
             android:label="Score Details"/>
 
         <activity
-            android:name=".activity.FullCommentryActivity"
+            android:name="com.androidfragmant.cricket.allabout.activity.FullCommentryActivity"
             android:screenOrientation="portrait"
             android:label="Full Commentry"/>
+
+        <activity
+            android:name="com.androidfragmant.cricket.allabout.activity.RankingActivity"
+            android:screenOrientation="portrait"
+            android:label="Ranking"/>
+
+        <service android:name="com.batch.android.BatchPushService" />
+        <receiver android:name="com.batch.android.BatchPushReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+
+        <!--
+          Optionally, register AnalyticsReceiver and AnalyticsService to support background
+          dispatching on non-Google Play devices
+        -->
+        <receiver
+            android:name="com.google.android.gms.analytics.AnalyticsReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.analytics.AnalyticsService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!--
+             Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
+             installation campaign reporting
+        -->
+        <receiver
+            android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
 
     </application>
 </manifest>

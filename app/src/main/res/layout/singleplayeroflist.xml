@@ -11,7 +11,7 @@
         android:orientation="horizontal"
         android:id="@+id/player_list_item_card">
 
-        <com.sfuronlabs.ripon.cricketmania.util.CircleImageView
+        <com.androidfragmant.cricket.allabout.util.CircleImageView
             android:id="@+id/civSinglePlayer"
             android:layout_width="90dp"
             android:layout_height="90dp"

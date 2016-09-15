@@ -53,32 +53,30 @@
             <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="8dp">
 
                 <TextView
                     android:gravity="center_horizontal"
                     android:id="@+id/labelTeam1"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="1.0"
-                    android:layout_width="0dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
                     android:text="team1"
                     android:textStyle="bold"
                     android:textColor="#000000"
-                    android:textSize="20sp" />
+                    android:textSize="19sp" />
 
                 <TextView
                     android:gravity="center_horizontal"
                     android:id="@+id/labelTeam2"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_weight="1.0"
-                    android:layout_width="0dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_width="match_parent"
                     android:text="team2"
                     android:textStyle="bold"
                     android:textColor="#000000"
-                    android:textSize="20sp" />
+                    android:textSize="19sp" />
             </LinearLayout>
 
             <TextView

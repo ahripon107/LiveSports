@@ -8,7 +8,7 @@
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewStreamM3U8"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/streamm3u8"
+        ads:adUnitId="@string/m3u8"
 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

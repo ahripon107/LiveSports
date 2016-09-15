@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <com.google.android.gms.ads.AdView
@@ -42,7 +42,7 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="7dp"
                     android:layout_marginLeft="5dp"
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/text_view_date"
@@ -52,7 +52,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/Green"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/text_view_author"
@@ -61,7 +61,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/Blue"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:text="author"/>
                 <TextView
                     android:id="@+id/text_view_details"
@@ -69,21 +69,36 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="Medium Text"
-                    android:textSize="18sp" />
-                <Button
-                    android:id="@+id/btn_details_news"
-                    android:text="DETAILS"
-                    android:layout_margin="3dp"
+                    android:textColor="@color/Black"
+                    android:textSize="16sp" />
+                <com.dd.ShadowLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"/>
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="5dp"
+                    app:sl_cornerRadius="2dp"
+                    app:sl_dx="5dp"
+                    app:sl_dy="5dp"
+                    app:sl_shadowColor="#AA000000">
+
+                    <Button
+                        android:id="@+id/btn_details_news"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/raised_selector"
+                        android:minHeight="36dp"
+                        android:minWidth="88dp"
+                        android:layout_margin="3dp"
+                        android:text="DETAILS"
+                        android:layout_gravity="right"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                        android:textColor="@android:color/white" />
+
+                </com.dd.ShadowLayout>
 
             </LinearLayout>
         </ScrollView>
 
     </android.support.v7.widget.CardView>
-
-
-
 
 </RelativeLayout>

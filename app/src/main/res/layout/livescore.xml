@@ -12,12 +12,12 @@
 
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/livescore">
+        ads:adUnitId="@string/newsinwebview">
         </com.google.android.gms.ads.AdView>
     <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/webView"
-        android:layout_above="@+id/adViewLivescore"
+        android:layout_above="@id/adViewLivescore"
         android:layout_gravity="center_horizontal" />
 </RelativeLayout>
