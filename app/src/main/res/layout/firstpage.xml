@@ -426,7 +426,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Points table!!"
+                    android:text="Points table of different tournaments!!"
                     android:textColor="@color/Black"
                     android:textSize="20sp"
                     android:textStyle="bold" />

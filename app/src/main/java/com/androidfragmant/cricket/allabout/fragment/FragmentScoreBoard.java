@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,10 +45,10 @@ public class FragmentScoreBoard extends Fragment {
     RecyclerView bowlingInnings3;
     RecyclerView bowlingInnings4;
 
-    TextView innings1extra,innings1total,innings1fallofwickets;
-    TextView innings2extra,innings2total,innings2fallofwickets;
-    TextView innings3extra,innings3total,innings3fallofwickets;
-    TextView innings4extra,innings4total,innings4fallofwickets;
+    TextView innings1extra,innings1total,innings1fallofwickets,innings1dnb;
+    TextView innings2extra,innings2total,innings2fallofwickets,innings2dnb;
+    TextView innings3extra,innings3total,innings3fallofwickets,innings3dnb;
+    TextView innings4extra,innings4total,innings4fallofwickets,innings4dnb;
 
     LinearLayout firstInningsContainer,secondInningsContainer,thirdInningsContainer,fourthInningsContainer;
 
@@ -81,18 +82,22 @@ public class FragmentScoreBoard extends Fragment {
         innings1extra = (TextView) view.findViewById(R.id.innings1extra);
         innings1total = (TextView) view.findViewById(R.id.innings1total);
         innings1fallofwickets = (TextView) view.findViewById(R.id.innings1fow);
+        innings1dnb = (TextView) view.findViewById(R.id.innings1DNB);
 
         innings2extra = (TextView) view.findViewById(R.id.innings2extra);
         innings2total = (TextView) view.findViewById(R.id.innings2total);
         innings2fallofwickets = (TextView) view.findViewById(R.id.innings2fow);
+        innings2dnb = (TextView) view.findViewById(R.id.innings2DNB);
 
         innings3extra = (TextView) view.findViewById(R.id.innings3extra);
         innings3total = (TextView) view.findViewById(R.id.innings3total);
         innings3fallofwickets = (TextView) view.findViewById(R.id.innings3fow);
+        innings3dnb = (TextView) view.findViewById(R.id.innings3DNB);
 
         innings4extra = (TextView) view.findViewById(R.id.innings4extra);
         innings4total = (TextView) view.findViewById(R.id.innings4total);
         innings4fallofwickets = (TextView) view.findViewById(R.id.innings4fow);
+        innings4dnb = (TextView) view.findViewById(R.id.innings4DNB);
 
         fourthInningsContainer = (LinearLayout) view.findViewById(R.id.fourthinningscontainer);
         thirdInningsContainer = (LinearLayout) view.findViewById(R.id.thirdinningscontainer);
@@ -184,7 +189,7 @@ public class FragmentScoreBoard extends Fragment {
     }
 
     public void setFirstInningsFOW(JSONArray jsonArray) {
-        String string = "Fall of wickets: ";
+        String string = "<b>Fall of wickets:</b> ";
         for (int i=0;i<jsonArray.length();i++) {
             try {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -193,7 +198,20 @@ public class FragmentScoreBoard extends Fragment {
                 e.printStackTrace();
             }
         }
-        innings1fallofwickets.setText(string);
+        innings1fallofwickets.setText(Html.fromHtml(string));
+    }
+
+    public void setFirstInningsDNB(JSONArray jsonArray) {
+        String string = "<b>Did not bat:</b> ";
+        for (int i=0;i<jsonArray.length();i++) {
+            try {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                string += jsonObject.getString("playerName")+", ";
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        innings1dnb.setText(Html.fromHtml(string));
     }
 
     public void setSecondInningsSummary(JSONObject jsonObject) {
@@ -215,7 +233,7 @@ public class FragmentScoreBoard extends Fragment {
     }
 
     public void setSecondInningsFOW(JSONArray jsonArray) {
-        String string = "Fall of wickets: ";
+        String string = "<b>Fall of wickets:</b> ";
         for (int i=0;i<jsonArray.length();i++) {
             try {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -224,7 +242,20 @@ public class FragmentScoreBoard extends Fragment {
                 e.printStackTrace();
             }
         }
-        innings2fallofwickets.setText(string);
+        innings2fallofwickets.setText(Html.fromHtml(string));
+    }
+
+    public void setSecondInningsDNB(JSONArray jsonArray) {
+        String string = "<b>Did not bat:</b> ";
+        for (int i=0;i<jsonArray.length();i++) {
+            try {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                string += jsonObject.getString("playerName")+", ";
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        innings2dnb.setText(Html.fromHtml(string));
     }
 
     public void setThirdInningsSummary(JSONObject jsonObject) {
@@ -246,7 +277,7 @@ public class FragmentScoreBoard extends Fragment {
     }
 
     public void setThirdInningsFOW(JSONArray jsonArray) {
-        String string = "Fall of wickets: ";
+        String string = "<b>Fall of wickets:</b> ";
         for (int i=0;i<jsonArray.length();i++) {
             try {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -255,7 +286,20 @@ public class FragmentScoreBoard extends Fragment {
                 e.printStackTrace();
             }
         }
-        innings3fallofwickets.setText(string);
+        innings3fallofwickets.setText(Html.fromHtml(string));
+    }
+
+    public void setThirdInningsDNB(JSONArray jsonArray) {
+        String string = "<b>Did not bat:</b> ";
+        for (int i=0;i<jsonArray.length();i++) {
+            try {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                string += jsonObject.getString("playerName")+", ";
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        innings3dnb.setText(Html.fromHtml(string));
     }
 
     public void setFourthInningsSummary(JSONObject jsonObject) {
@@ -278,7 +322,7 @@ public class FragmentScoreBoard extends Fragment {
     }
 
     public void setFourthInningsFOW(JSONArray jsonArray) {
-        String string = "Fall of wickets: ";
+        String string = "<b>Fall of wickets:</b> ";
         for (int i=0;i<jsonArray.length();i++) {
             try {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -287,7 +331,20 @@ public class FragmentScoreBoard extends Fragment {
                 e.printStackTrace();
             }
         }
-        innings4fallofwickets.setText(string);
+        innings4fallofwickets.setText(Html.fromHtml(string));
+    }
+
+    public void setFourthInningsDNB(JSONArray jsonArray) {
+        String string = "<b>Did not bat:</b> ";
+        for (int i=0;i<jsonArray.length();i++) {
+            try {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                string += jsonObject.getString("playerName")+", ";
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        innings4dnb.setText(Html.fromHtml(string));
     }
 
     public void hideFirstInnings() {

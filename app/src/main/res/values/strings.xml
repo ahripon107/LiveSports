@@ -14,6 +14,8 @@
     <string name="playerprofile">ca-app-pub-9201945236996508/6742916072</string>
     <string name="matchdetails">ca-app-pub-9201945236996508/8219649270</string>
     <string name="livescorelist">ca-app-pub-9201945236996508/9696382470</string>
+    <string name="pointstable">ca-app-pub-9201945236996508/8392616079</string>
+    <string name="teamprofiledetails">ca-app-pub-9201945236996508/2346082470</string>
 
     <string name="youtube">AIzaSyDPm-0hit-BeRpVgGiQ2B5vjtSHhxveayQ</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>

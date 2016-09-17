@@ -246,6 +246,7 @@
                 android:id="@+id/innings1fow"
                 android:text="Fall of wickets"
                 android:textColor="@color/Black"
+                android:layout_margin="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -253,6 +254,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@android:color/holo_blue_dark"/>
+
+            <TextView
+                android:id="@+id/innings1DNB"
+                android:text="DNB"
+                android:textColor="@color/Black"
+                android:layout_margin="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/holo_blue_dark"/>
+
 
             <LinearLayout
                 android:background="@color/CornflowerBlue"
@@ -480,6 +495,20 @@
                 android:id="@+id/innings2fow"
                 android:text="Fall of wickets"
                 android:textColor="@color/Black"
+                android:layout_margin="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/holo_blue_dark"/>
+
+            <TextView
+                android:id="@+id/innings2DNB"
+                android:text="DNB"
+                android:textColor="@color/Black"
+                android:layout_margin="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -715,6 +744,20 @@
                 android:id="@+id/innings3fow"
                 android:text="Fall of wickets"
                 android:textColor="@color/Black"
+                android:layout_margin="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/holo_blue_dark"/>
+
+            <TextView
+                android:id="@+id/innings3DNB"
+                android:text="DNB"
+                android:textColor="@color/Black"
+                android:layout_margin="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -953,6 +996,20 @@
                 android:id="@+id/innings4fow"
                 android:text="Fall of wickets"
                 android:textColor="@color/Black"
+                android:layout_margin="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/holo_blue_dark"/>
+
+            <TextView
+                android:id="@+id/innings4DNB"
+                android:text="DNB"
+                android:textColor="@color/Black"
+                android:layout_margin="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

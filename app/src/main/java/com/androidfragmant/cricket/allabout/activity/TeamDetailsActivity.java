@@ -15,6 +15,9 @@ import com.androidfragmant.cricket.allabout.R;
 import com.androidfragmant.cricket.allabout.fragment.BasicInfoFragment;
 import com.androidfragmant.cricket.allabout.fragment.PlayersFragment;
 import com.androidfragmant.cricket.allabout.fragment.RecordFragment;
+import com.androidfragmant.cricket.allabout.util.Constants;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 /**
  * @author Ripon
@@ -26,11 +29,13 @@ public class TeamDetailsActivity extends AppCompatActivity{
     private TabLayout mTabLayout;
     private CharSequence Titles[] = {"BASIC INFO", "TEST RECORD", "ODI RECORD", "T20 RECORD", "PLAYERS"};
     private int NoOfTabs = 5;
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.teamdetailsactivity);
+        adView = (AdView) findViewById(R.id.adViewTeamProfieDetails);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -41,6 +46,10 @@ public class TeamDetailsActivity extends AppCompatActivity{
         mPager.setAdapter(mAdapter);
 
         mTabLayout.setupWithViewPager(mPager);
+
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
+                .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
+        adView.loadAd(adRequest);
     }
 
     @Override
