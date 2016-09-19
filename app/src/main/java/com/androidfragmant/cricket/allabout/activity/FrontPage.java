@@ -39,6 +39,8 @@ public class FrontPage extends AppCompatActivity {
 
     TextView[] dots1;
 
+    TextView welcomeText;
+
     ArrayList<String> imageUrls,texts;
     ViewPager viewPager;
 
@@ -64,6 +66,8 @@ public class FrontPage extends AppCompatActivity {
         records = (Button) findViewById(R.id.button_records);
         pointsTable = (Button) findViewById(R.id.button_points_table);
 
+        welcomeText = (TextView) findViewById(R.id.tv_welcome_text);
+
         viewPager = (ViewPager) findViewById(R.id.placeViewPagerImageSlideShow);
         placeImageDotsLayout = (LinearLayout) findViewById(R.id.placeImageDots);
         cardContainer = (LinearLayout) findViewById(R.id.placecardcontainer);
@@ -73,6 +77,36 @@ public class FrontPage extends AppCompatActivity {
 
         viewPagerAdapter = new SlideShowViewPagerAdapter(this,imageUrls,texts);
         viewPager.setAdapter(viewPagerAdapter);
+
+        String welcomeTextUrl = "http://apisea.xyz/Cricket/apis/v1/welcometext.php?key=bl905577";
+        Log.d(Constants.TAG, welcomeTextUrl);
+
+        FetchFromWeb.get(welcomeTextUrl,null,new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, final JSONObject response) {
+                try {
+                    welcomeText.setText(response.getJSONArray("content").getJSONObject(0).getString("description"));
+                    if (response.getJSONArray("content").getJSONObject(0).getString("clickable").equals("true")) {
+                        welcomeText.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                try {
+                                    Uri uriUrl = Uri.parse(String.valueOf(response.getJSONArray("content").getJSONObject(0).getString("link")));
+                                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                                    startActivity(launchBrowser);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.d(Constants.TAG, response.toString());
+            }
+        });
 
         cricketLive.setOnClickListener(new View.OnClickListener() {
             @Override
