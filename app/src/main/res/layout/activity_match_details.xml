@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/pagebackground">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
@@ -20,7 +21,7 @@
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewMatchDetails"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/teamprofiledetails"
+        ads:adUnitId="@string/matchdetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>

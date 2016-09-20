@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/cardbackground">
 
     <TextView
         android:id="@+id/iv_team_rank"
