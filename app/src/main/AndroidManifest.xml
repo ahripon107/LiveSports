@@ -147,6 +147,11 @@
             android:screenOrientation="portrait"
             android:label="Points Table"/>
 
+        <activity
+            android:name="com.androidfragmant.cricket.allabout.cricbuzz.CricbuzzNewsListActivity"
+            android:screenOrientation="portrait"
+            android:label="Points Table"/>
+
         <service android:name="com.batch.android.BatchPushService" />
         <receiver android:name="com.batch.android.BatchPushReceiver" android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>

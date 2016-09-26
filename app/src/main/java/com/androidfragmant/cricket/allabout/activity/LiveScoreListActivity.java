@@ -62,6 +62,7 @@ public class LiveScoreListActivity extends RoboAppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("Live Score");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        String source = getIntent().getStringExtra("source");
 
         recyclerView.setAdapter(new BasicListAdapter<Match, LiveScoreViewHolder>(datas) {
             @Override
@@ -101,43 +102,86 @@ public class LiveScoreListActivity extends RoboAppCompatActivity {
                 })
         );
 
-        String url = "http://cricinfo-mukki.rhcloud.com/api/match/live";
-        Log.d(Constants.TAG, url);
+        if (source.equals("cricinfo")) {
+            String url = "http://cricinfo-mukki.rhcloud.com/api/match/live";
+            Log.d(Constants.TAG, url);
 
-        final AlertDialog progressDialog = new SpotsDialog(LiveScoreListActivity.this, R.style.Custom);
-        progressDialog.show();
-        progressDialog.setCancelable(true);
-        FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                progressDialog.dismiss();
-                try {
-                    Log.d(Constants.TAG, response.toString());
-                    JSONArray jsonArray = response.getJSONArray("items");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject obj = jsonArray.getJSONObject(i);
+            final AlertDialog progressDialog = new SpotsDialog(LiveScoreListActivity.this, R.style.Custom);
+            progressDialog.show();
+            progressDialog.setCancelable(true);
+            FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    progressDialog.dismiss();
+                    try {
+                        Log.d(Constants.TAG, response.toString());
+                        JSONArray jsonArray = response.getJSONArray("items");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject obj = jsonArray.getJSONObject(i);
 
-                        datas.add(new Match(obj.getJSONObject("team1").getString("teamName"), obj.getJSONObject("team2").getString("teamName"),
-                                obj.getString("matchDescription"), "", "", "", obj.getString("matchId")));
+                            datas.add(new Match(obj.getJSONObject("team1").getString("teamName"), obj.getJSONObject("team2").getString("teamName"),
+                                    obj.getString("matchDescription"), "", "", "", obj.getString("matchId")));
+                        }
+                        recyclerView.getAdapter().notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    recyclerView.getAdapter().notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                progressDialog.dismiss();
-                Toast.makeText(LiveScoreListActivity.this, "Failed", Toast.LENGTH_LONG).show();
-            }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    progressDialog.dismiss();
+                    Toast.makeText(LiveScoreListActivity.this, "Failed", Toast.LENGTH_LONG).show();
+                }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
-                progressDialog.dismiss();
-                Toast.makeText(LiveScoreListActivity.this, "Failed", Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                    progressDialog.dismiss();
+                    Toast.makeText(LiveScoreListActivity.this, "Failed", Toast.LENGTH_LONG).show();
+                }
+            });
+
+        } else if (source.equals("myself")) {
+            String url = "http://apisea.xyz/Cricket/apis/v1/fetchMyLiveScores.php?key=bl905577";
+            Log.d(Constants.TAG, url);
+
+            final AlertDialog progressDialog = new SpotsDialog(LiveScoreListActivity.this, R.style.Custom);
+            progressDialog.show();
+            progressDialog.setCancelable(true);
+            FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    progressDialog.dismiss();
+                    try {
+                        Log.d(Constants.TAG, response.toString());
+                        if (response.getString("msg").equals("Successful")) {
+                            JSONArray jsonArray = response.getJSONArray("content");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject obj = jsonArray.getJSONObject(i);
+                                datas.add(new Match(obj.getString("team1"), obj.getString("team2"),
+                                        obj.getString("status"), "", "", "", obj.getString("matchId")));
+                            }
+                        }
+                        recyclerView.getAdapter().notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    progressDialog.dismiss();
+                    Toast.makeText(LiveScoreListActivity.this, "Failed", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                    progressDialog.dismiss();
+                    Toast.makeText(LiveScoreListActivity.this, "Failed", Toast.LENGTH_LONG).show();
+                }
+            });
+
+        }
 
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
                 .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();

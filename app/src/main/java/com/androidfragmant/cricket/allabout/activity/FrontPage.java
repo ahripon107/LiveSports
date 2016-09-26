@@ -1,5 +1,6 @@
 package com.androidfragmant.cricket.allabout.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;;
 import android.net.ConnectivityManager;
@@ -14,13 +15,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.androidfragmant.cricket.allabout.cricbuzz.CricbuzzNewsListActivity;
 import com.batch.android.Batch;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.androidfragmant.cricket.allabout.R;
 import com.androidfragmant.cricket.allabout.adapter.SlideShowViewPagerAdapter;
 import com.androidfragmant.cricket.allabout.util.Constants;
 import com.androidfragmant.cricket.allabout.util.FetchFromWeb;
+import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import dmax.dialog.SpotsDialog;
 
 /**
  * @author ripon
@@ -120,8 +125,48 @@ public class FrontPage extends AppCompatActivity {
         cricketLiveScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FrontPage.this, LiveScoreListActivity.class);
-                startActivity(intent);
+                String idMatcherURL = "http://apisea.xyz/Cricket/apis/v1/livescoresource.php";
+                Log.d(Constants.TAG, idMatcherURL);
+
+                final AlertDialog progressDialog = new SpotsDialog(FrontPage.this, R.style.Custom);
+                progressDialog.show();
+                progressDialog.setCancelable(true);
+                RequestParams params = new RequestParams();
+                params.add("key", "bl905577");
+
+                FetchFromWeb.get(idMatcherURL, params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        progressDialog.dismiss();
+                        try {
+                            if (response.getString("msg").equals("Successful")) {
+                                String source = response.getJSONArray("content").getJSONObject(0).getString("scoresource");
+                                if (source.equals("myself")) {
+                                    Intent intent = new Intent(FrontPage.this, LiveScoreListActivity.class);
+                                    intent.putExtra("source",source);
+                                    startActivity(intent);
+                                } else if (source.equals("cricinfo")) {
+                                    Intent intent = new Intent(FrontPage.this, LiveScoreListActivity.class);
+                                    intent.putExtra("source",source);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(FrontPage.this,"Please Update App",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            Log.d(Constants.TAG, response.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        progressDialog.dismiss();
+                        Toast.makeText(FrontPage.this, "Failed", Toast.LENGTH_LONG).show();
+                    }
+                });
+
             }
         });
 
