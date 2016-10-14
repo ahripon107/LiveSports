@@ -8,8 +8,10 @@
     <color name="shadow">#555555</color>
     <color name="title">#777777</color>
 
-    <color name="cardbackground">#4DB6AC</color>
+    <color name="cardbackground">#80CBC4</color>
     <color name="pagebackground">#B2DFDB</color>
+
+    <color name="batsmanbowlerbackground">#80CBC4</color>
 
     <color name="tabsScrollColor">#8a140e</color>
     <color name="NiceButtonStartColor">#4AA02C</color>

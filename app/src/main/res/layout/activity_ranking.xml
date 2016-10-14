@@ -28,7 +28,7 @@
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewMatchDetails"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/matchdetails"
+        ads:adUnitId="@string/ranking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>

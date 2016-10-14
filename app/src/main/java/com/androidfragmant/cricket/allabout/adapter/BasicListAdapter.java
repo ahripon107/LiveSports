@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * Created by amin on 9/8/16.
+ * @author Ripon
  */
 public abstract class BasicListAdapter<T,X extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<X> {
 

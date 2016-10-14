@@ -11,6 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.androidfragmant.cricket.allabout.fragment.PlayingXIFragment;
+import com.androidfragmant.cricket.allabout.model.Commentry;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
@@ -42,7 +44,7 @@ public class ActivityMatchDetails extends AppCompatActivity {
     private MatchDetailsViewPagerAdapter matchDetailsViewPagerAdapter;
     private ViewPager viewPager;
     private Gson gson;
-    ArrayList<String> commentry = new ArrayList<>();
+    ArrayList<Commentry> commentry = new ArrayList<>();
 
     AdView adView;
 
@@ -74,11 +76,12 @@ public class ActivityMatchDetails extends AppCompatActivity {
         this.matchDetailsViewPagerAdapter = new MatchDetailsViewPagerAdapter(getSupportFragmentManager());
         this.matchDetailsViewPagerAdapter.addFragment(new FragmentScoreBoard(), "Score Board");
         this.matchDetailsViewPagerAdapter.addFragment(new FragmentMatchSummary(), "Commentry");
+        this.matchDetailsViewPagerAdapter.addFragment(new PlayingXIFragment(),"Playing XI");
         viewPager.setAdapter(this.matchDetailsViewPagerAdapter);
     }
 
     private void sendRequestForLiveMatchDetails() {
-        String url = "http://cricinfo-mukki.rhcloud.com/api/match/" + this.liveMatchID;
+        String url = "http://37.187.95.220:8080/cricket-api/api/match/" + this.liveMatchID;
         Log.d(Constants.TAG, url);
 
         final AlertDialog progressDialog = new SpotsDialog(ActivityMatchDetails.this, R.style.Custom);
@@ -95,9 +98,14 @@ public class ActivityMatchDetails extends AppCompatActivity {
 
 
                     ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).setMatchSummary(summary);
-                    ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).loadEachTeamScore(liveMatchID);
+                    //((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).loadEachTeamScore(liveMatchID);
+
+                    if (response.has("innings1") && response.has("innings2")) {
+                        ((PlayingXIFragment) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(2)).setPlayingXI(response.getJSONObject("innings1").getJSONArray("batting"),response.getJSONObject("innings1").getJSONArray("dnb"),response.getJSONObject("innings2").getJSONArray("batting"),response.getJSONObject("innings2").getJSONArray("dnb"),summary.getTeam1(),summary.getTeam2());
+                    }
 
                     if (response.has("innings1")) {
+
                         if (response.getJSONObject("innings1").has("summary")) {
                             numberOfInnings = 1;
                             ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).setFirstInningsBattingList(response.getJSONObject("innings1").getJSONArray("batting"));
@@ -105,6 +113,7 @@ public class ActivityMatchDetails extends AppCompatActivity {
                             ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).setFirstInningsSummary(response.getJSONObject("innings1").getJSONObject("summary"));
                             ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).setFirstInningsFOW(response.getJSONObject("innings1").getJSONArray("fow"));
                             ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).setFirstInningsDNB(response.getJSONObject("innings1").getJSONArray("dnb"));
+
                         } else {
                             ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).hideFirstInnings();
                         }
@@ -120,6 +129,7 @@ public class ActivityMatchDetails extends AppCompatActivity {
                             ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).setSecondInningsSummary(response.getJSONObject("innings2").getJSONObject("summary"));
                             ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).setSecondInningsFOW(response.getJSONObject("innings2").getJSONArray("fow"));
                             ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).setSecondInningsDNB(response.getJSONObject("innings2").getJSONArray("dnb"));
+
                         } else {
                             ((FragmentScoreBoard) ActivityMatchDetails.this.matchDetailsViewPagerAdapter.getItem(0)).hideSecondInnings();
                         }
@@ -228,26 +238,35 @@ public class ActivityMatchDetails extends AppCompatActivity {
                                     JSONObject obj = jsonArray1.getJSONObject(i);
                                     if (obj.getString("type").equals("ball")) {
                                         String string = "";
-                                        string += obj.getString("ov") + "." + obj.getString("n") + " ";
+                                        String ov = (Integer.parseInt(obj.getString("ov"))-1) + "." + obj.getString("n") + " ";
                                         string += obj.getString("shc") + " - ";
                                         string += obj.getString("r") + " run; ";
                                         string += obj.getString("c");
-                                        commentry.add(string);
+                                        if (obj.has("dmsl")) {
+                                            commentry.add(new Commentry("ball","W",ov,string));
+                                        } else {
+                                            commentry.add(new Commentry("ball",obj.getString("r"),ov,string));
+                                        }
+
                                     } else {
-                                        commentry.add(obj.getString("c"));
+                                        commentry.add(new Commentry("nonball","","",obj.getString("c")));
                                     }
                                 }
                             } else if (object instanceof JSONObject) {
                                 JSONObject obj = (JSONObject) object;
                                 if (obj.getString("type").equals("ball")) {
                                     String string = "";
-                                    string += obj.getString("ov") + "." + obj.getString("n") + " ";
+                                    String ov = (Integer.parseInt(obj.getString("ov"))-1) + "." + obj.getString("n") + " ";
                                     string += obj.getString("shc") + " - ";
                                     string += obj.getString("r") + " run; ";
                                     string += obj.getString("c");
-                                    commentry.add(string);
+                                    if (obj.has("dmsl")) {
+                                        commentry.add(new Commentry("ball","W",ov,string));
+                                    } else {
+                                        commentry.add(new Commentry("ball",obj.getString("r"),ov,string));
+                                    }
                                 } else {
-                                    commentry.add(obj.getString("c"));
+                                    commentry.add(new Commentry("nonball","","",obj.getString("c")));
                                 }
                             }
                             //commentry.add("-------------------------------------------");
@@ -259,13 +278,17 @@ public class ActivityMatchDetails extends AppCompatActivity {
                             JSONObject obj = jsonArray1.getJSONObject(i);
                             if (obj.getString("type").equals("ball")) {
                                 String string = "";
-                                string += obj.getString("ov") + "." + obj.getString("n") + " ";
+                                String ov = (Integer.parseInt(obj.getString("ov"))-1) + "." + obj.getString("n") + " ";
                                 string += obj.getString("shc") + " - ";
                                 string += obj.getString("r") + " run; ";
                                 string += obj.getString("c");
-                                commentry.add(string);
+                                if (obj.has("dmsl")) {
+                                    commentry.add(new Commentry("ball","W",ov,string));
+                                } else {
+                                    commentry.add(new Commentry("ball",obj.getString("r"),ov,string));
+                                }
                             } else {
-                                commentry.add(obj.getString("c"));
+                                commentry.add(new Commentry("nonball","","",obj.getString("c")));
                             }
                         }
 

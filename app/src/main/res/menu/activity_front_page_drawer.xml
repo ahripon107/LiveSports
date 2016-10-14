@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_live_streaming"
+            android:title="Live Streaming" />
+        <item
+            android:id="@+id/nav_sports_news"
+            android:title="News" />
+        <item
+            android:id="@+id/nav_highlights"
+            android:title="Highlights" />
+        <item
+            android:id="@+id/nav_fixture"
+            android:title="Fixture" />
+
+
+        <item
+            android:id="@+id/nav_past_matches"
+            android:title= "Past Matches" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:title="Gallery" />
+        <item
+            android:id="@+id/nav_series_stats"
+            android:title="Series Stats" />
+        <item
+            android:id="@+id/nav_ranking"
+            android:title="Ranking" />
+        <item
+            android:id="@+id/nav_records"
+            android:title="Records" />
+        <item
+            android:id="@+id/nav_points_table"
+            android:title="Point Table" />
+        <item
+            android:id="@+id/nav_quotes"
+            android:title="Quotes" />
+        <item
+            android:id="@+id/nav_team_profile"
+            android:title="Team Profile" />
+        <item
+            android:id="@+id/nav_update_app"
+            android:title="Update App" />
+
+    </group>
+</menu>
