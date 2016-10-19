@@ -16,6 +16,10 @@
     <string name="livescorelist">ca-app-pub-9201945236996508/9696382470</string>
     <string name="pointstable">ca-app-pub-9201945236996508/8392616079</string>
     <string name="teamprofiledetails">ca-app-pub-9201945236996508/2346082470</string>
+    <string name="opinion">ca-app-pub-9201945236996508/3727340072</string>
+    <string name="frontPageInterstitial">ca-app-pub-9201945236996508/2250606872</string>
+    <string name="mainactivity">ca-app-pub-9201945236996508/6680806474</string>
+    <string name="ranking">ca-app-pub-9201945236996508/8157539673</string>
 
     <string name="youtube">AIzaSyDPm-0hit-BeRpVgGiQ2B5vjtSHhxveayQ</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
@@ -28,4 +32,14 @@
         <item>Top Bowlers</item>
         <item>Top Allrounders</item>
     </array>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
 </resources>

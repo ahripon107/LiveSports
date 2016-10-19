@@ -3,11 +3,13 @@ package com.androidfragmant.cricket.allabout.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androidfragmant.cricket.allabout.activity.PlayerProfileActivity;
@@ -61,6 +63,15 @@ public class BatsmanAdapter extends RecyclerView.Adapter<BatsmanAdapter.BatsmanV
                 context.startActivity(intent);
             }
         });
+
+        if (position%2 == 1) {
+            holder.linearLayout.setBackgroundColor(ContextCompat.getColor(context,R.color.batsmanbowlerbackground));
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
@@ -76,6 +87,7 @@ public class BatsmanAdapter extends RecyclerView.Adapter<BatsmanAdapter.BatsmanV
         protected TextView six;
         protected TextView out;
         protected TextView sr;
+        protected LinearLayout linearLayout;
 
         public BatsmanViewHolder(View itemView) {
             super(itemView);
@@ -87,6 +99,7 @@ public class BatsmanAdapter extends RecyclerView.Adapter<BatsmanAdapter.BatsmanV
             six = ViewHolder.get(itemView, R.id.six);
             out = ViewHolder.get(itemView, R.id.desc_out);
             sr = ViewHolder.get(itemView, R.id.sr);
+            linearLayout = ViewHolder.get(itemView,R.id.batsman_layout);
         }
     }
 }
