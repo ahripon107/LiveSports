@@ -3,19 +3,11 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_live_streaming"
-            android:title="Live Streaming" />
-        <item
             android:id="@+id/nav_sports_news"
             android:title="News" />
         <item
-            android:id="@+id/nav_highlights"
-            android:title="Highlights" />
-        <item
             android:id="@+id/nav_fixture"
             android:title="Fixture" />
-
-
         <item
             android:id="@+id/nav_past_matches"
             android:title= "Past Matches" />

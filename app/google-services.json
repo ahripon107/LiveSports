@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "727874777194",
-    "firebase_url": "https://cricket-with-livestream.firebaseio.com",
-    "project_id": "cricket-with-livestream",
-    "storage_bucket": "cricket-with-livestream.appspot.com"
+    "project_number": "718383263529",
+    "firebase_url": "https://live-cricket-tv-8b3db.firebaseio.com",
+    "project_id": "live-cricket-tv-8b3db",
+    "storage_bucket": "live-cricket-tv-8b3db.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:727874777194:android:fce7c788debb1800",
+        "mobilesdk_app_id": "1:718383263529:android:661aed219d9403fd",
         "android_client_info": {
-          "package_name": "com.androidfragmant.cricket.allabout"
+          "package_name": "com.sportsworld.cricket.everything"
         }
       },
       "oauth_client": [
         {
-          "client_id": "727874777194-5segkqvd3n2e25lr9ujvbusigl1j84ra.apps.googleusercontent.com",
+          "client_id": "718383263529-2nqtp4hltv2p3blnem6hd72l0fb8hhj0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.androidfragmant.cricket.allabout",
+            "package_name": "com.sportsworld.cricket.everything",
             "certificate_hash": "AC2E463E9E46EA618950801E8592D691E340BBDF"
           }
         },
         {
-          "client_id": "727874777194-hlcdqc8jq81vmrea9imqq2i1s0glehbt.apps.googleusercontent.com",
+          "client_id": "718383263529-7ipivt0172ag109v3r67c6bt59l58kg4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCi8GIts9rVJuzGvwaGL-XsSXtY0mh9n6I"
+          "current_key": "AIzaSyDmjb8IzQrhVEyDwrhRees_B-Ze_gGcVio"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "727874777194-hlcdqc8jq81vmrea9imqq2i1s0glehbt.apps.googleusercontent.com",
+              "client_id": "718383263529-7ipivt0172ag109v3r67c6bt59l58kg4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

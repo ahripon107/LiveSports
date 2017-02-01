@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.androidfragmant.cricket.allabout">
+    package="com.sportsworld.cricket.everything">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,7 +15,7 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
-        android:name=".ParseApplication"
+        android:name="com.sportsworld.cricket.everything.ParseApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.sportsworld.cricket.everything.activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -34,139 +34,118 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.CricketNewsListActivity"
+            android:name="com.sportsworld.cricket.everything.activity.CricketNewsListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.FixtureActivity"
+            android:name="com.sportsworld.cricket.everything.activity.FixtureActivity"
             android:label="Fixture"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.NewsDetailsActivity"
+            android:name="com.sportsworld.cricket.everything.activity.NewsDetailsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.Highlights"
+            android:name="com.sportsworld.cricket.everything.activity.Highlights"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".videoplayers.HighlightsVids"
+            android:name="com.sportsworld.cricket.everything.videoplayers.HighlightsVids"
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".activity.LiveScore"
+            android:name="com.sportsworld.cricket.everything.activity.LiveScore"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.LiveScoreListActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.TeamDetailsActivity"
+            android:name="com.sportsworld.cricket.everything.activity.TeamDetailsActivity"
             android:label="Team Profile"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.TeamProfile"
+            android:name="com.sportsworld.cricket.everything.activity.TeamProfile"
             android:label="Team Profile"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.PastMatchesActivity"
+            android:name="com.sportsworld.cricket.everything.activity.PastMatchesActivity"
             android:label="Past Matches"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".videoplayers.FrameStream"
+            android:name="com.sportsworld.cricket.everything.videoplayers.FrameStream"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".videoplayers.LiveStreamView"
+            android:name="com.sportsworld.cricket.everything.videoplayers.LiveStreamView"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".videoplayers.DMPlayerActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-        <activity
-            android:name=".activity.TrollPostListActivity"
-            android:label="Cricket Trolls"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.PlayerProfileActivity"
+            android:name="com.sportsworld.cricket.everything.activity.PlayerProfileActivity"
             android:label="Player Profile"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ActivityMatchDetails"
+            android:name="com.sportsworld.cricket.everything.activity.ActivityMatchDetails"
             android:label="Score Details"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.FullCommentryActivity"
+            android:name="com.sportsworld.cricket.everything.activity.FullCommentryActivity"
             android:label="Full Commentry"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.RankingActivity"
+            android:name="com.sportsworld.cricket.everything.activity.RankingActivity"
             android:label="Ranking"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.RecordsActivity"
+            android:name="com.sportsworld.cricket.everything.activity.RecordsActivity"
             android:label="Records"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.RecordDetailsActivity"
+            android:name="com.sportsworld.cricket.everything.activity.RecordDetailsActivity"
             android:label="Record Details"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.PointsTableActivity"
+            android:name="com.sportsworld.cricket.everything.activity.PointsTableActivity"
             android:label="Points Table"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cricbuzz.CricbuzzNewsListActivity"
+            android:name="com.sportsworld.cricket.everything.cricbuzz.CricbuzzNewsListActivity"
             android:label="Points Table"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activity.QuotesListActivity"
+            android:name="com.sportsworld.cricket.everything.cricbuzz.CricbuzzNewsDetailsActivity"
+            android:label="News Details"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.sportsworld.cricket.everything.activity.QuotesListActivity"
             android:label="Quotes"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activity.GalleryActivity"
+            android:name="com.sportsworld.cricket.everything.activity.GalleryActivity"
             android:label="Gallery"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activity.SeriesStatsActivity"
+            android:name="com.sportsworld.cricket.everything.activity.SeriesStatsActivity"
             android:label="Series Stats"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activity.SeriesStatsDetailsActivity"
+            android:name="com.sportsworld.cricket.everything.activity.SeriesStatsDetailsActivity"
             android:label="Series Stats Details"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activity.GalleryOfMatchActivity"
+            android:name="com.sportsworld.cricket.everything.activity.GalleryOfMatchActivity"
             android:label="Gallery"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activity.InsertOpinionActivity"
+            android:name="com.sportsworld.cricket.everything.activity.InsertOpinionActivity"
             android:label="Discussion"
             android:screenOrientation="portrait" />
-
-        <service android:name="com.batch.android.BatchPushService" />
-
-        <receiver
-            android:name="com.batch.android.BatchPushReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
-                <category android:name="${applicationId}" />
-            </intent-filter>
-        </receiver>
-
         <!--
           Optionally, register AnalyticsReceiver and AnalyticsService to support background
           dispatching on non-Google Play devices
@@ -199,13 +178,13 @@
         <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
 
         <service
-            android:name=".util.MyFirebaseMessagingService">
+            android:name="com.sportsworld.cricket.everything.util.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
 
-        <service android:name=".util.FirebaseIDService">
+        <service android:name="com.sportsworld.cricket.everything.util.FirebaseIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>

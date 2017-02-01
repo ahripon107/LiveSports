@@ -2,26 +2,28 @@
     <string name="app_name">Live Cricket Streaming</string>
     <string name="action_settings">Settings</string>
 
-    <string name="newslist">ca-app-pub-9201945236996508/9975584077</string>
-    <string name="newsdetails">ca-app-pub-9201945236996508/2452317273</string>
-    <string name="m3u8">ca-app-pub-9201945236996508/3929050473</string>
-    <string name="newsinwebview">ca-app-pub-9201945236996508/5405783673</string>
-    <string name="youtubeplayer">ca-app-pub-9201945236996508/6882516872</string>
-    <string name="highlights">ca-app-pub-9201945236996508/8359250071</string>
-    <string name="iframe">ca-app-pub-9201945236996508/9835983277</string>
-    <string name="fixture">ca-app-pub-9201945236996508/2312716476</string>
-    <string name="dmplayer">ca-app-pub-9201945236996508/3789449674</string>
-    <string name="playerprofile">ca-app-pub-9201945236996508/6742916072</string>
-    <string name="matchdetails">ca-app-pub-9201945236996508/8219649270</string>
-    <string name="livescorelist">ca-app-pub-9201945236996508/9696382470</string>
-    <string name="pointstable">ca-app-pub-9201945236996508/8392616079</string>
-    <string name="teamprofiledetails">ca-app-pub-9201945236996508/2346082470</string>
-    <string name="opinion">ca-app-pub-9201945236996508/3727340072</string>
-    <string name="frontPageInterstitial">ca-app-pub-9201945236996508/2250606872</string>
-    <string name="mainactivity">ca-app-pub-9201945236996508/6680806474</string>
-    <string name="ranking">ca-app-pub-9201945236996508/8157539673</string>
+    <string name="newslist">ca-app-pub-9201945236996508/1421489672</string>
+    <string name="newsdetails">ca-app-pub-9201945236996508/5851689277</string>
+    <string name="m3u8">ca-app-pub-9201945236996508/7328422471</string>
+    <string name="newsinwebview">ca-app-pub-9201945236996508/8805155676</string>
+    <string name="youtubeplayer">ca-app-pub-9201945236996508/1281888875</string>
+    <string name="highlights">ca-app-pub-9201945236996508/2758622078</string>
+    <string name="iframe">ca-app-pub-9201945236996508/5712088473</string>
+    <string name="fixture">ca-app-pub-9201945236996508/7188821679</string>
+    <string name="playerprofile">ca-app-pub-9201945236996508/1142288070</string>
+    <string name="matchdetails">ca-app-pub-9201945236996508/2619021276</string>
+    <string name="livescorelist">ca-app-pub-9201945236996508/4095754473</string>
+    <string name="pointstable">ca-app-pub-9201945236996508/5572487676</string>
+    <string name="teamprofiledetails">ca-app-pub-9201945236996508/8525954075</string>
+    <string name="opinion">ca-app-pub-9201945236996508/1002687279</string>
+    <string name="mainactivity">ca-app-pub-9201945236996508/2479420475</string>
+    <string name="ranking">ca-app-pub-9201945236996508/3956153673</string>
 
-    <string name="youtube">AIzaSyDPm-0hit-BeRpVgGiQ2B5vjtSHhxveayQ</string>
+    <string name="frontPageInterstitial">ca-app-pub-9201945236996508/5432886876</string>
+    <string name="highlightsInterstitial">ca-app-pub-9201945236996508/6909620071</string>
+    <string name="newsInterstitial">ca-app-pub-9201945236996508/5638036476</string>
+
+    <string name="youtube">AIzaSyDmjb8IzQrhVEyDwrhRees_B-Ze_gGcVio</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
 
     <string name="load">Refresh</string>
