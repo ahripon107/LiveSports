@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:fillViewport="true"
+<android.support.v4.widget.NestedScrollView android:fillViewport="true"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:orientation="vertical"
@@ -1084,4 +1084,4 @@
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>

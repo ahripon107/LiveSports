@@ -115,7 +115,7 @@ public class CricbuzzNewsListActivity extends RoboAppCompatActivity {
                         .into(holder.circleImageView);
 
                 if (position == this.getItemCount()-1) {
-                    loadData(counter++);
+                    loadData(++counter);
                 }
             }
         });
