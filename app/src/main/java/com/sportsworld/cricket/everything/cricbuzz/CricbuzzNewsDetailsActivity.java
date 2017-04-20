@@ -12,6 +12,7 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.sportsworld.cricket.everything.R;
+import com.sportsworld.cricket.everything.activity.CommonAppCompatActivity;
 import com.sportsworld.cricket.everything.model.CricketNews;
 import com.sportsworld.cricket.everything.util.Constants;
 import com.sportsworld.cricket.everything.util.FetchFromWeb;
@@ -29,7 +30,7 @@ import dmax.dialog.SpotsDialog;
  * @author Ripon
  */
 
-public class CricbuzzNewsDetailsActivity extends AppCompatActivity {
+public class CricbuzzNewsDetailsActivity extends CommonAppCompatActivity {
 
     WebView webView;
     String html;
@@ -43,7 +44,6 @@ public class CricbuzzNewsDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.framestream);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         adView = (AdView) findViewById(R.id.adViewFrameStream);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
@@ -106,23 +106,5 @@ public class CricbuzzNewsDetailsActivity extends AppCompatActivity {
         webView.destroy();
         webView = null;
         super.onDestroy();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

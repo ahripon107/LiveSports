@@ -4,25 +4,21 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sportsworld.cricket.everything.R;
 import com.sportsworld.cricket.everything.adapter.MatchDetailsViewPagerAdapter;
 import com.sportsworld.cricket.everything.fragment.RankingFragment;
 import com.sportsworld.cricket.everything.util.Constants;
 import com.sportsworld.cricket.everything.util.FetchFromWeb;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +32,7 @@ import dmax.dialog.SpotsDialog;
 /**
  * @author Ripon
  */
-public class RankingActivity extends AppCompatActivity {
+public class RankingActivity extends CommonAppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -71,7 +67,6 @@ public class RankingActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupViewPage(viewPager);
         viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager);
@@ -167,23 +162,5 @@ public class RankingActivity extends AppCompatActivity {
         this.matchDetailsViewPagerAdapter.addFragment(odiFragment, "ODI");
         this.matchDetailsViewPagerAdapter.addFragment(T20Fragment, "T20I");
         viewPager.setAdapter(this.matchDetailsViewPagerAdapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

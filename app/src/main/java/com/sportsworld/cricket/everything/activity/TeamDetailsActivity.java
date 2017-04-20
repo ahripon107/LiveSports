@@ -6,23 +6,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.sportsworld.cricket.everything.R;
 import com.sportsworld.cricket.everything.fragment.BasicInfoFragment;
 import com.sportsworld.cricket.everything.fragment.PlayersFragment;
 import com.sportsworld.cricket.everything.fragment.RecordFragment;
 import com.sportsworld.cricket.everything.util.Constants;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 /**
  * @author Ripon
  */
-public class TeamDetailsActivity extends AppCompatActivity {
+public class TeamDetailsActivity extends CommonAppCompatActivity {
 
     private ViewPager mPager;
     private TeamDetailsPagerAdapter mAdapter;
@@ -37,8 +33,6 @@ public class TeamDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.teamdetailsactivity);
         adView = (AdView) findViewById(R.id.adViewTeamProfieDetails);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         String data = getIntent().getStringExtra("data");
         mTabLayout = (TabLayout) findViewById(R.id.hoteltab_layout);
         mAdapter = new TeamDetailsPagerAdapter(getSupportFragmentManager(), Titles, NoOfTabs, data);
@@ -50,24 +44,6 @@ public class TeamDetailsActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
                 .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
         adView.loadAd(adRequest);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private class TeamDetailsPagerAdapter extends FragmentPagerAdapter {

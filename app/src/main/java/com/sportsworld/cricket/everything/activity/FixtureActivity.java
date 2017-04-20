@@ -6,9 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -19,13 +16,12 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.inject.Inject;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.sportsworld.cricket.everything.R;
 import com.sportsworld.cricket.everything.adapter.BasicListAdapter;
+import com.sportsworld.cricket.everything.model.Match;
 import com.sportsworld.cricket.everything.util.CircleImageView;
 import com.sportsworld.cricket.everything.util.Constants;
 import com.sportsworld.cricket.everything.util.FetchFromWeb;
-import com.sportsworld.cricket.everything.model.Match;
-import com.sportsworld.cricket.everything.R;
-import com.sportsworld.cricket.everything.util.RoboAppCompatActivity;
 import com.sportsworld.cricket.everything.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -44,7 +40,7 @@ import roboguice.inject.InjectView;
  * @author ripon
  */
 @ContentView(R.layout.fixture)
-public class FixtureActivity extends RoboAppCompatActivity {
+public class FixtureActivity extends CommonAppCompatActivity {
 
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -59,7 +55,6 @@ public class FixtureActivity extends RoboAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView.setAdapter(new BasicListAdapter<Match, FixtureViewHolder>(data) {
             @Override
             public FixtureViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -164,24 +159,6 @@ public class FixtureActivity extends RoboAppCompatActivity {
             seriesName = ViewHolder.get(itemView, R.id.tvSeriesname);
             matchNo = ViewHolder.get(itemView, R.id.tvMatchNo);
             linearLayout = ViewHolder.get(itemView, R.id.match_layout);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 }

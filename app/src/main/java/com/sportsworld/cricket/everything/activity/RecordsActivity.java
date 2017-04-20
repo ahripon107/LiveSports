@@ -7,19 +7,16 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.gson.Gson;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sportsworld.cricket.everything.R;
 import com.sportsworld.cricket.everything.adapter.MatchDetailsViewPagerAdapter;
 import com.sportsworld.cricket.everything.fragment.RecordsFragment;
 import com.sportsworld.cricket.everything.util.Constants;
 import com.sportsworld.cricket.everything.util.FetchFromWeb;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.gson.Gson;
-import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +28,7 @@ import dmax.dialog.SpotsDialog;
 /**
  * @author Ripon
  */
-public class RecordsActivity extends AppCompatActivity {
+public class RecordsActivity extends CommonAppCompatActivity {
 
     MatchDetailsViewPagerAdapter matchDetailsViewPagerAdapter;
     ViewPager viewPager;
@@ -44,7 +41,6 @@ public class RecordsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_details);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         battingRecordsFragment = new RecordsFragment();
         bowlingRecordsFragment = new RecordsFragment();
@@ -104,38 +100,20 @@ public class RecordsActivity extends AppCompatActivity {
         matchDetailsViewPagerAdapter = new MatchDetailsViewPagerAdapter(getSupportFragmentManager());
 
         Bundle bundle = new Bundle();
-        bundle.putString("recordtype","batting");
+        bundle.putString("recordtype", "batting");
         battingRecordsFragment.setArguments(bundle);
         matchDetailsViewPagerAdapter.addFragment(battingRecordsFragment, "Batting Records");
 
         Bundle bundle1 = new Bundle();
-        bundle1.putString("recordtype","bowling");
+        bundle1.putString("recordtype", "bowling");
         bowlingRecordsFragment.setArguments(bundle1);
         matchDetailsViewPagerAdapter.addFragment(bowlingRecordsFragment, "Bowling Records");
 
         Bundle bundle2 = new Bundle();
-        bundle2.putString("recordtype","fastest");
+        bundle2.putString("recordtype", "fastest");
         fastestRecordsFragment.setArguments(bundle2);
         matchDetailsViewPagerAdapter.addFragment(fastestRecordsFragment, "Fastest Records");
 
         viewPager.setAdapter(matchDetailsViewPagerAdapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

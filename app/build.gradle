@@ -29,22 +29,22 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.android.support:design:25.0.1'
-    compile 'com.android.support:support-v4:25.0.1'
-    compile 'com.android.support:recyclerview-v7:25.0.1'
-    compile 'com.android.support:cardview-v7:25.0.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.loopj.android:android-async-http:1.4.9'
-    compile 'com.google.android.gms:play-services-base:9.6.1'
-    compile 'com.google.android.gms:play-services-gcm:9.6.1'
-    compile 'com.google.android.gms:play-services-ads:9.6.1'
-    compile 'com.google.android.gms:play-services-analytics:9.6.1'
+    compile 'com.google.android.gms:play-services-base:10.2.1'
+    compile 'com.google.android.gms:play-services-gcm:10.2.1'
+    compile 'com.google.android.gms:play-services-ads:10.2.1'
+    compile 'com.google.android.gms:play-services-analytics:10.2.1'
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.github.dmytrodanylyk.shadow-layout:library:1.0.3'
     compile 'com.github.d-max:spots-dialog:0.4@aar'
-    compile 'com.google.firebase:firebase-core:9.6.1'
-    compile 'com.google.firebase:firebase-messaging:9.6.1'
+    compile 'com.google.firebase:firebase-core:10.2.1'
+    compile 'com.google.firebase:firebase-messaging:10.2.1'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile files('libs/gson-2.3.1.jar')
 }

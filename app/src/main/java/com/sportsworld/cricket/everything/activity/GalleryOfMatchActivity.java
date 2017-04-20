@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,18 +14,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sportsworld.cricket.everything.R;
-import com.sportsworld.cricket.everything.adapter.BasicListAdapter;
-import com.sportsworld.cricket.everything.model.Gallery;
-import com.sportsworld.cricket.everything.util.Constants;
-import com.sportsworld.cricket.everything.util.FetchFromWeb;
-import com.sportsworld.cricket.everything.util.RoboAppCompatActivity;
-import com.sportsworld.cricket.everything.util.ViewHolder;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.sportsworld.cricket.everything.R;
+import com.sportsworld.cricket.everything.adapter.BasicListAdapter;
+import com.sportsworld.cricket.everything.model.Gallery;
+import com.sportsworld.cricket.everything.util.Constants;
+import com.sportsworld.cricket.everything.util.FetchFromWeb;
+import com.sportsworld.cricket.everything.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -41,11 +39,11 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 /**
- * Created by Ripon on 10/14/16.
+ * @author Ripon
  */
 
 @ContentView(R.layout.fixture)
-public class GalleryOfMatchActivity extends RoboAppCompatActivity {
+public class GalleryOfMatchActivity extends CommonAppCompatActivity {
 
     @InjectView(R.id.adViewFixture)
     AdView adView;
@@ -62,10 +60,6 @@ public class GalleryOfMatchActivity extends RoboAppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
 
         recyclerView.setAdapter(new BasicListAdapter<Gallery, GalleryMatchViewHolder>(galleries) {
             @Override
@@ -120,7 +114,7 @@ public class GalleryOfMatchActivity extends RoboAppCompatActivity {
                     JSONArray jsonArray = response.getJSONArray("Image Details");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject obj = jsonArray.getJSONObject(i);
-                        Gallery gallery = new Gallery(obj.getString("cap"),"","",response.getJSONObject("Event Details").getString("base")+obj.getString("urlLarge"));
+                        Gallery gallery = new Gallery(obj.getString("cap"), "", "", response.getJSONObject("Event Details").getString("base") + obj.getString("urlLarge"));
                         galleries.add(gallery);
                     }
                 } catch (JSONException e) {
@@ -140,18 +134,6 @@ public class GalleryOfMatchActivity extends RoboAppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
                 .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
         adView.loadAd(adRequest);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private static class GalleryMatchViewHolder extends RecyclerView.ViewHolder {

@@ -47,7 +47,7 @@ import roboguice.inject.InjectView;
  * @author ripon
  */
 @ContentView(R.layout.fixture)
-public class PastMatchesActivity extends RoboAppCompatActivity {
+public class PastMatchesActivity extends CommonAppCompatActivity {
 
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -61,8 +61,6 @@ public class PastMatchesActivity extends RoboAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView.setAdapter(new BasicListAdapter<Match, PastMatchesViewHolder>(data) {
             @Override
@@ -204,24 +202,6 @@ public class PastMatchesActivity extends RoboAppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
                 .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
         adView.loadAd(adRequest);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private static class PastMatchesViewHolder extends RecyclerView.ViewHolder {

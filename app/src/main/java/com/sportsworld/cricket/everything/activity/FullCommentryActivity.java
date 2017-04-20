@@ -3,17 +3,14 @@ package com.sportsworld.cricket.everything.activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.sportsworld.cricket.everything.R;
 import com.sportsworld.cricket.everything.adapter.MatchDetailsViewPagerAdapter;
 import com.sportsworld.cricket.everything.fragment.FullCommentryFragment;
 import com.sportsworld.cricket.everything.util.Constants;
 import com.sportsworld.cricket.everything.util.RoboAppCompatActivity;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -41,9 +38,9 @@ public class FullCommentryActivity extends RoboAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        numberOfInnings = getIntent().getIntExtra("numberofinnings",0);
+
+        numberOfInnings = getIntent().getIntExtra("numberofinnings", 0);
         id = getIntent().getStringExtra("id");
         this.viewPager.setOffscreenPageLimit(3);
         setupViewPage(this.viewPager);
@@ -56,32 +53,13 @@ public class FullCommentryActivity extends RoboAppCompatActivity {
 
     public void setupViewPage(ViewPager viewPager) {
         this.matchDetailsViewPagerAdapter = new MatchDetailsViewPagerAdapter(getSupportFragmentManager());
-        for (int i=1;i<=numberOfInnings;i++) {
+        for (int i = 1; i <= numberOfInnings; i++) {
             FullCommentryFragment fullCommentryFragment = new FullCommentryFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("url","http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20cricket.commentary%20where%20match_id="+id+"%20and%20innings_id="+i+"&format=json&diagnostics=false&env=store%3A%2F%2F0TxIGQMQbObzvU4Apia0V0&callback=");
+            bundle.putString("url", "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20cricket.commentary%20where%20match_id=" + id + "%20and%20innings_id=" + i + "&format=json&diagnostics=false&env=store%3A%2F%2F0TxIGQMQbObzvU4Apia0V0&callback=");
             fullCommentryFragment.setArguments(bundle);
-            this.matchDetailsViewPagerAdapter.addFragment(fullCommentryFragment,"Innings "+i);
+            this.matchDetailsViewPagerAdapter.addFragment(fullCommentryFragment, "Innings " + i);
         }
         viewPager.setAdapter(this.matchDetailsViewPagerAdapter);
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
 }

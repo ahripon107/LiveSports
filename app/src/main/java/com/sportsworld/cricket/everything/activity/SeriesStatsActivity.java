@@ -39,10 +39,10 @@ import cz.msebera.android.httpclient.Header;
 import dmax.dialog.SpotsDialog;
 
 /**
- * Created by Ripon on 10/14/16.
+ * @author Ripon
  */
 
-public class SeriesStatsActivity extends AppCompatActivity {
+public class SeriesStatsActivity extends CommonAppCompatActivity {
 
     Spinner spinner;
     RecyclerView recyclerView;
@@ -57,7 +57,6 @@ public class SeriesStatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_series_stats);
         spinner = (Spinner) findViewById(R.id.spinner);
         recyclerView = (RecyclerView) findViewById(R.id.series_stats);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         currentSeries = new ArrayList<>();
         seriesIds = new ArrayList<>();
@@ -143,24 +142,6 @@ public class SeriesStatsActivity extends AppCompatActivity {
             super(itemView);
             textView = ViewHolder.get(itemView,R.id.tv_record_type);
             recordTypeLayout = ViewHolder.get(itemView,R.id.record_type_layout);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 }

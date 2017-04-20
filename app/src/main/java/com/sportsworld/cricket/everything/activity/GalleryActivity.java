@@ -4,25 +4,23 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sportsworld.cricket.everything.R;
 import com.sportsworld.cricket.everything.adapter.BasicListAdapter;
 import com.sportsworld.cricket.everything.model.Gallery;
 import com.sportsworld.cricket.everything.util.Constants;
 import com.sportsworld.cricket.everything.util.FetchFromWeb;
 import com.sportsworld.cricket.everything.util.ViewHolder;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -35,10 +33,10 @@ import cz.msebera.android.httpclient.Header;
 import dmax.dialog.SpotsDialog;
 
 /**
- * Created by Ripon on 10/14/16.
+ * @author Ripon
  */
 
-public class GalleryActivity extends AppCompatActivity {
+public class GalleryActivity extends CommonAppCompatActivity {
 
     RecyclerView recyclerView;
     ArrayList<Gallery> galleries;
@@ -47,8 +45,6 @@ public class GalleryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
         setContentView(R.layout.playersfragment);
         galleries = new ArrayList<>();
 
@@ -61,15 +57,15 @@ public class GalleryActivity extends AppCompatActivity {
         progressDialog.show();
         progressDialog.setCancelable(true);
 
-        FetchFromWeb.get(galleryUrl,null,new JsonHttpResponseHandler() {
+        FetchFromWeb.get(galleryUrl, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 progressDialog.dismiss();
                 try {
                     JSONArray jsonArray = response.getJSONArray("Match Details");
-                    for (int i=0;i<jsonArray.length();i++) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject obj = jsonArray.getJSONObject(i);
-                        galleries.add(new Gallery(obj.getString("name"),response.getJSONObject("Index").getString("match")+obj.getString("url"),obj.getString("dt"),response.getJSONObject("Index").getString("img")+obj.getString("img")));
+                        galleries.add(new Gallery(obj.getString("name"), response.getJSONObject("Index").getString("match") + obj.getString("url"), obj.getString("dt"), response.getJSONObject("Index").getString("img") + obj.getString("img")));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -94,11 +90,11 @@ public class GalleryActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView.setAdapter(new BasicListAdapter<Gallery,GalleryViewHolder>(galleries) {
+        recyclerView.setAdapter(new BasicListAdapter<Gallery, GalleryViewHolder>(galleries) {
 
             @Override
             public GalleryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.singlenews,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.singlenews, parent, false);
                 return new GalleryViewHolder(view);
             }
 
@@ -116,8 +112,8 @@ public class GalleryActivity extends AppCompatActivity {
                 holder.linearLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(GalleryActivity.this,GalleryOfMatchActivity.class);
-                        intent.putExtra("url",gallery.getUrl());
+                        Intent intent = new Intent(GalleryActivity.this, GalleryOfMatchActivity.class);
+                        intent.putExtra("url", gallery.getUrl());
                         startActivity(intent);
                     }
                 });
@@ -132,18 +128,6 @@ public class GalleryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     private static class GalleryViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView matchTitle;
@@ -156,10 +140,10 @@ public class GalleryActivity extends AppCompatActivity {
             super(itemView);
 
             matchTitle = ViewHolder.get(itemView, R.id.tv_headline);
-            imageView = ViewHolder.get(itemView,R.id.civ_news_thumb);
-            matchDate = ViewHolder.get(itemView,R.id.tv_times_ago);
-            author = ViewHolder.get(itemView,R.id.tv_author);
-            linearLayout = ViewHolder.get(itemView,R.id.news_item_container);
+            imageView = ViewHolder.get(itemView, R.id.civ_news_thumb);
+            matchDate = ViewHolder.get(itemView, R.id.tv_times_ago);
+            author = ViewHolder.get(itemView, R.id.tv_author);
+            linearLayout = ViewHolder.get(itemView, R.id.news_item_container);
         }
     }
 }

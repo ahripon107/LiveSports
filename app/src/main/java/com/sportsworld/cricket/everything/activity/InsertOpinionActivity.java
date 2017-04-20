@@ -5,14 +5,10 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,6 +16,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.sportsworld.cricket.everything.R;
 import com.sportsworld.cricket.everything.adapter.BasicListAdapter;
 import com.sportsworld.cricket.everything.model.Comment;
@@ -27,10 +27,6 @@ import com.sportsworld.cricket.everything.util.Constants;
 import com.sportsworld.cricket.everything.util.FetchFromWeb;
 import com.sportsworld.cricket.everything.util.Validator;
 import com.sportsworld.cricket.everything.util.ViewHolder;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,7 +41,7 @@ import dmax.dialog.SpotsDialog;
  * @author Ripon
  */
 
-public class InsertOpinionActivity extends AppCompatActivity {
+public class InsertOpinionActivity extends CommonAppCompatActivity {
 
     ArrayList<Comment> comments;
     String url;
@@ -59,10 +55,9 @@ public class InsertOpinionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opinions);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = (RecyclerView) findViewById(R.id.rvComments);
         recyclerView.setHasFixedSize(true);
-        id =  getIntent().getStringExtra("opinionid");
+        id = getIntent().getStringExtra("opinionid");
         adView = (AdView) findViewById(R.id.adViewOpinions);
 
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
@@ -98,7 +93,7 @@ public class InsertOpinionActivity extends AppCompatActivity {
         RequestParams requestParams = new RequestParams();
 
         requestParams.add("key", "bl905577");
-        requestParams.add("newsid", "discussion"+id);
+        requestParams.add("newsid", "discussion" + id);
         url = Constants.FETCH_NEWS_COMMENT_URL;
 
         FetchFromWeb.get(url, requestParams, new JsonHttpResponseHandler() {
@@ -166,7 +161,7 @@ public class InsertOpinionActivity extends AppCompatActivity {
                             RequestParams params = new RequestParams();
 
                             params.put("key", "bl905577");
-                            params.put("newsid", "discussion"+id);
+                            params.put("newsid", "discussion" + id);
                             params.put("name", name);
                             params.put("comment", comment);
                             params.put("timestamp", System.currentTimeMillis() + "");
@@ -218,24 +213,6 @@ public class InsertOpinionActivity extends AppCompatActivity {
             commenter = ViewHolder.get(v, R.id.tvName);
             comment = ViewHolder.get(v, R.id.tvComment);
             timestamp = ViewHolder.get(itemView, R.id.tv_time_stamp);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 }

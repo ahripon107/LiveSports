@@ -8,9 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,7 +25,6 @@ import com.sportsworld.cricket.everything.model.ProfileBatting;
 import com.sportsworld.cricket.everything.model.ProfileBowling;
 import com.sportsworld.cricket.everything.util.Constants;
 import com.sportsworld.cricket.everything.util.FetchFromWeb;
-import com.sportsworld.cricket.everything.util.RoboAppCompatActivity;
 import com.sportsworld.cricket.everything.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -46,7 +42,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 @ContentView(R.layout.activity_player_profile)
-public class PlayerProfileActivity extends RoboAppCompatActivity {
+public class PlayerProfileActivity extends CommonAppCompatActivity {
     @InjectView(R.id.tv_player_name)
     TextView playerName;
 
@@ -91,6 +87,7 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
 
     @Inject
     ArrayList<ProfileBowling> profileBowlings;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,10 +95,9 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
         battingRecord.setNestedScrollingEnabled(false);
         bowlingRecord.setNestedScrollingEnabled(false);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         String playerID = getIntent().getStringExtra("playerID");
 
-        String url = "http://cricapi.com/api/playerStats?pid="+playerID+"&apikey=MScPVINvZoYtOmeNSY7aDVtaa4H2";
+        String url = "http://cricapi.com/api/playerStats?pid=" + playerID + "&apikey=MScPVINvZoYtOmeNSY7aDVtaa4H2";
         Log.d(Constants.TAG, url);
 
         final AlertDialog progressDialog = new SpotsDialog(PlayerProfileActivity.this, R.style.Custom);
@@ -114,25 +110,32 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
                 try {
                     playerName.setText(response.getString("name"));
 
-                    if (response.has("born")) playerBorn.setText(Html.fromHtml("<b>Born:</b> "+response.getString("born")));
+                    if (response.has("born"))
+                        playerBorn.setText(Html.fromHtml("<b>Born:</b> " + response.getString("born")));
                     else playerBorn.setText("");
 
-                    if (response.has("currentAge"))playerAge.setText(Html.fromHtml("<b>Current Age:</b> "+response.getString("currentAge")));
+                    if (response.has("currentAge"))
+                        playerAge.setText(Html.fromHtml("<b>Current Age:</b> " + response.getString("currentAge")));
                     else playerAge.setText("");
 
-                    if (response.has("majorTeams")) majorTeams.setText(Html.fromHtml("<b>Major Teams:</b> "+response.getString("majorTeams")));
+                    if (response.has("majorTeams"))
+                        majorTeams.setText(Html.fromHtml("<b>Major Teams:</b> " + response.getString("majorTeams")));
                     else majorTeams.setText("");
 
-                    if (response.has("playingRole")) playingRole.setText(Html.fromHtml("<b>Playing Role:</b> "+response.getString("playingRole")));
+                    if (response.has("playingRole"))
+                        playingRole.setText(Html.fromHtml("<b>Playing Role:</b> " + response.getString("playingRole")));
                     else playingRole.setText("");
 
-                    if (response.has("battingStyle")) battingStyle.setText(Html.fromHtml("<b>Batting Style:</b> "+response.getString("battingStyle")));
+                    if (response.has("battingStyle"))
+                        battingStyle.setText(Html.fromHtml("<b>Batting Style:</b> " + response.getString("battingStyle")));
                     else battingStyle.setText("");
 
-                    if (response.has("bowlingStyle")) bowlingStyle.setText(Html.fromHtml("<b>Bowling Style:</b> "+response.getString("bowlingStyle")));
+                    if (response.has("bowlingStyle"))
+                        bowlingStyle.setText(Html.fromHtml("<b>Bowling Style:</b> " + response.getString("bowlingStyle")));
                     else bowlingStyle.setText("");
 
-                    if (response.has("profile")) playerProfile.setText(response.getString("profile"));
+                    if (response.has("profile"))
+                        playerProfile.setText(response.getString("profile"));
                     else playerProfile.setText("");
 
                     if (response.has("imageURL")) {
@@ -147,39 +150,39 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
 
                     if (battingObject.has("tests")) {
                         ProfileBatting profileBat = processProfileBatting(battingObject.getJSONObject("tests"));
-                        if (profileBat!=null) profileBat.setGametype("Tests");
+                        if (profileBat != null) profileBat.setGametype("Tests");
                         profileBattings.add(profileBat);
                     }
                     if (battingObject.has("ODIs")) {
                         ProfileBatting profileBat = processProfileBatting(battingObject.getJSONObject("ODIs"));
-                        if (profileBat!=null) profileBat.setGametype("ODIs");
+                        if (profileBat != null) profileBat.setGametype("ODIs");
                         profileBattings.add(profileBat);
                     }
                     if (battingObject.has("T20Is")) {
                         ProfileBatting profileBat = processProfileBatting(battingObject.getJSONObject("T20Is"));
-                        if (profileBat!=null) profileBat.setGametype("T20Is");
+                        if (profileBat != null) profileBat.setGametype("T20Is");
                         profileBattings.add(profileBat);
                     }
                     if (battingObject.has("firstClass")) {
                         ProfileBatting profileBat = processProfileBatting(battingObject.getJSONObject("firstClass"));
-                        if (profileBat!=null) profileBat.setGametype("FirstClass");
+                        if (profileBat != null) profileBat.setGametype("FirstClass");
                         profileBattings.add(profileBat);
                     }
                     if (battingObject.has("listA")) {
                         ProfileBatting profileBat = processProfileBatting(battingObject.getJSONObject("listA"));
-                        if (profileBat!=null) profileBat.setGametype("ListA");
+                        if (profileBat != null) profileBat.setGametype("ListA");
                         profileBattings.add(profileBat);
                     }
                     if (battingObject.has("twenty20")) {
                         ProfileBatting profileBat = processProfileBatting(battingObject.getJSONObject("twenty20"));
-                        if (profileBat!=null) profileBat.setGametype("Twenty20");
+                        if (profileBat != null) profileBat.setGametype("Twenty20");
                         profileBattings.add(profileBat);
                     }
 
-                    battingRecord.setAdapter(new BasicListAdapter<ProfileBatting,ProfileBattingViewHolder>(profileBattings) {
+                    battingRecord.setAdapter(new BasicListAdapter<ProfileBatting, ProfileBattingViewHolder>(profileBattings) {
                         @Override
                         public ProfileBattingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_profile_batting,parent,false);
+                            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_profile_batting, parent, false);
                             return new ProfileBattingViewHolder(view);
                         }
 
@@ -203,41 +206,41 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
 
                     if (bowlingObject.has("tests")) {
                         ProfileBowling profileBowl = processProfileBowling(bowlingObject.getJSONObject("tests"));
-                        if (profileBowl!=null) profileBowl.setGameType("tests");
+                        if (profileBowl != null) profileBowl.setGameType("tests");
                         profileBowlings.add(profileBowl);
                     }
 
                     if (bowlingObject.has("ODIs")) {
                         ProfileBowling profileBowl = processProfileBowling(bowlingObject.getJSONObject("ODIs"));
-                        if (profileBowl!=null) profileBowl.setGameType("ODIs");
+                        if (profileBowl != null) profileBowl.setGameType("ODIs");
                         profileBowlings.add(profileBowl);
                     }
                     if (bowlingObject.has("T20Is")) {
                         ProfileBowling profileBowl = processProfileBowling(bowlingObject.getJSONObject("T20Is"));
-                        if (profileBowl!=null) profileBowl.setGameType("T20Is");
+                        if (profileBowl != null) profileBowl.setGameType("T20Is");
                         profileBowlings.add(profileBowl);
                     }
                     if (bowlingObject.has("firstClass")) {
                         ProfileBowling profileBowl = processProfileBowling(bowlingObject.getJSONObject("firstClass"));
-                        if (profileBowl!=null) profileBowl.setGameType("FirstClass");
+                        if (profileBowl != null) profileBowl.setGameType("FirstClass");
                         profileBowlings.add(profileBowl);
                     }
                     if (bowlingObject.has("listA")) {
                         ProfileBowling profileBowl = processProfileBowling(bowlingObject.getJSONObject("listA"));
-                        if (profileBowl!=null) profileBowl.setGameType("ListA");
+                        if (profileBowl != null) profileBowl.setGameType("ListA");
                         profileBowlings.add(profileBowl);
                     }
                     if (bowlingObject.has("twenty20")) {
                         ProfileBowling profileBowl = processProfileBowling(bowlingObject.getJSONObject("twenty20"));
-                        if (profileBowl!=null) profileBowl.setGameType("Twenty20");
+                        if (profileBowl != null) profileBowl.setGameType("Twenty20");
                         profileBowlings.add(profileBowl);
                     }
 
 
-                    bowlingRecord.setAdapter(new BasicListAdapter<ProfileBowling,ProfileBowlingViewHolder>(profileBowlings) {
+                    bowlingRecord.setAdapter(new BasicListAdapter<ProfileBowling, ProfileBowlingViewHolder>(profileBowlings) {
                         @Override
                         public ProfileBowlingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_profile_bowling,parent,false);
+                            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_profile_bowling, parent, false);
                             return new ProfileBowlingViewHolder(view);
                         }
 
@@ -276,24 +279,6 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
         adView.loadAd(adRequest);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     public ProfileBatting processProfileBatting(JSONObject jsonObject) {
         ProfileBatting profileBatting = null;
         try {
@@ -309,7 +294,7 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
             String SR = jsonObject.getString("SR");
             String fours = jsonObject.getString("4s");
             String sixes = jsonObject.getString("6s");
-            profileBatting = new ProfileBatting(fifty,hundred,Mat,Inns,NO,Runs,HS,Ave,BF,SR,fours,sixes);
+            profileBatting = new ProfileBatting(fifty, hundred, Mat, Inns, NO, Runs, HS, Ave, BF, SR, fours, sixes);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -331,7 +316,7 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
             String SR = jsonObject.getString("SR");
             String fourWkts = jsonObject.getString("4w");
             String fiveWkts = jsonObject.getString("5w");
-            profileBowling = new ProfileBowling(Mat,Inns,balls,Runs,wkts,BBI,BBM,Ave,Econ,SR,fourWkts,fiveWkts);
+            profileBowling = new ProfileBowling(Mat, Inns, balls, Runs, wkts, BBI, BBM, Ave, Econ, SR, fourWkts, fiveWkts);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -350,14 +335,14 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
 
         public ProfileBattingViewHolder(View itemView) {
             super(itemView);
-            gameType = ViewHolder.get(itemView,R.id.tv_game_type);
-            matches = ViewHolder.get(itemView,R.id.tv_matches);
-            runs = ViewHolder.get(itemView,R.id.tv_runs);
-            highestScore = ViewHolder.get(itemView,R.id.tv_highest_score);
-            average = ViewHolder.get(itemView,R.id.tv_average);
-            strikeRate = ViewHolder.get(itemView,R.id.tv_strike_rate);
-            fifties = ViewHolder.get(itemView,R.id.tv_fifties);
-            hundreds = ViewHolder.get(itemView,R.id.tv_hundreds);
+            gameType = ViewHolder.get(itemView, R.id.tv_game_type);
+            matches = ViewHolder.get(itemView, R.id.tv_matches);
+            runs = ViewHolder.get(itemView, R.id.tv_runs);
+            highestScore = ViewHolder.get(itemView, R.id.tv_highest_score);
+            average = ViewHolder.get(itemView, R.id.tv_average);
+            strikeRate = ViewHolder.get(itemView, R.id.tv_strike_rate);
+            fifties = ViewHolder.get(itemView, R.id.tv_fifties);
+            hundreds = ViewHolder.get(itemView, R.id.tv_hundreds);
         }
     }
 
@@ -373,14 +358,14 @@ public class PlayerProfileActivity extends RoboAppCompatActivity {
 
         public ProfileBowlingViewHolder(View itemView) {
             super(itemView);
-            gameType = ViewHolder.get(itemView,R.id.game_type);
-            matches = ViewHolder.get(itemView,R.id.tv_matches);
-            wickets = ViewHolder.get(itemView,R.id.tv_wickets);
-            bbi = ViewHolder.get(itemView,R.id.tv_bbi);
-            average = ViewHolder.get(itemView,R.id.tv_average);
-            economy = ViewHolder.get(itemView,R.id.tv_economy);
-            strikeRate = ViewHolder.get(itemView,R.id.tv_strike_rate);
-            fiveWickets = ViewHolder.get(itemView,R.id.tv_five_wickets);
+            gameType = ViewHolder.get(itemView, R.id.game_type);
+            matches = ViewHolder.get(itemView, R.id.tv_matches);
+            wickets = ViewHolder.get(itemView, R.id.tv_wickets);
+            bbi = ViewHolder.get(itemView, R.id.tv_bbi);
+            average = ViewHolder.get(itemView, R.id.tv_average);
+            economy = ViewHolder.get(itemView, R.id.tv_economy);
+            strikeRate = ViewHolder.get(itemView, R.id.tv_strike_rate);
+            fiveWickets = ViewHolder.get(itemView, R.id.tv_five_wickets);
         }
     }
 }

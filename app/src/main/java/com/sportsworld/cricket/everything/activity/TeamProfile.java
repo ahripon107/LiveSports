@@ -1,12 +1,8 @@
 package com.sportsworld.cricket.everything.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.sportsworld.cricket.everything.R;
 import com.sportsworld.cricket.everything.adapter.TeamProfileAdapter;
@@ -17,9 +13,9 @@ import java.util.ArrayList;
 /**
  * @author ripon
  */
-public class TeamProfile extends AppCompatActivity {
+public class TeamProfile extends CommonAppCompatActivity {
 
-    ArrayList<String> teams,teamImages;
+    ArrayList<String> teams, teamImages;
     TeamProfileAdapter teamProfileAdapter;
     RecyclerView recyclerView;
 
@@ -27,7 +23,6 @@ public class TeamProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playersfragment);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setTitle("Team Profile");
 
@@ -68,26 +63,8 @@ public class TeamProfile extends AppCompatActivity {
         teamImages.add(Constants.SCO_TEAM_LOGO_URL);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        teamProfileAdapter = new TeamProfileAdapter(this, teams,teamImages);
+        teamProfileAdapter = new TeamProfileAdapter(this, teams, teamImages);
         recyclerView.setAdapter(teamProfileAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

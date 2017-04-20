@@ -3,30 +3,26 @@ package com.sportsworld.cricket.everything.activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sportsworld.cricket.everything.R;
 import com.sportsworld.cricket.everything.adapter.BasicListAdapter;
 import com.sportsworld.cricket.everything.model.CricketNews;
 import com.sportsworld.cricket.everything.util.Constants;
 import com.sportsworld.cricket.everything.util.FetchFromWeb;
 import com.sportsworld.cricket.everything.util.ViewHolder;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -42,7 +38,7 @@ import dmax.dialog.SpotsDialog;
  * @author Ripon
  */
 
-public class QuotesListActivity extends AppCompatActivity {
+public class QuotesListActivity extends CommonAppCompatActivity {
 
     RecyclerView recyclerView;
     AdView adView;
@@ -52,7 +48,6 @@ public class QuotesListActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         adView = (AdView) findViewById(R.id.adViewNews);
@@ -62,10 +57,10 @@ public class QuotesListActivity extends AppCompatActivity {
                 .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
         adView.loadAd(adRequest);
 
-        recyclerView.setAdapter(new BasicListAdapter<CricketNews,QuotesViewHolder>(quotes) {
+        recyclerView.setAdapter(new BasicListAdapter<CricketNews, QuotesViewHolder>(quotes) {
             @Override
             public QuotesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_quotes,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_quotes, parent, false);
                 return new QuotesViewHolder(view);
             }
 
@@ -98,9 +93,9 @@ public class QuotesListActivity extends AppCompatActivity {
                     JSONArray jsonArray = response.getJSONArray("quotes");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        CricketNews cricketNews = new CricketNews("",jsonObject.getString("image"),
-                                "",jsonObject.getString("comment"),
-                                "","banglanews",jsonObject.getString("context"));
+                        CricketNews cricketNews = new CricketNews("", jsonObject.getString("image"),
+                                "", jsonObject.getString("comment"),
+                                "", "banglanews", jsonObject.getString("context"));
                         quotes.add(cricketNews);
                     }
                 } catch (JSONException e) {
@@ -138,24 +133,6 @@ public class QuotesListActivity extends AppCompatActivity {
             author = ViewHolder.get(itemView, R.id.tv_author);
             time = ViewHolder.get(itemView, R.id.tv_times_ago);
             circleImageView = ViewHolder.get(itemView, R.id.civ_news_thumb);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 }

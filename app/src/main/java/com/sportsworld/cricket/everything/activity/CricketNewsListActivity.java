@@ -8,9 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -21,14 +18,13 @@ import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.sportsworld.cricket.everything.adapter.BasicListAdapter;
 import com.sportsworld.cricket.everything.R;
+import com.sportsworld.cricket.everything.adapter.BasicListAdapter;
 import com.sportsworld.cricket.everything.model.CricketNews;
 import com.sportsworld.cricket.everything.util.CircleImageView;
 import com.sportsworld.cricket.everything.util.Constants;
 import com.sportsworld.cricket.everything.util.FetchFromWeb;
 import com.sportsworld.cricket.everything.util.RecyclerItemClickListener;
-import com.sportsworld.cricket.everything.util.RoboAppCompatActivity;
 import com.sportsworld.cricket.everything.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -47,7 +43,7 @@ import roboguice.inject.InjectView;
  * @author ripon
  */
 @ContentView(R.layout.news)
-public class CricketNewsListActivity extends RoboAppCompatActivity {
+public class CricketNewsListActivity extends CommonAppCompatActivity {
 
     @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -68,10 +64,10 @@ public class CricketNewsListActivity extends RoboAppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setTitle("Cricket News");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        typeface = Typeface.createFromAsset(getAssets(),Constants.TIMES_NEW_ROMAN_FONT);
 
-        recyclerView.setAdapter(new BasicListAdapter<CricketNews,NewsViewHolder>(cricketNewses) {
+        typeface = Typeface.createFromAsset(getAssets(), Constants.TIMES_NEW_ROMAN_FONT);
+
+        recyclerView.setAdapter(new BasicListAdapter<CricketNews, NewsViewHolder>(cricketNewses) {
             @Override
             public NewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.singlenews, parent, false);
@@ -86,7 +82,7 @@ public class CricketNewsListActivity extends RoboAppCompatActivity {
 
                 String dateAndTime = cricketNewses.get(position).getPubDate();
                 String arr[] = dateAndTime.split("T");
-                holder.time.setText(arr[0] +" "+arr[1]);
+                holder.time.setText(arr[0] + " " + arr[1]);
                 Picasso.with(CricketNewsListActivity.this)
                         .load(cricketNewses.get(position).getThumburl())
                         .placeholder(R.drawable.default_image)
@@ -122,7 +118,7 @@ public class CricketNewsListActivity extends RoboAppCompatActivity {
                     JSONArray jsonArray = response.getJSONArray("item");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        CricketNews cricketNews = gson.fromJson(String.valueOf(jsonObject),CricketNews.class);
+                        CricketNews cricketNews = gson.fromJson(String.valueOf(jsonObject), CricketNews.class);
                         cricketNewses.add(cricketNews);
                     }
                 } catch (JSONException e) {
@@ -157,24 +153,6 @@ public class CricketNewsListActivity extends RoboAppCompatActivity {
             author = ViewHolder.get(itemView, R.id.tv_author);
             time = ViewHolder.get(itemView, R.id.tv_times_ago);
             circleImageView = ViewHolder.get(itemView, R.id.civ_news_thumb);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 }

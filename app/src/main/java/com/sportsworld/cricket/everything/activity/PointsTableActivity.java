@@ -3,14 +3,10 @@ package com.sportsworld.cricket.everything.activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,6 +14,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.gson.Gson;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sportsworld.cricket.everything.R;
 import com.sportsworld.cricket.everything.adapter.BasicListAdapter;
 import com.sportsworld.cricket.everything.model.PointsTable;
@@ -25,10 +25,6 @@ import com.sportsworld.cricket.everything.model.PointsTableElement;
 import com.sportsworld.cricket.everything.util.Constants;
 import com.sportsworld.cricket.everything.util.FetchFromWeb;
 import com.sportsworld.cricket.everything.util.ViewHolder;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.gson.Gson;
-import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +40,7 @@ import dmax.dialog.SpotsDialog;
 /**
  * @author Ripon
  */
-public class PointsTableActivity extends AppCompatActivity{
+public class PointsTableActivity extends CommonAppCompatActivity {
 
     AdView adView;
     RecyclerView recyclerView;
@@ -57,7 +53,6 @@ public class PointsTableActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_points_table);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         pointTables = new ArrayList<>();
         pointTableElements = new ArrayList<>();
         gson = new Gson();
@@ -119,13 +114,13 @@ public class PointsTableActivity extends AppCompatActivity{
                 progressDialog.dismiss();
                 try {
                     JSONArray jsonArray = response.getJSONArray("pointsTable");
-                    for (int i=0;i<jsonArray.length();i++) {
-                        pointTables.add(gson.fromJson(String.valueOf(jsonArray.get(i)),PointsTable.class));
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        pointTables.add(gson.fromJson(String.valueOf(jsonArray.get(i)), PointsTable.class));
                         categories.add(pointTables.get(i).getSeriesName());
                     }
                     dataAdapter.notifyDataSetChanged();
 
-                    if (pointTables.size()>0) {
+                    if (pointTables.size() > 0) {
                         final AlertDialog progressDialog = new SpotsDialog(PointsTableActivity.this, R.style.Custom);
                         progressDialog.show();
                         progressDialog.setCancelable(true);
@@ -172,16 +167,16 @@ public class PointsTableActivity extends AppCompatActivity{
     public void processData(JSONObject jsonObject) {
 
         pointTableElements.clear();
-        pointTableElements.add(new PointsTableElement("Team","Played","Wins","Loss","NR","Pts","NRR"));
+        pointTableElements.add(new PointsTableElement("Team", "Played", "Wins", "Loss", "NR", "Pts", "NRR"));
         try {
             jsonObject = jsonObject.getJSONObject("group");
             Iterator<?> keys = jsonObject.keys();
 
-            while( keys.hasNext() ) {
-                String key = (String)keys.next();
+            while (keys.hasNext()) {
+                String key = (String) keys.next();
                 JSONArray jsonArray = jsonObject.getJSONArray(key);
-                for (int i=0;i<jsonArray.length();i++) {
-                    pointTableElements.add(gson.fromJson(String.valueOf(jsonArray.get(i)),PointsTableElement.class));
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    pointTableElements.add(gson.fromJson(String.valueOf(jsonArray.get(i)), PointsTableElement.class));
                 }
             }
 
@@ -189,10 +184,10 @@ public class PointsTableActivity extends AppCompatActivity{
             e.printStackTrace();
         }
 
-        recyclerView.setAdapter(new BasicListAdapter<PointsTableElement,PointsTableViewHolder>(pointTableElements) {
+        recyclerView.setAdapter(new BasicListAdapter<PointsTableElement, PointsTableViewHolder>(pointTableElements) {
             @Override
             public PointsTableViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_points_table,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_points_table, parent, false);
                 return new PointsTableViewHolder(view);
             }
 
@@ -210,24 +205,6 @@ public class PointsTableActivity extends AppCompatActivity{
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     private static class PointsTableViewHolder extends RecyclerView.ViewHolder {
         protected TextView teamName;
         protected TextView played;
@@ -239,13 +216,13 @@ public class PointsTableActivity extends AppCompatActivity{
 
         public PointsTableViewHolder(View itemView) {
             super(itemView);
-            teamName = ViewHolder.get(itemView,R.id.tv_team_name);
-            played = ViewHolder.get(itemView,R.id.tv_played);
-            wins = ViewHolder.get(itemView,R.id.tv_wins);
-            losses = ViewHolder.get(itemView,R.id.tv_loss);
-            NR = ViewHolder.get(itemView,R.id.tv_nr);
-            points = ViewHolder.get(itemView,R.id.tv_points);
-            nrr = ViewHolder.get(itemView,R.id.tv_nrr);
+            teamName = ViewHolder.get(itemView, R.id.tv_team_name);
+            played = ViewHolder.get(itemView, R.id.tv_played);
+            wins = ViewHolder.get(itemView, R.id.tv_wins);
+            losses = ViewHolder.get(itemView, R.id.tv_loss);
+            NR = ViewHolder.get(itemView, R.id.tv_nr);
+            points = ViewHolder.get(itemView, R.id.tv_points);
+            nrr = ViewHolder.get(itemView, R.id.tv_nrr);
         }
     }
 }
