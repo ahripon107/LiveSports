@@ -6,10 +6,14 @@ android {
 
     defaultConfig {
         applicationId "com.sportsworld.cricket.everything"
+
+        manifestPlaceholders = [onesignal_app_id: "30f8eb90-7684-4eab-8070-2934c1ebc162",
+                                // Project number pulled from dashboard, local value is ignored.
+                                onesignal_google_project_number: "REMOTE"]
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
     }
     buildTypes {
         release {
@@ -40,6 +44,8 @@ dependencies {
     compile 'com.google.android.gms:play-services-gcm:10.2.1'
     compile 'com.google.android.gms:play-services-ads:10.2.1'
     compile 'com.google.android.gms:play-services-analytics:10.2.1'
+    compile 'com.onesignal:OneSignal:3.+@aar'
+    compile "com.google.android.gms:play-services-location:10.2.1"
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.github.dmytrodanylyk.shadow-layout:library:1.0.3'
     compile 'com.github.d-max:spots-dialog:0.4@aar'

@@ -1,5 +1,7 @@
 package com.sportsworld.cricket.everything.util;
 
+import android.util.Log;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,7 +30,8 @@ public class Constants {
 
     public static String SHOW_PLAYER_IMAGE = "false";
 
-    public static final String ACCESS_CHECKER_URL = "http://apisea.xyz/CricketTV/apis/v1/accesschecker.php";
+    public static final String ACCESS_CHECKER_URL = "http://apisea.xyz/CricketTV/apis/v2/accesschecker.php";
+    public static final String WELCOME_TEXT_URL = "http://apisea.xyz/CricketTV/apis/v2/welcometext.php?key=bl905577";
     public static final String OPINION_QUES_URL = "http://apisea.xyz/Cricket/apis/v3/fetchOpinionQuestions.php";
     public static final String SERIES_STATS_URL = "http://opera.m.cricbuzz.com/cbzandroid/series-stats";
 
@@ -106,38 +109,13 @@ public class Constants {
     }
 
     public static String resolveLogo(String teamName) {
-        if (teamName.contains("Australia"))
-            return Constants.AUS_TEAM_LOGO_URL;
-        else if (teamName.contains("Bangladesh"))
-            return Constants.BD_TEAM_LOGO_URL;
-        else if (teamName.contains("England"))
-            return Constants.ENG_TEAM_LOGO_URL;
-        else if (teamName.contains("India"))
-            return Constants.IND_TEAm_LOGO_URL;
-        else if (teamName.contains("New Zealand"))
-            return Constants.NZ_TEAM_LOGO_URL;
-        else if (teamName.contains("Pakistan"))
-            return Constants.PAK_TEAM_LOGO_URL;
-        else if (teamName.contains("South Africa"))
-            return Constants.SA_TEAM_LOGO_URL;
-        else if (teamName.contains("Sri Lanka"))
-            return Constants.SL_TEAM_LOGO_URL;
-        else if (teamName.contains("West Indies"))
-            return Constants.WI_TEAM_LOGO_URL;
-        else if (teamName.contains("Zimbabwe"))
-            return Constants.ZIM_TEAM_LOGO_URL;
-        else if (teamName.contains("Bermuda"))
-            return Constants.BER_TEAM_LOGO_URL;
-        else if (teamName.contains("Canada"))
-            return Constants.CAN_TEAM_LOGO_URL;
-        else if (teamName.contains("Ireland"))
-            return Constants.IRE_TEAM_LOGO_URL;
-        else if (teamName.contains("Kenya"))
-            return Constants.KEN_TEAM_LOGO_URL;
-        else if (teamName.contains("Netherland"))
-            return Constants.NED_TEAM_LOGO_URL;
-        else if (teamName.contains("Scotland"))
-            return Constants.SCO_TEAM_LOGO_URL;
-        else return "n";
+        if (SHOW_PLAYER_IMAGE.equals("true")) {
+            String replace = teamName.replace(" ", "");
+            Log.d(TAG, replace);
+
+            return "http://apisea.xyz/BPL2016/images/" + replace + ".png";
+        } else {
+            return "xyz";
+        }
     }
 }

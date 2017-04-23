@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import com.sportsworld.cricket.everything.adapter.BasicListAdapter;
 import com.sportsworld.cricket.everything.model.LivestreamAndHighlights;
 import com.sportsworld.cricket.everything.util.CircleImageView;
 import com.sportsworld.cricket.everything.util.Constants;
+import com.sportsworld.cricket.everything.util.DividerItemDecoration;
 import com.sportsworld.cricket.everything.util.FetchFromWeb;
 import com.sportsworld.cricket.everything.util.RoboAppCompatActivity;
 import com.sportsworld.cricket.everything.util.ViewHolder;
@@ -58,6 +60,9 @@ public class Highlights extends RoboAppCompatActivity {
 
     @InjectView(R.id.adViewHighlights)
     AdView adView;
+
+    @InjectView(R.id.empty_view)
+    TextView emptyView;
 
     InterstitialAd mInterstitialAd;
 
@@ -99,18 +104,15 @@ public class Highlights extends RoboAppCompatActivity {
         recyclerView.setAdapter(new BasicListAdapter<LivestreamAndHighlights,HighlightsViewHolder>(objects) {
             @Override
             public HighlightsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.singleteam,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_livestream,parent,false);
                 return new HighlightsViewHolder(view);
             }
 
             @Override
             public void onBindViewHolder(HighlightsViewHolder holder, final int position) {
                 holder.teamName.setText(objects.get(position).getTitle());
-                Picasso.with(Highlights.this)
-                        .load("http://img.youtube.com/vi/" + objects.get(position).getUrl() + "/0.jpg")
-                        .placeholder(R.drawable.default_image)
-                        .into(holder.circleImageView);
-                holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+
+                holder.watchLive.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (objects.get(position).getType().equals("youtube")) {
@@ -132,15 +134,16 @@ public class Highlights extends RoboAppCompatActivity {
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this));
 
         if (cause.equals("livestream")) {
             url = "http://apisea.xyz/Cricket/apis/v1/fetchLiveStrams.php?key=bl905577";
             fetchFromWeb(url);
-            setTitle("Live Streaming");
+            setTitle("Live Streaming Cricket");
         } else {
-            url = "http://apisea.xyz/Cricket/apis/v1/fetchHighlights.php?key=bl905577";
+            url = "http://apisea.xyz/Cricket/apis/v1/fetchLiveStramsFootball.php?key=bl905577";
             fetchFromWeb(url);
-            setTitle("Highlights");
+            setTitle("Live Streaming Football");
         }
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
                 .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
@@ -148,14 +151,15 @@ public class Highlights extends RoboAppCompatActivity {
     }
 
     private static class HighlightsViewHolder extends RecyclerView.ViewHolder {
-        protected CircleImageView circleImageView;
         protected TextView teamName;
         protected LinearLayout linearLayout;
+        protected Button watchLive;
+
         public HighlightsViewHolder(View itemView) {
             super(itemView);
-            circleImageView = ViewHolder.get(itemView, R.id.civTeams);
-            teamName = ViewHolder.get(itemView, R.id.tvTeamName);
-            linearLayout = ViewHolder.get(itemView,R.id.team_name_flag_container);
+            teamName = ViewHolder.get(itemView, R.id.tv_link_title);
+            linearLayout = ViewHolder.get(itemView, R.id.linear_layout);
+            watchLive = ViewHolder.get(itemView, R.id.btn_watch);
         }
     }
 
@@ -205,18 +209,33 @@ public class Highlights extends RoboAppCompatActivity {
 
                 recyclerView.getAdapter().notifyDataSetChanged();
                 Log.d(Constants.TAG, response.toString());
+
+                if (objects.size() > 0) {
+                    emptyView.setVisibility(View.GONE);
+                } else {
+                    emptyView.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 progressDialog.dismiss();
                 Toast.makeText(Highlights.this, "Failed", Toast.LENGTH_LONG).show();
+                emptyView.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 progressDialog.dismiss();
                 Toast.makeText(Highlights.this, "Failed", Toast.LENGTH_LONG).show();
+                emptyView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                progressDialog.dismiss();
+                Toast.makeText(Highlights.this, "Failed", Toast.LENGTH_LONG).show();
+                emptyView.setVisibility(View.VISIBLE);
             }
         });
     }

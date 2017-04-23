@@ -59,7 +59,7 @@ public class LiveScoreFragment extends Fragment {
 
     ArrayList<String> imageUrls, texts;
 
-    Button liveStreaming;
+    Button liveStreaming, liveStreamingFootball;
 
     RecyclerView recyclerView;
 
@@ -86,6 +86,7 @@ public class LiveScoreFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.live_matches);
         imageView = (ImageView) view.findViewById(R.id.tour_image);
         liveStreaming = (Button) view.findViewById(R.id.btn_live_stream);
+        liveStreamingFootball = (Button) view.findViewById(R.id.btn_live_stream_football);
 
         imageUrls = new ArrayList<>();
         texts = new ArrayList<>();
@@ -139,7 +140,50 @@ public class LiveScoreFragment extends Fragment {
             }
         });
 
-        String welcomeTextUrl = "http://apisea.xyz/CricketTV/apis/v1/welcometext.php?key=bl905577";
+        liveStreamingFootball.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String isAllowedUrl = Constants.ACCESS_CHECKER_URL;
+                Log.d(Constants.TAG, isAllowedUrl);
+
+                final AlertDialog progressDialog = new SpotsDialog(getContext(), R.style.Custom);
+                progressDialog.show();
+                progressDialog.setCancelable(true);
+                RequestParams params = new RequestParams();
+                params.add("key", "bl905577");
+
+                FetchFromWeb.get(isAllowedUrl, params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        progressDialog.dismiss();
+                        try {
+                            if (response.getString("msg").equals("Successful")) {
+                                String source = response.getJSONArray("content").getJSONObject(0).getString("livestreamfootball");
+                                if (source.equals("true")) {
+                                    Intent intent = new Intent(getContext(), Highlights.class);
+                                    intent.putExtra("cause", "livestreamfootball");
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            Log.d(Constants.TAG, response.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+
+        String welcomeTextUrl = Constants.WELCOME_TEXT_URL;
         Log.d(Constants.TAG, welcomeTextUrl);
 
         FetchFromWeb.get(welcomeTextUrl, null, new JsonHttpResponseHandler() {
@@ -169,8 +213,14 @@ public class LiveScoreFragment extends Fragment {
                         liveStreaming.setText(response.getJSONArray("content").getJSONObject(0).getString("buttontext"));
                     }
 
+                    if (response.getJSONArray("content").getJSONObject(0).getString("showbuttonfootball").equals("true")) {
+                        liveStreamingFootball.setVisibility(View.VISIBLE);
+                        liveStreamingFootball.setText(response.getJSONArray("content").getJSONObject(0).getString("buttontextfootball"));
+                    }
+
 
                     if (isNetworkAvailable() && response.getJSONArray("content").getJSONObject(0).getString("appimage").equals("true")) {
+                        imageView.setVisibility(View.VISIBLE);
                         Picasso.with(getContext())
                                 .load(response.getJSONArray("content").getJSONObject(0).getString("appimageurl"))
                                 .placeholder(R.drawable.default_image)

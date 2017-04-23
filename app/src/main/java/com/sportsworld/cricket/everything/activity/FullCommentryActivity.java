@@ -19,7 +19,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 @ContentView(R.layout.activity_match_details)
-public class FullCommentryActivity extends RoboAppCompatActivity {
+public class FullCommentryActivity extends CommonAppCompatActivity {
 
     @InjectView(R.id.viewPager)
     private ViewPager viewPager;

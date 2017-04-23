@@ -6,6 +6,7 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.StandardExceptionParser;
 import com.google.android.gms.analytics.Tracker;
+import com.onesignal.OneSignal;
 
 /**
  * @author Ripon
@@ -22,6 +23,7 @@ public class ParseApplication extends Application {
     {
         super.onCreate();
 
+        OneSignal.startInit(this).init();
         mInstance = this;
 
         AnalyticsTrackers.initialize(this);
