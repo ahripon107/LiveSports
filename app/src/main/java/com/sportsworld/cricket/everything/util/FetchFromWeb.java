@@ -5,7 +5,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 /**
- * Created by Ripon on 8/10/16.
+ * @author Ripon
  */
 public class FetchFromWeb {
 

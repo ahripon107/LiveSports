@@ -240,30 +240,26 @@ public class LiveScoreFragment extends Fragment {
                     }
 
                     if (!response.getJSONArray("content").getJSONObject(0).getString("checkversion").contains(pInfo.versionName)) {
-                        android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(getContext());
-                        alertDialogBuilder.setMessage(response.getJSONArray("content").getJSONObject(0).getString("popupmessage"));
-                        alertDialogBuilder.setPositiveButton("Yes",
-                                new DialogInterface.OnClickListener() {
+                        new AlertDialog.Builder(getContext())
+                                .setMessage(response.getJSONArray("content").getJSONObject(0).getString("popupmessage"))
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(DialogInterface arg0, int arg1) {
+                                    public void onClick(DialogInterface dialogInterface, int i) {
                                         try {
                                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(response.getJSONArray("content").getJSONObject(0).getString("popuplink"))));
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
-
                                     }
-                                });
-
-                        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-
-                        android.support.v7.app.AlertDialog alertDialog = alertDialogBuilder.create();
-                        alertDialog.show();
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.dismiss();
+                                    }
+                                })
+                                .create()
+                                .show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -336,86 +332,7 @@ public class LiveScoreFragment extends Fragment {
                                     })
                             );
 
-                            if (source.equals("cricinfo")) {
-                                //String url = "http://cricinfo-mukki.rhcloud.com/api/match/live";
-                                Log.d(Constants.TAG, url);
-
-                                final AlertDialog progressDialog = new SpotsDialog(getContext(), R.style.Custom);
-                                progressDialog.show();
-                                progressDialog.setCancelable(true);
-                                FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
-                                    @Override
-                                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                        progressDialog.dismiss();
-                                        try {
-                                            Log.d(Constants.TAG, response.toString());
-                                            JSONArray jsonArray = response.getJSONArray("items");
-                                            for (int i = 0; i < jsonArray.length(); i++) {
-                                                JSONObject obj = jsonArray.getJSONObject(i);
-
-                                                datas.add(new Match(obj.getJSONObject("team1").getString("teamName"), obj.getJSONObject("team2").getString("teamName"),
-                                                        obj.getString("matchDescription"), "", "", "", obj.getString("matchId")));
-                                            }
-                                            recyclerView.getAdapter().notifyDataSetChanged();
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
-                                    }
-
-                                    @Override
-                                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
-                                    }
-                                });
-
-                            } else if (source.equals("myself")) {
-                                //String url = "http://apisea.xyz/Cricket/apis/v1/fetchMyLiveScores.php?key=bl905577";
-                                Log.d(Constants.TAG, url);
-
-                                final AlertDialog progressDialog = new SpotsDialog(getContext(), R.style.Custom);
-                                progressDialog.show();
-                                progressDialog.setCancelable(true);
-                                FetchFromWeb.get(url, null, new JsonHttpResponseHandler() {
-                                    @Override
-                                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                        progressDialog.dismiss();
-                                        try {
-                                            Log.d(Constants.TAG, response.toString());
-                                            if (response.getString("msg").equals("Successful")) {
-                                                JSONArray jsonArray = response.getJSONArray("content");
-                                                for (int i = 0; i < jsonArray.length(); i++) {
-                                                    JSONObject obj = jsonArray.getJSONObject(i);
-                                                    datas.add(new Match(obj.getString("team1"), obj.getString("team2"),
-                                                            obj.getString("status"), "", "", "", obj.getString("matchId")));
-                                                }
-                                            }
-                                            recyclerView.getAdapter().notifyDataSetChanged();
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
-                                    }
-
-                                    @Override
-                                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
-                                    }
-                                });
-
-                            } else if (source.equals("webview")) {
+                            if (source.equals("webview")) {
                                 //String url = "http://www.criconly.com/ipl/2013/html/iphone_home_json.json";
                                 Log.d(Constants.TAG, url);
 

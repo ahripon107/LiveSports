@@ -46,24 +46,18 @@ import roboguice.inject.InjectView;
 public class CricketNewsListActivity extends CommonAppCompatActivity {
 
     @InjectView(R.id.recycler_view)
-    RecyclerView recyclerView;
-
+    private RecyclerView recyclerView;
     @InjectView(R.id.adViewNews)
-    AdView adView;
-
+    private AdView adView;
     @Inject
-    ArrayList<CricketNews> cricketNewses;
-
+    private ArrayList<CricketNews> cricketNewses;
     @Inject
-    Gson gson;
-
-    Typeface typeface;
+    private Gson gson;
+    private Typeface typeface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setTitle("Cricket News");
 
         typeface = Typeface.createFromAsset(getAssets(), Constants.TIMES_NEW_ROMAN_FONT);
 
@@ -76,6 +70,9 @@ public class CricketNewsListActivity extends CommonAppCompatActivity {
 
             @Override
             public void onBindViewHolder(NewsViewHolder holder, final int position) {
+                holder.headline.setTypeface(typeface);
+                holder.author.setTypeface(typeface);
+                holder.time.setTypeface(typeface);
 
                 holder.headline.setText(cricketNewses.get(position).getTitle());
                 holder.author.setText(cricketNewses.get(position).getAuthor());
@@ -83,6 +80,7 @@ public class CricketNewsListActivity extends CommonAppCompatActivity {
                 String dateAndTime = cricketNewses.get(position).getPubDate();
                 String arr[] = dateAndTime.split("T");
                 holder.time.setText(arr[0] + " " + arr[1]);
+
                 Picasso.with(CricketNewsListActivity.this)
                         .load(cricketNewses.get(position).getThumburl())
                         .placeholder(R.drawable.default_image)

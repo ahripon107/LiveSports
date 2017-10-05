@@ -7,9 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -28,7 +25,6 @@ import com.sportsworld.cricket.everything.util.CircleImageView;
 import com.sportsworld.cricket.everything.util.Constants;
 import com.sportsworld.cricket.everything.util.FetchFromWeb;
 import com.sportsworld.cricket.everything.util.RecyclerItemClickListener;
-import com.sportsworld.cricket.everything.util.RoboAppCompatActivity;
 import com.sportsworld.cricket.everything.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -50,13 +46,13 @@ import roboguice.inject.InjectView;
 public class PastMatchesActivity extends CommonAppCompatActivity {
 
     @InjectView(R.id.recycler_view)
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
     @Inject
-    ArrayList<Match> data;
+    private ArrayList<Match> data;
 
     @InjectView(R.id.adViewFixture)
-    AdView adView;
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +100,7 @@ public class PastMatchesActivity extends CommonAppCompatActivity {
                         final AlertDialog progressDialog = new SpotsDialog(PastMatchesActivity.this, R.style.Custom);
                         progressDialog.show();
                         progressDialog.setCancelable(true);
+
                         RequestParams params = new RequestParams();
                         params.add("key", "bl905577");
                         params.add("yahoo", data.get(position).getMatchId());
@@ -119,7 +116,7 @@ public class PastMatchesActivity extends CommonAppCompatActivity {
                                         intent.putExtra("matchID", cricinfoID);
                                         startActivity(intent);
                                     } else {
-                                        Toast.makeText(PastMatchesActivity.this,"Scorecard not available",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PastMatchesActivity.this, "Scorecard not available", Toast.LENGTH_SHORT).show();
                                     }
 
                                     Log.d(Constants.TAG, response.toString());
@@ -151,7 +148,7 @@ public class PastMatchesActivity extends CommonAppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 progressDialog.dismiss();
                 try {
-                    String team1, team2, venue, time="", seriesName, matcNo,matchID;
+                    String team1, team2, venue, time = "", seriesName, matcNo, matchID;
                     response = response.getJSONObject("query").getJSONObject("results");
                     JSONArray jsonArray = response.getJSONArray("Match");
                     for (int i = 0; i < jsonArray.length(); i++) {
@@ -167,11 +164,11 @@ public class PastMatchesActivity extends CommonAppCompatActivity {
 
                         String by = obj.getJSONObject("Result").getString("by");
                         String how = obj.getJSONObject("Result").getString("how");
-                        JSONArray temp  = obj.getJSONObject("Result").getJSONArray("Team");
+                        JSONArray temp = obj.getJSONObject("Result").getJSONArray("Team");
                         if (temp.getJSONObject(0).getString("matchwon").equals("yes") && temp.getJSONObject(1).getString("matchwon").equals("no")) {
-                            time = team1 + " won by " + by +" " + how;
+                            time = team1 + " won by " + by + " " + how;
                         } else if (temp.getJSONObject(0).getString("matchwon").equals("no") && temp.getJSONObject(1).getString("matchwon").equals("yes")) {
-                            time = team2 + " won by " + by +" " + how;
+                            time = team2 + " won by " + by + " " + how;
                         } else if (temp.getJSONObject(0).getString("matchwon").equals("no") && temp.getJSONObject(1).getString("matchwon").equals("no")) {
                             time = how;
                         }
